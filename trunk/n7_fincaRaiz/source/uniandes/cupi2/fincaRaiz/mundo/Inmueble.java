@@ -20,26 +20,17 @@ import java.util.ArrayList;
  * 
  * <b>inv: </b> <br>
  * 
- * identificador != null <br>
- * !identificador.equals("") <br>
+ * identificador != null && !identificador.equals("") <br>
  * El identificador debe ser único por inmueble <br>
- * tipoOferta != null <br>
- * !tipoOferta.equals("") <br>
- * ciudad != null <br>
- * !ciudad.equals("") <br>
- * barrio != null <br>
- * !barrio.equals("") <br>
- * direccion != null <br>
- * !direccion.equals("") <br>
- * telefono != null <br>
- * !telefono.equals("") <br>
- * tamanio != null <br>
- * tamanio != 0 <br>
- * precio != null <br>
- * precio != 0 <br>
+ * tipoOferta != null && !tipoOferta.equals("") <br>
+ * ciudad != null && !ciudad.equals("") <br>
+ * barrio != null && !barrio.equals("") <br>
+ * direccion != null && !direccion.equals("") <br>
+ * telefono != null && !telefono.equals("") <br>
+ * tamanio != null && tamanio != 0 <br>
+ * precio != null && precio != 0 <br>
  * imagenes != null <br>
- * tipoInmueble != null <br>
- * !tipoInmueble.equals("") <br>
+ * tipoInmueble != null <br> && !tipoInmueble.equals("") 
  */
 
 public class Inmueble
@@ -159,6 +150,8 @@ public class Inmueble
         precio = nPrecio;
         imagenes = nImagenes;
 
+     // Verifica el invariante
+        verificarInvariante( );
     }
 
     // -----------------------------------------------------------------
@@ -275,6 +268,30 @@ public class Inmueble
     }
 
     /**
+     * Método que compara dos cadenas de caracteres sin tener en cuenta la diferenciación entre mayúsculas y minúsculas
+     * @param a Cadena número Uno
+     * 		  b Cadena número Dos	
+     * @return Retorna 0 si las cadenas de caracteres son iguales<br>
+     *         Retorna -1 si la cadena de caracteres a es mayor a la b<br>
+     *         Retorna 1 si la cadena de caracteres a es menor a la b
+     */
+    public int compararStrings( String a , String b )
+    {
+    	if ( a.compareToIgnoreCase( b ) > 0 )
+    	{
+    		return 1;
+    	}
+    	else if ( a.compareToIgnoreCase( b ) == 0 )
+    	{
+    		return 0;
+    	}
+    	else
+    	{
+    		return -1;
+    	}
+    }
+    
+    /**
      * Método que compara dos inmuebles basado en la ciudad en la que se encuentran
      * @param a El inmueble con el que se debe comparar
      * @return Retorna 0 si el inmueble a es igual<br>
@@ -283,7 +300,10 @@ public class Inmueble
      */
     public int compararPorCiudad( Inmueble a )
     {
-    	// TODO Completar según la documentación del método
+    	String ciudadUno = darCiudad( );
+    	String ciudadDos = a.darCiudad( );
+    	int rta = compararStrings( ciudadUno , ciudadDos );
+    	return rta;
     }
 
     /**
@@ -295,7 +315,10 @@ public class Inmueble
      */
     public int compararPorIdentificador( Inmueble a )
     {
-    	// TODO Completar según la documentación del método
+    	String identificadorUno = darIdentificador( );
+    	String identificadorDos = a.darIdentificador( );
+    	int rta = compararStrings( identificadorUno , identificadorDos );
+    	return rta;
     }
 
     /**
@@ -307,7 +330,20 @@ public class Inmueble
      */
     public int compararPorPrecio( Inmueble a )
     {
-    	// TODO Completar según la documentación del método
+    	double precioUno = darPrecio( );
+    	double precioDos = a.darPrecio( );
+    	if ( precioUno > precioDos )
+    	{
+    		return 1;
+    	}
+    	else if ( precioUno == precioDos )
+    	{
+    		return 0;
+    	}
+    	else
+    	{
+    		return -1;
+    	} 
     }
 
     /**
@@ -319,7 +355,20 @@ public class Inmueble
      */
     public int compararPorTamanio( Inmueble a )
     {
-    	// TODO Completar según la documentación del método
+    	double tamanioUno = darTamanio( );
+    	double tamanioDos = a.darTamanio( );
+    	if ( tamanioUno > tamanioDos )
+    	{
+    		return 1;
+    	}
+    	else if ( tamanioUno == tamanioDos )
+    	{
+    		return 0;
+    	}
+    	else
+    	{
+    		return -1;
+    	} 
     }
 
     // -----------------------------------------------------------------
@@ -384,23 +433,6 @@ public class Inmueble
         return telefono != null && !telefono.equals( "" );
     }
     
-    /**
-     * El tamanio es válido si no es null y si es diferente de cero. <br>
-     * @return True si el tamanio es válido, false en caso contrario
-     */
-    private boolean TamanioEsValido( )
-    {
-        return tamanio != null && tamanio != 0;
-    }
-    
-    /**
-     * El precio es válido si no es null y si es diferente de cero. <br>
-     * @return True si el precio es válido, false en caso contrario
-     */
-    private boolean PrecioEsValido( )
-    {
-        return precio != null && precio != 0;
-    }
     
     /**
      * El tipo de inmueble es válido si no es null y si es diferente de la cadena vacía. <br>
@@ -408,13 +440,14 @@ public class Inmueble
      */
     private boolean TipoInmuebleEsValido( )
     {
-        return tipoInmueble != null && !tipoImnueble.equals( "" );
+        return tipoInmueble != null && !tipoInmueble.equals( "" );
     }
     
     /**
      * Verifica que el invariante de la clase se cumpla. Si algo falla, lanza un AssertionError. <br>
      * <b>inv: </b> 
-     * identificador != null && !identificador.equals("") && El identificador debe ser único por inmueble <br>
+     * identificador != null && !identificador.equals("") <br>
+     * El identificador debe ser único por inmueble <br>
 	 * tipoOferta != null && !tipoOferta.equals("") <br>
 	 * ciudad != null && !ciudad.equals("") <br>
 	 * barrio != null && !barrio.equals("") <br>
@@ -434,8 +467,8 @@ public class Inmueble
     	 assert BarrioEsValido( ) : "El barrio es inválido";
     	 assert DireccionEsValida( ) : "La dirección es inválida";
     	 assert TelefonoEsValido( ) : "El telefono es inválido";
-    	 assert TamanioEsValido( ) : "El tamanio es inválido";
-    	 assert PrecioEsValido( ) : "El precio es inválido";
+    	 assert tamanio != 0 : "El tamanio es inválido";
+    	 assert precio != 0 : "El precio es inválido";
     	 assert imagenes != null : "Las imagenes están sin inicializar";
     	 assert TipoInmuebleEsValido( ) : "El tipo de inmueble es inválido";
     }
