@@ -138,7 +138,25 @@ public class FincaRaiz
      */
     public void ordenarPorPrecio( )
     {
-    	// TODO Completar según documentación
+    	int N = inmuebles.size( );
+    	for ( int i = 0 ; i < N-2 ; i++  )
+    	{
+    		Inmueble inmuebleI = ( Inmueble )inmuebles.get( i );
+    		Inmueble inmuebleM = ( Inmueble )inmuebles.get( N-1 );
+    		double menor = inmuebleM.darPrecio( );
+    		int k = i+1 ;
+    		
+    		for ( int j = N-1 ; j > i ; j-- )
+    		{
+    				double precioJ = ((Inmueble) inmuebles.get( j )).darPrecio();
+    				if ( precioJ < menor )
+    				{
+    					menor = precioJ;
+    					k = j;
+    				}
+    		}
+    		intercambiarInmueble( i , k );
+    	}
     }
 
     /**
