@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Clase que representa un negocio de finca raíz que maneja la información de inmuebles para venta y arriendo
  * <b>inv: </b> <br>
- * TODO Definir y documentar el invariante de la clase
+ * inmuebles != null <br>
  */
 public class FincaRaiz
 {
@@ -162,6 +162,9 @@ public class FincaRaiz
         siguienteId++;
         Inmueble inmueble = new Inmueble( nTipoInmueble, nIdentificador, nTipoOferta, nCiudad, nBarrio, nDireccion, nTelefono, nTamanio, nPrecio, imagenes );
         inmuebles.add( inmueble );
+     
+        // Verifica el invariante
+        verificarInvariante( );
     }
 
     /**
@@ -184,6 +187,8 @@ public class FincaRaiz
             }
         }
         
+        // Verifica el invariante
+        verificarInvariante( );
     }
     
     // -----------------------------------------------------------------
@@ -212,7 +217,13 @@ public class FincaRaiz
     // Invariante
     // -----------------------------------------------------------------
 
-    // TODO Declarar, implementar y documentar el método verificarInvariante
-    // Si utiliza métodos auxiliares, declárelos e impleméntelos en esta sección
-
+    /**
+     * Verifica que el invariante de la clase se cumpla. Si algo falla, lanza un AssertError.<br>
+     * <b>inv: </b> <br>
+     * inmuebles != null <br>
+     */
+    private void verificarInvariante( )
+    {
+        assert inmuebles != null : "El arreglo de Inmuebles está sin inicializar";
+    }
 }

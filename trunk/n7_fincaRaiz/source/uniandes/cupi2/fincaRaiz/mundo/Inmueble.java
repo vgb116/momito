@@ -17,9 +17,31 @@ import java.util.ArrayList;
 
 /**
  * Clase que representa un inmueble <br>
+ * 
  * <b>inv: </b> <br>
- * TODO Definir y documentar el invariante de la clase
+ * 
+ * identificador != null <br>
+ * !identificador.equals("") <br>
+ * El identificador debe ser único por inmueble <br>
+ * tipoOferta != null <br>
+ * !tipoOferta.equals("") <br>
+ * ciudad != null <br>
+ * !ciudad.equals("") <br>
+ * barrio != null <br>
+ * !barrio.equals("") <br>
+ * direccion != null <br>
+ * !direccion.equals("") <br>
+ * telefono != null <br>
+ * !telefono.equals("") <br>
+ * tamanio != null <br>
+ * tamanio != 0 <br>
+ * precio != null <br>
+ * precio != 0 <br>
+ * imagenes != null <br>
+ * tipoInmueble != null <br>
+ * !tipoInmueble.equals("") <br>
  */
+
 public class Inmueble
 {
 
@@ -304,6 +326,117 @@ public class Inmueble
     // Invariante
     // -----------------------------------------------------------------
 
-    // TODO Declarar, implementar y documentar el método verificarInvariante
-
+    /**
+     * El identificador es válido si: <br>
+     *  	no es null <br>
+     *  	es diferente de la cadena vacía <br>
+     *  	si es único por inmueble <br>
+     * @return True si el identificador es válido, false en caso contrario
+     */
+    private boolean identificadorEsValido( )
+    {
+        return identificador != null && !identificador.equals( "" );
+        //falta lo de que sea único
+    }
+    
+    /**
+     * El tipo de oferta es válida si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si el tipo de oferta es válida, false en caso contrario
+     */
+    private boolean TipoOfertaEsValida( )
+    {
+        return tipoOferta != null && !tipoOferta.equals( "" );
+    }
+    
+    /**
+     * La ciudad es válida si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si la ciudad es válida, false en caso contrario
+     */
+    private boolean CiudadEsValida( )
+    {
+        return ciudad != null && !ciudad.equals( "" );
+    }
+    
+    /**
+     * El barrio es válido si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si el barrio es válido, false en caso contrario
+     */
+    private boolean BarrioEsValido( )
+    {
+        return barrio != null && !barrio.equals( "" );
+    }
+    
+    /**
+     * La dirección es válida si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si la dirección es válida, false en caso contrario
+     */
+    private boolean DireccionEsValida( )
+    {
+        return direccion != null && !direccion.equals( "" );
+    }
+    
+    /**
+     * El teléfono es válido si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si el teléfono es válido, false en caso contrario
+     */
+    private boolean TelefonoEsValido( )
+    {
+        return telefono != null && !telefono.equals( "" );
+    }
+    
+    /**
+     * El tamanio es válido si no es null y si es diferente de cero. <br>
+     * @return True si el tamanio es válido, false en caso contrario
+     */
+    private boolean TamanioEsValido( )
+    {
+        return tamanio != null && tamanio != 0;
+    }
+    
+    /**
+     * El precio es válido si no es null y si es diferente de cero. <br>
+     * @return True si el precio es válido, false en caso contrario
+     */
+    private boolean PrecioEsValido( )
+    {
+        return precio != null && precio != 0;
+    }
+    
+    /**
+     * El tipo de inmueble es válido si no es null y si es diferente de la cadena vacía. <br>
+     * @return True si el tipo de inmueble es válido, false en caso contrario
+     */
+    private boolean TipoInmuebleEsValido( )
+    {
+        return tipoInmueble != null && !tipoImnueble.equals( "" );
+    }
+    
+    /**
+     * Verifica que el invariante de la clase se cumpla. Si algo falla, lanza un AssertionError. <br>
+     * <b>inv: </b> 
+     * identificador != null && !identificador.equals("") && El identificador debe ser único por inmueble <br>
+	 * tipoOferta != null && !tipoOferta.equals("") <br>
+	 * ciudad != null && !ciudad.equals("") <br>
+	 * barrio != null && !barrio.equals("") <br>
+	 * direccion != null && !direccion.equals("") <br>
+	 * telefono != null && !telefono.equals("") <br>
+	 * tamanio != null && tamanio != 0 <br>
+	 * precio != null && precio != 0 <br>
+	 * imagenes != null <br>
+	 * tipoInmueble != null <br> && !tipoInmueble.equals("") 
+     */
+    
+    private void verificarInvariante( )
+    {
+    	 assert identificadorEsValido( ) : "El identificadore es inválido";
+    	 assert TipoOfertaEsValida( ) : "El tipo de oferta es inválida";
+    	 assert CiudadEsValida( ) : "La ciudad es inválida";
+    	 assert BarrioEsValido( ) : "El barrio es inválido";
+    	 assert DireccionEsValida( ) : "La dirección es inválida";
+    	 assert TelefonoEsValido( ) : "El telefono es inválido";
+    	 assert TamanioEsValido( ) : "El tamanio es inválido";
+    	 assert PrecioEsValido( ) : "El precio es inválido";
+    	 assert imagenes != null : "Las imagenes están sin inicializar";
+    	 assert TipoInmuebleEsValido( ) : "El tipo de inmueble es inválido";
+    }
 }
