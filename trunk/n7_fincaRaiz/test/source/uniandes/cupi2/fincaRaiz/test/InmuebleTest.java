@@ -199,7 +199,16 @@ public class InmuebleTest extends TestCase
         setupEscenario1( );
         
         //Compara la ciudad del inmueble1 con la del inmueble2
-        assertTrue( "La ciudad del inmueble1 resultó menor" , inmueble1.compararPorCiudad( inmueble2 ) == 1 ); 
+        boolean ciudad1;
+        if ( inmueble1.compararPorCiudad( inmueble2 ) == 1)
+        {
+        	ciudad1=true;
+        }
+        else
+        {
+        	ciudad1=false;
+        }
+        assertTrue( "La ciudad del inmueble1 resultó menor" , ciudad1); 
         
         //Compara la ciudad del inmueble2 con la del inmueble1
         assertTrue( "La ciudad del inmueble2 resultó mayor" , inmueble2.compararPorCiudad( inmueble1 ) == -1 );
