@@ -68,14 +68,42 @@ public class FincaRaiz
     }
 
     /**
+     * Método que intercambia dos inmuebles en el arraylist.<br>
+     * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
+     * <b> post: </b> se intercambian los elementos j e i del arraylist
+     */
+    public void intercambiarInmueble( int i , int j )
+    {
+    	Inmueble inmueblei = ( Inmueble )inmuebles.get( i );
+    	Inmueble inmueblej = ( Inmueble )inmuebles.get( j );
+    	inmuebles.set( i , inmueblej );
+    	inmuebles.set( j , inmueblei );
+    }
+    
+    /**
      * Método que ordena la lista de inmuebles según la ciudad usando el algoritmo de burbuja.<br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
      * <b> post: </b> La lista de inmuebles está ordenada por ciudad (orden ascendente)
      */
+
     public void ordenarPorCiudad( )
     {
-    	// TODO Completar según documentación
-
+    	int N = inmuebles.size( );
+    	for ( int i = N-1 ; i > 0 ; i-- )
+    	{
+    		for ( int j = 0 ; j < i ; j++ )
+    		{
+    			Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+    			Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j+1 );
+    			String ciudadJ = inmuebleJ.darCiudad();
+    			String ciudadJJ = inmuebleJJ.darCiudad();
+    			
+    			if ( ciudadJ.compareToIgnoreCase( ciudadJJ ) > 0 )
+    			{
+    				intercambiarInmueble( j , j+1 );
+    			}
+    		}
+    	}
     }
 
     /**
@@ -85,7 +113,22 @@ public class FincaRaiz
      */
     public void ordenarPorIdentificador( )
     {
-    	// TODO Completar según documentación
+    	int N = inmuebles.size( );
+    	for ( int i = N-1 ; i > 0 ; i-- )
+    	{
+    		for ( int j = 0 ; j < i ; j++ )
+    		{
+    			Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+    			Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j+1 );
+    			String identificadorJ = inmuebleJ.darIdentificador( );
+    			String identificadorJJ = inmuebleJJ.darIdentificador( );
+    			
+    			if ( identificadorJ.compareToIgnoreCase( identificadorJJ ) > 0 )
+    			{
+    				intercambiarInmueble( j , j+1 );
+    			}
+    		}
+    	}
     }
 
     /**
