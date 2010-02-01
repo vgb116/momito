@@ -16,8 +16,7 @@ package uniandes.cupi2.fincaRaiz.mundo;
 import java.util.ArrayList;
 
 /**
- * Clase que representa un negocio de finca raíz que maneja la información de inmuebles para venta y arriendo
- * <b>inv: </b> <br>
+ * Clase que representa un negocio de finca raíz que maneja la información de inmuebles para venta y arriendo <b>inv: </b> <br>
  * inmuebles != null <br>
  */
 public class FincaRaiz
@@ -44,7 +43,7 @@ public class FincaRaiz
     /**
      * Construye un nuevo manejador de finca raíz <br>
      * <b> post: </b> Se inicializó siguienteId en 0 <br>
-     *                Se inicializó la lista de inmuebles vacía <br>
+     * Se inicializó la lista de inmuebles vacía <br>
      */
     public FincaRaiz( )
     {
@@ -72,14 +71,14 @@ public class FincaRaiz
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
      * <b> post: </b> se intercambian los elementos j e i del arraylist
      */
-    public void intercambiarInmueble( int i , int j )
+    public void intercambiarInmueble( int i, int j )
     {
-    	Inmueble inmueblei = ( Inmueble )inmuebles.get( i );
-    	Inmueble inmueblej = ( Inmueble )inmuebles.get( j );
-    	inmuebles.set( i , inmueblej );
-    	inmuebles.set( j , inmueblei );
+        Inmueble inmueblei = ( Inmueble )inmuebles.get( i );
+        Inmueble inmueblej = ( Inmueble )inmuebles.get( j );
+        inmuebles.set( i, inmueblej );
+        inmuebles.set( j, inmueblei );
     }
-    
+
     /**
      * Método que ordena la lista de inmuebles según la ciudad usando el algoritmo de burbuja.<br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
@@ -88,22 +87,20 @@ public class FincaRaiz
 
     public void ordenarPorCiudad( )
     {
-    	int N = inmuebles.size( );
-    	for ( int i = N-1 ; i > 0 ; i-- )
-    	{
-    		for ( int j = 0 ; j < i ; j++ )
-    		{
-    			Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
-    			Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j+1 );
-    			String ciudadJ = inmuebleJ.darCiudad();
-    			String ciudadJJ = inmuebleJJ.darCiudad();
-    			
-    			if ( ciudadJ.compareToIgnoreCase( ciudadJJ ) > 0 )
-    			{
-    				intercambiarInmueble( j , j+1 );
-    			}
-    		}
-    	}
+        int N = inmuebles.size( );
+        for( int i = N - 1; i > 0; i-- )
+        {
+            for( int j = 0; j < i; j++ )
+            {
+                Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+                Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j + 1 );
+                int x = inmuebleJ.compararPorCiudad( inmuebleJJ );
+                if( x > 0 )
+                {
+                    intercambiarInmueble( j, j + 1 );
+                }
+            }
+        }
     }
 
     /**
@@ -113,22 +110,20 @@ public class FincaRaiz
      */
     public void ordenarPorIdentificador( )
     {
-    	int N = inmuebles.size( );
-    	for ( int i = N-1 ; i > 0 ; i-- )
-    	{
-    		for ( int j = 0 ; j < i ; j++ )
-    		{
-    			Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
-    			Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j+1 );
-    			String identificadorJ = inmuebleJ.darIdentificador( );
-    			String identificadorJJ = inmuebleJJ.darIdentificador( );
-    			
-    			if ( identificadorJ.compareToIgnoreCase( identificadorJJ ) > 0 )
-    			{
-    				intercambiarInmueble( j , j+1 );
-    			}
-    		}
-    	}
+        int N = inmuebles.size( );
+        for( int i = N - 1; i > 0; i-- )
+        {
+            for( int j = 0; j < i; j++ )
+            {
+                Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+                Inmueble inmuebleJJ = ( Inmueble )inmuebles.get( j + 1 );
+                int x = inmuebleJ.compararPorIdentificador( inmuebleJJ );
+                if( x > 0 )
+                {
+                    intercambiarInmueble( j, j + 1 );
+                }
+            }
+        }
     }
 
     /**
@@ -138,27 +133,25 @@ public class FincaRaiz
      */
     public void ordenarPorPrecio( )
     {
-    	int N = inmuebles.size( );
-    	for ( int i = 0 ; i < N-2 ; i++  )
-    	{
-    		Inmueble inmuebleI = ( Inmueble )inmuebles.get( i );
-    		Inmueble inmuebleM = ( Inmueble )inmuebles.get( N-1 );
-    		double menor = inmuebleM.darPrecio( );
-    		int k = i+1 ;
-    		
-    		for ( int j = N-1 ; j > i ; j-- )
-    		{
-    				double precioJ = ((Inmueble) inmuebles.get( j )).darPrecio();
-    				if ( precioJ < menor )
-    				{
-    					menor = precioJ;
-    					k = j;
-    				}
-    		}
-    		intercambiarInmueble( i , k );
-    	}
-    }
+        int N = inmuebles.size( );
+        for( int i = 0; i < N - 2; i++ )
+        {
+            int k = i;
+            Inmueble inmuebleMenor = ( Inmueble )inmuebles.get( k );
 
+            for( int j = i; j < N - 1; j++ )
+            {
+                Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+                int x = inmuebleJ.compararPorPrecio( inmuebleMenor );
+                if( x < 0 )
+                {
+                    inmuebleMenor = inmuebleJ;
+                    k = j;
+                }
+            }
+            intercambiarInmueble( i, k );
+        }
+    }
     /**
      * Método que ordena la lista de inmuebles según el tamaño usando el algoritmo de inserción. <br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
@@ -166,19 +159,19 @@ public class FincaRaiz
      */
     public void ordenarPorTamanio( )
     {
-    	// TODO Completar según documentación
+        // TODO Completar según documentación
     }
 
     /**
      * Busca un inmueble utilizando una búsqueda binaria. <br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
-     *               La lista de inmuebles se encuentra ordenada por identificador. <br>
+     * La lista de inmuebles se encuentra ordenada por identificador. <br>
      * @param identificador es el identificador del inmueble que se va a buscar - identificador!=null
      * @return Retorna la posición del inmueble con el identificador dado. Si el inmueble no existe se retorna -1.
      */
     public int buscarBinarioPorIdentificador( String identificador )
     {
-    	// TODO Completar según documentación
+        // TODO Completar según documentación
     }
 
     /**
@@ -188,7 +181,7 @@ public class FincaRaiz
      */
     public int buscarInmuebleMasBaratoArrendar( )
     {
-    	// TODO Completar según documentación
+        // TODO Completar según documentación
     }
 
     /**
@@ -198,15 +191,14 @@ public class FincaRaiz
      */
     public int buscarInmuebleMasCostosoVenta( )
     {
-    	// TODO Completar según documentación
+        // TODO Completar según documentación
     }
 
     /**
-     * Método que agregar un nuevo inmueble con los parámetros dados
-     * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
+     * Método que agregar un nuevo inmueble con los parámetros dados <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
      * <b> post: </b> El inmueble creado con la información dada se agrego a la lista de inmuebles<br>
-     *                El inmueble agregado tiene por id 'siguienteId-X-XX', donde X es la primera letra de la ciudad y XX es la primera letra del barrio <br>
-     *                Se aumento siguienteId en uno <br>
+     * El inmueble agregado tiene por id 'siguienteId-X-XX', donde X es la primera letra de la ciudad y XX es la primera letra del barrio <br>
+     * Se aumento siguienteId en uno <br>
      * @param nTipoInmueble El tipo de inmueble - nTipoInmueble != null
      * @param nTipoOferta El tipo de oferta del inmueble - nTipoOferta != null
      * @param nCiudad La ciudad donde se encuentra el inmueble - nCiudad != null
@@ -223,7 +215,7 @@ public class FincaRaiz
         siguienteId++;
         Inmueble inmueble = new Inmueble( nTipoInmueble, nIdentificador, nTipoOferta, nCiudad, nBarrio, nDireccion, nTelefono, nTamanio, nPrecio, imagenes );
         inmuebles.add( inmueble );
-     
+
         // Verifica el invariante
         verificarInvariante( );
     }
@@ -247,11 +239,11 @@ public class FincaRaiz
                 termino = true;
             }
         }
-        
+
         // Verifica el invariante
         verificarInvariante( );
     }
-    
+
     // -----------------------------------------------------------------
     // Puntos de Extensión
     // -----------------------------------------------------------------
@@ -273,7 +265,7 @@ public class FincaRaiz
     {
         return "Respuesta 2";
     }
-    
+
     // -----------------------------------------------------------------
     // Invariante
     // -----------------------------------------------------------------
