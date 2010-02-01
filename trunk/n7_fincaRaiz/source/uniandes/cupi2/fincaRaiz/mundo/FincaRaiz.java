@@ -192,9 +192,35 @@ public class FincaRaiz
      */
     public int buscarInmuebleMasBaratoArrendar( )
     {
-        // TODO Completar según documentación
-    }
+        int N = inmuebles.size( );
+        int menor = -1;
+        if( inmuebles.isEmpty( ) == true )
+        {
+            return menor;
+        }
+        else
+        {
+            for( int i = 0; i < N; i++ )
+            {
+                Inmueble inmuebleX = ( Inmueble )inmuebles.get( i );
+                String ofertaX = inmuebleX.darTipoOferta( );
 
+                if( ofertaX.equalsIgnoreCase( "Arrendar" ) == true )
+                {
+                    Inmueble inmuebleMenor = 
+                    String ofertaMenor = ofertaX;
+                    menor = i;
+                    for( int j = i; j < N; j++ )
+                    {
+                        Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+                        String ofertaJ = inmuebleJ.darTipoOferta( );
+                        if ( ofertaX.equalsIgnoreCase( "Arrendar" ) == true && ofertaMenor>inmuebleJ.darPrecio( ) )
+                    }
+                }
+
+            }
+        }
+    }
     /**
      * Busca el inmueble que tenga el costo más alto y sea para vender. <br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
