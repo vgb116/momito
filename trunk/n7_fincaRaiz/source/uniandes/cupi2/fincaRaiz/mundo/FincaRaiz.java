@@ -159,9 +159,20 @@ public class FincaRaiz
      */
     public void ordenarPorTamanio( )
     {
-        // TODO Completar según documentación
+        int N = inmuebles.size( );
+        for( int i = 1; i < N - 1; i++ )
+        {
+            int j = i;
+            Inmueble inmuebleJm = ( Inmueble )inmuebles.get( j - 1 );
+            Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+            int x = inmuebleJ.compararPorTamanio( inmuebleJm );
+            while( j > 0 && x < 0 )
+            {
+                intercambiarInmueble( j, j - 1 );
+                j--;
+            }
+        }
     }
-
     /**
      * Busca un inmueble utilizando una búsqueda binaria. <br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
