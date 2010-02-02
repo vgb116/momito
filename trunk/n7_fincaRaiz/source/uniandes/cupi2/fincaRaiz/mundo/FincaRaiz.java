@@ -190,9 +190,9 @@ public class FincaRaiz
 
         while( true )
         {
-            Inmueble inmuebleX = ( Inmueble )inmuebles.get( m );
-            String identifiX = inmuebleX.darIdentificador( );
-            int X = identifiX.compareToIgnoreCase( identificador );
+            Inmueble inmuebleM = ( Inmueble )inmuebles.get( m );
+            String identifiM = inmuebleM.darIdentificador( );
+            int X = identifiM.compareToIgnoreCase( identificador );
 
             if( X == 0 )
             {
@@ -200,11 +200,15 @@ public class FincaRaiz
             }
             else if( X < 0 )
             {
-                f = m + 1;
+                i = m + 1;
             }
             else
             {
-                i = m - 1;
+                f = m - 1;
+            }
+            if(i>f)
+            {
+                return -1;
             }
         }
     }
