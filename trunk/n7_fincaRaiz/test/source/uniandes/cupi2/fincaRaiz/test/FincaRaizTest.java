@@ -37,26 +37,34 @@ public class FincaRaizTest extends TestCase
     // -----------------------------------------------------------------
 
     /**
-     * Crea un sistema de finca raíz con 9 inmuebles
-     * <b>Número de inmuebles: 9</b><br/>
+     * Crea un sistema de finca raíz con 9 inmuebles <b>Número de inmuebles: 9</b><br/>
      * <b>Datos del inmueble 1:</b> <br/>
-     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Álamos1, Dirección: Cra. 97 No. 51-51, Teléfono: 123456, Tamaño: 123.2d, Precio: 567d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Álamos1, Dirección: Cra. 97 No. 51-51, Teléfono: 123456, Tamaño: 123.2d, Precio: 567d, Imagenes:
+     * ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 2:</b> <br/>
-     * TipoInmueble: Casa, TipoOferta: Arrendar, Ciudad: Cali, Barrio: Sausal, Dirección: Cra. 42 No. 51-51, Teléfono: 123456, Tamaño: 1234, Precio: 54457.d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Casa, TipoOferta: Arrendar, Ciudad: Cali, Barrio: Sausal, Dirección: Cra. 42 No. 51-51, Teléfono: 123456, Tamaño: 1234, Precio: 54457.d, Imagenes:
+     * ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 3:</b> <br/>
-     * TipoInmueble: Casa, TipoOferta: Venta, Ciudad: Cartagena, Barrio: Amigos, Dirección: Cra. 38 No. 51-51, Teléfono: 123456, Tamaño:  123456.2d, Precio: 5678d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Casa, TipoOferta: Venta, Ciudad: Cartagena, Barrio: Amigos, Dirección: Cra. 38 No. 51-51, Teléfono: 123456, Tamaño: 123456.2d, Precio: 5678d, Imagenes:
+     * ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 4:</b> <br/>
-     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Cali, Barrio: Alamos, Dirección: Cra. 24 No. 51-51, Teléfono: 123456, Tamaño:  1234567.2d, Precio: 56789d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Cali, Barrio: Alamos, Dirección: Cra. 24 No. 51-51, Teléfono: 123456, Tamaño: 1234567.2d, Precio: 56789d,
+     * Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 5:</b> <br/>
-     * TipoInmueble: Apartamento, TipoOferta: Arrendar, Ciudad: Barranquilla, Barrio: Ceditros, Dirección: Cra. 16 No. 51-51, Teléfono: 123456, Tamaño: 234.2d, Precio: 678d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, TipoOferta: Arrendar, Ciudad: Barranquilla, Barrio: Ceditros, Dirección: Cra. 16 No. 51-51, Teléfono: 123456, Tamaño: 234.2d, Precio: 678d,
+     * Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 6:</b> <br/>
-     * TipoInmueble: Apartamento, TipoOferta: Arrendar, Ciudad: Pasto, Barrio: Chico, Dirección: Cra. 78 No. 51-51, Teléfono: 123456, Tamaño: 23452d, Precio: 2345.d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, TipoOferta: Arrendar, Ciudad: Pasto, Barrio: Chico, Dirección: Cra. 78 No. 51-51, Teléfono: 123456, Tamaño: 23452d, Precio: 2345.d, Imagenes:
+     * ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 7:</b> <br/>
-     * TipoInmueble: Casa, TipoOferta: Venta, Ciudad: Tunja, Barrio: Alamos, Dirección: Cra. 35 No. 51-51, Teléfono: 123456, Tamaño: 5478.2d, Precio: 6789.d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Casa, TipoOferta: Venta, Ciudad: Tunja, Barrio: Alamos, Dirección: Cra. 35 No. 51-51, Teléfono: 123456, Tamaño: 5478.2d, Precio: 6789.d, Imagenes:
+     * ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 8:</b> <br/>
-     * TipoInmueble: Finca, TipoOferta: Arrendar, Ciudad: Bogotá, Barrio: Villavicencio, Dirección: Cra. 98 No. 51-51, Teléfono: 123456, Tamaño: 234567.2d, Precio: 789.d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Finca, TipoOferta: Arrendar, Ciudad: Bogotá, Barrio: Villavicencio, Dirección: Cra. 98 No. 51-51, Teléfono: 123456, Tamaño: 234567.2d, Precio: 789.d,
+     * Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 9:</b> <br/>
-     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Los Rosales, Dirección: Cra. 47 No. 51-51, Teléfono: 123456, Tamaño: 345d, Precio: 7891.d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/> 
+     * TipoInmueble: Apartamento, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Los Rosales, Dirección: Cra. 47 No. 51-51, Teléfono: 123456, Tamaño: 345d, Precio: 7891.d,
+     * Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      */
     public void setupEscenario1( )
     {
@@ -101,7 +109,14 @@ public class FincaRaizTest extends TestCase
      */
     public void testOrdenarPorCiudad( )
     {
-    	// TODO Completar según documentación   
+        setupEscenario1( );
+        fincaRaiz.ordenarPorCiudad( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        int N = inmuebles.size( );
+        Inmueble inm = ( Inmueble )inmuebles.get( N - 1 );
+        String ciudad = inm.darCiudad( );
+        assertEquals( "La ciudad mayor no fue Tunja", "Tunja", ciudad );
+
     }
 
     /**
@@ -115,7 +130,14 @@ public class FincaRaizTest extends TestCase
      */
     public void testOrdenarPorIdentificador( )
     {
-    	// TODO Completar según documentación   
+        setupEscenario1( );
+        fincaRaiz.ordenarPorIdentificador( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        int N = inmuebles.size( );
+        Inmueble inm = ( Inmueble )inmuebles.get( N - 1 );
+        String barrio = inm.darBarrio( );
+        assertEquals( "No se ordeno correctamente por identificador", "Los Rosales", barrio );
+
     }
 
     /**
@@ -129,7 +151,13 @@ public class FincaRaizTest extends TestCase
      */
     public void testOrdenarPorPrecio( )
     {
-    	// TODO Completar según documentación   
+        setupEscenario1( );
+        fincaRaiz.ordenarPorPrecio( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        int N = inmuebles.size( );
+        Inmueble inm = ( Inmueble )inmuebles.get( N - 1 );
+        double precio = inm.darPrecio( );
+        assertEquals( "No se ordeno correctamente por precio", 56789d, precio );
     }
 
     /**
@@ -141,9 +169,16 @@ public class FincaRaizTest extends TestCase
      * 1. La lista de inmuebles se encuentra ordenada por el tamaño del inmueble.
      * 
      */
+    
     public void testOrdenarPorTamanio( )
     {
-    	// TODO Completar según documentación   
+        setupEscenario1( );
+        fincaRaiz.ordenarPorPrecio( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        int N = inmuebles.size( );
+        Inmueble inm = ( Inmueble )inmuebles.get( N - 1 );
+        double tamanio = inm.darTamanio( );
+        assertEquals( "No se ordeno correctamente por tamanio", 1234567.2, tamanio );
     }
 
     /**
@@ -158,7 +193,12 @@ public class FincaRaizTest extends TestCase
      */
     public void testBuscarBinarioPorIdentificador( )
     {
-    	// TODO Completar según documentación 
+        setupEscenario1( );
+        int x = fincaRaiz.buscarBinarioPorIdentificador( "1-C-S" );
+        assertFalse( "No re realizo bien la busqueda de indentificador", x == -1 );
+
+        int y = fincaRaiz.buscarBinarioPorIdentificador( "40-T-R" );
+        assertTrue( "En busqueda por identificador encontro algo no existente", y == -1 );
 
     }
 
@@ -172,7 +212,12 @@ public class FincaRaizTest extends TestCase
      */
     public void testBuscarInmuebleMasBaratoArrendar( )
     {
-    	// TODO Completar según documentación 
+        setupEscenario1( );
+        int x = fincaRaiz.buscarInmuebleMasBaratoArrendar( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        Inmueble inm = ( Inmueble )inmuebles.get( x );
+        double precio = inm.darPrecio( );
+        assertEquals("No se encontro el arriendo mas barato",precio,678d);
     }
 
     /**
@@ -185,7 +230,12 @@ public class FincaRaizTest extends TestCase
      */
     public void testBuscarInmuebleMasCostosoVenta( )
     {
-    	// TODO Completar según documentación 
+        setupEscenario1( );
+        int x = fincaRaiz.buscarInmuebleMasCostosoVenta( );
+        ArrayList inmuebles = fincaRaiz.darListaInmuebles( );
+        Inmueble inm = ( Inmueble )inmuebles.get( x );
+        double precio = inm.darPrecio( );
+        assertEquals("No se encontro la venta mas costosa",precio,56789d);
     }
 
     /**
