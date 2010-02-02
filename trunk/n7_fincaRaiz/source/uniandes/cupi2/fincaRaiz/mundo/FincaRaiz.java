@@ -70,6 +70,7 @@ public class FincaRaiz
      * Método que intercambia dos inmuebles en el arraylist.<br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
      * <b> post: </b> se intercambian los elementos j e i del arraylist
+     * @param int i indicador inmueble 1, int j indicador inmueble j
      */
     public void intercambiarInmueble( int i, int j )
     {
@@ -134,12 +135,12 @@ public class FincaRaiz
     public void ordenarPorPrecio( )
     {
         int N = inmuebles.size( );
-        for( int i = 0; i < N - 2; i++ )
+        for( int i = 0; i < N - 1; i++ )
         {
             int k = i;
             Inmueble inmuebleMenor = ( Inmueble )inmuebles.get( k );
 
-            for( int j = i; j < N - 1; j++ )
+            for( int j = i; j < N; j++ )
             {
                 Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
                 int x = inmuebleJ.compararPorPrecio( inmuebleMenor );
@@ -160,7 +161,7 @@ public class FincaRaiz
     public void ordenarPorTamanio( )
     {
         int N = inmuebles.size( );
-        for( int i = 1; i < N - 1; i++ )
+        for( int i = 1; i < N; i++ )
         {
             int j = i;
             Inmueble inmuebleJm = ( Inmueble )inmuebles.get( j - 1 );
@@ -182,9 +183,31 @@ public class FincaRaiz
      */
     public int buscarBinarioPorIdentificador( String identificador )
     {
-        // TODO Completar según documentación
-    }
+        int N = inmuebles.size( );
+        int i = 0;
+        int f = N - 1;
+        int m = ( f - i ) / 2;
 
+        while( true )
+        {
+            Inmueble inmuebleX = ( Inmueble )inmuebles.get( m );
+            String identifiX = inmuebleX.darIdentificador( );
+            int X = identifiX.compareToIgnoreCase( identificador );
+
+            if( X == 0 )
+            {
+                return m;
+            }
+            else if( X < 0 )
+            {
+                f = m + 1;
+            }
+            else
+            {
+                i = m - 1;
+            }
+        }
+    }
     /**
      * Busca el inmueble que tenga la menor precio y sea para arrendar. <br>
      * <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
@@ -194,6 +217,8 @@ public class FincaRaiz
     {
         int N = inmuebles.size( );
         int menor = -1;
+
+        // verifica que existan inmuebles
         if( inmuebles.isEmpty( ) == true )
         {
             return menor;
@@ -205,20 +230,28 @@ public class FincaRaiz
                 Inmueble inmuebleX = ( Inmueble )inmuebles.get( i );
                 String ofertaX = inmuebleX.darTipoOferta( );
 
-                if( ofertaX.equalsIgnoreCase( "Arrendar" ) == true )
+                if( ofertaX.equalsIgnoreCase( "arrendar" ) == true )
                 {
-                    Inmueble inmuebleMenor = 
-                    String ofertaMenor = ofertaX;
+                    Inmueble inmuebleMenor = inmuebleX;
                     menor = i;
+
                     for( int j = i; j < N; j++ )
                     {
                         Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
                         String ofertaJ = inmuebleJ.darTipoOferta( );
-                        if ( ofertaX.equalsIgnoreCase( "Arrendar" ) == true && ofertaMenor>inmuebleJ.darPrecio( ) )
+                        double precioJ = inmuebleJ.darPrecio( );
+                        double precioMenor = inmuebleMenor.darPrecio( );
+
+                        if( ofertaJ.equalsIgnoreCase( "Arrendar" ) == true && precioMenor > precioJ )
+                        {
+                            inmuebleMenor = inmuebleJ;
+                            menor = j;
+                        }
                     }
                 }
 
             }
+            return menor;
         }
     }
     /**
@@ -228,7 +261,44 @@ public class FincaRaiz
      */
     public int buscarInmuebleMasCostosoVenta( )
     {
-        // TODO Completar según documentación
+        int N = inmuebles.size( );
+        int mayor = -1;
+
+        // verifica que existan inmuebles
+        if( inmuebles.isEmpty( ) == true )
+        {
+            return mayor;
+        }
+        else
+        {
+            for( int i = 0; i < N; i++ )
+            {
+                Inmueble inmuebleX = ( Inmueble )inmuebles.get( i );
+                String ofertaX = inmuebleX.darTipoOferta( );
+
+                if( ofertaX.equalsIgnoreCase( "vender" ) == true )
+                {
+                    Inmueble inmuebleMayor = inmuebleX;
+                    mayor = i;
+
+                    for( int j = i; j < N; j++ )
+                    {
+                        Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
+                        String ofertaJ = inmuebleJ.darTipoOferta( );
+                        double precioJ = inmuebleJ.darPrecio( );
+                        double precioMayor = inmuebleMayor.darPrecio( );
+
+                        if( ofertaJ.equalsIgnoreCase( "vender" ) == true && precioMayor < precioJ )
+                        {
+                            inmuebleMayor = inmuebleJ;
+                            mayor = j;
+                        }
+                    }
+                }
+
+            }
+            return mayor;
+        }
     }
 
     /**

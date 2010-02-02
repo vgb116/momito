@@ -30,8 +30,7 @@ import java.util.ArrayList;
  * tamanio != null && tamanio != 0 <br>
  * precio != null && precio != 0 <br>
  * imagenes != null <br>
- * tipoInmueble != null <br>
- * && !tipoInmueble.equals("")
+ * tipoInmueble != null && !tipoInmueble.equals("")
  */
 
 public class Inmueble
@@ -265,12 +264,12 @@ public class Inmueble
      */
     public String toString( )
     {
-        return tipoInmueble + " " + tipoOferta + " " + tamanio + " " + ciudad;
+        return tipoInmueble + " " + tipoOferta + " " + tamanio + "m2 " + ciudad;
     }
 
     /**
      * Método que compara dos cadenas de caracteres sin tener en cuenta la diferenciación entre mayúsculas y minúsculas
-     * @param a Cadena número Uno b Cadena número Dos
+     * @param a Cadena número Uno, b Cadena número Dos
      * @return Retorna 0 si las cadenas de caracteres son iguales<br>
      *         Retorna -1 si la cadena de caracteres a es mayor a la b<br>
      *         Retorna 1 si la cadena de caracteres a es menor a la b
