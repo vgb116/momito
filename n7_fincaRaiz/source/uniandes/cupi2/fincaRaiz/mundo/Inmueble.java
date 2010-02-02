@@ -264,7 +264,7 @@ public class Inmueble
      */
     public String toString( )
     {
-        return tipoInmueble + " " + tipoOferta + " " + tamanio + "m2 " + ciudad;
+        return tipoInmueble + "-" + tipoOferta + "-" + tamanio + "m2-" + ciudad;
     }
 
     /**

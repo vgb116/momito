@@ -13,7 +13,7 @@ public class InmuebleTest extends TestCase
     // -----------------------------------------------------------------
     // Atributos
     // -----------------------------------------------------------------
-    
+
     /**
      * Es la primera clase donde se harán las pruebas
      */
@@ -27,13 +27,15 @@ public class InmuebleTest extends TestCase
     // -----------------------------------------------------------------
     // Métodos
     // -----------------------------------------------------------------
-    
+
     /**
      * Construye los inmuebles 1 y 2 <br/>
      * <b>Datos del inmueble 1:</b> <br/>
-     * TipoInmueble: Apartamento, Id: 1-B-A, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Álamos, Dirección: Cra. 97 No. 51-51, Telefono: 123456, Tamaño: 123.2d, Precio: 567d,  Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, Id: 1-B-A, TipoOferta: Venta, Ciudad: Bogotá, Barrio: Álamos, Dirección: Cra. 97 No. 51-51, Telefono: 123456, Tamaño: 123.2d, Precio: 567d,
+     * Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      * <b>Datos del inmueble 2:</b> <br/>
-     * TipoInmueble: Apartamento, Id: 2-C-C, TipoOferta: Arrendar, Ciudad: Cali, Barrio: Chico, Dirección: Cra. 75 No. 41-10, Telefono: 359845, Tamaño: 258741d, Precio: 98958d,Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
+     * TipoInmueble: Apartamento, Id: 2-C-C, TipoOferta: Arrendar, Ciudad: Cali, Barrio: Chico, Dirección: Cra. 75 No. 41-10, Telefono: 359845, Tamaño: 258741d, Precio:
+     * 98958d,Imagenes: ./data/ap1.jpg; ./data/ap2.jpg; ./data/ap3.jpg<br/>
      */
     public void setupEscenario1( )
     {
@@ -192,27 +194,14 @@ public class InmuebleTest extends TestCase
      * <b> Objetivo: </b> Probar que el método compararPorCiudad compare de la forma correcta. <br>
      * <b> Resultados esperados: </b> <br>
      * 1. Se espera que la ciudad del inmueble1 sea MAYOR a la del inmueble2
-     * 2. Se espera que la ciudad del inmueble2 sea MENOR a la del inmueble1
      */
     public void testCompararPorCiudad( )
     {
         setupEscenario1( );
-        
-        //Compara la ciudad del inmueble1 con la del inmueble2
-        boolean ciudad1;
-        if ( inmueble1.compararPorCiudad( inmueble2 ) == 1)
-        {
-        	ciudad1=true;
-        }
-        else
-        {
-        	ciudad1=false;
-        }
-        assertTrue( "La ciudad del inmueble1 resultó menor" , ciudad1); 
-        
-        //Compara la ciudad del inmueble2 con la del inmueble1
-        assertTrue( "La ciudad del inmueble2 resultó mayor" , inmueble2.compararPorCiudad( inmueble1 ) == -1 );
-        
+
+        // Compara la ciudad del inmueble1 con la del inmueble2
+        assertEquals( "La ciudad del inmueble1 resultó mayor", -1, inmueble1.compararPorCiudad( inmueble2 ) );
+
     }
 
     /**
@@ -221,20 +210,17 @@ public class InmuebleTest extends TestCase
      * compararPorIdentificador. <br>
      * <b> Objetivo: </b> Probar que el método compararPorIdentificador compare de la forma correcta. <br>
      * <b> Resultados esperados: </b> <br>
-     * 1. Se espera que el identificador del inmueble1 sea MAYOR al del inmueble2
-     * 2. Se espera que el identificador del inmueble2 sea MENOR al del inmueble1
+     * 1. Se espera que el identificador del inmueble1 sea MAYOR al del inmueble2 2.
      */
     public void testCompararPorIdentificador( )
     {
         setupEscenario1( );
-        
-        //Compara el identificador del inmueble1 con la del inmueble2
-        assertTrue( "El identificador del inmueble1 resultó menor" , inmueble1.compararPorIdentificador( inmueble2 ) == 1 ); 
-        
-        //Compara el identificador del inmueble2 con la del inmueble1
-        assertTrue( "El identificador del inmueble2 resultó mayor" , inmueble2.compararPorIdentificador( inmueble1 ) == -1 ); 
+
+        // Compara el identificador del inmueble1 con la del inmueble2
+        assertEquals( "El identificador del inmueble1 resultó mayor", -1, inmueble1.compararPorIdentificador( inmueble2 ) );
+
     }
-    
+
     /**
      * Prueba 13 - Verifica el método compararPorPrecio. <br>
      * <b> Métodos a probar: </b> <br>
@@ -242,19 +228,15 @@ public class InmuebleTest extends TestCase
      * <b> Objetivo: </b> Probar que el método compararPorPrecio compare de la forma correcta. <br>
      * <b> Resultados esperados: </b> <br>
      * 1. Se espera que el precio del inmueble1 sea MENOR al del inmueble2
-     * 2. Se espera que el precio del inmueble2 sea MAYOR al del inmueble1
      */
     public void testCompararPorPrecio( )
     {
         setupEscenario1( );
-        
-        //Compara el identificador del inmueble1 con la del inmueble2
-        assertTrue( "El precio del inmueble1 resultó mayor" , inmueble1.compararPorPrecio( inmueble2 ) == -1 ); 
-        
-        //Compara el identificador del inmueble2 con la del inmueble1
-        assertTrue( "El precio del inmueble2 resultó mayor" , inmueble2.compararPorPrecio( inmueble1 ) == 1 ); 
+
+        // Compara el identificador del inmueble1 con la del inmueble2
+        assertEquals( "El precio del inmueble1 resultó mayor", -1, inmueble1.compararPorPrecio( inmueble2 ) );
+
     }
-    
 
     /**
      * Prueba 14 - Verifica el método compararPorTamanio. <br>
@@ -263,18 +245,14 @@ public class InmuebleTest extends TestCase
      * <b> Objetivo: </b> Probar que el método compararPorTamanio compare de la forma correcta. <br>
      * <b> Resultados esperados: </b> <br>
      * 1. Se espera que el Tamanio del inmueble1 sea MENOR al del inmueble2
-     * 2. Se espera que el Tamanio del inmueble2 sea MAYOR al del inmueble1
      */
     public void testCompararPorTamanio( )
     {
         setupEscenario1( );
-        
-        //Compara el identificador del inmueble1 con la del inmueble2
-        assertTrue( "El Tamanio del inmueble1 resultó mayor" , inmueble1.compararPorTamanio( inmueble2 ) == -1 ); 
-        
-        //Compara el identificador del inmueble2 con la del inmueble1
-        assertTrue( "El Tamanio del inmueble2 resultó mayor" , inmueble2.compararPorTamanio( inmueble1 ) == 1 );
-       
-    }    
-    
+
+        // Compara el identificador del inmueble1 con la del inmueble2
+        assertEquals( "El Tamanio del inmueble1 resultó mayor", -1, inmueble1.compararPorTamanio( inmueble2 ) );
+
+    }
+
 }
