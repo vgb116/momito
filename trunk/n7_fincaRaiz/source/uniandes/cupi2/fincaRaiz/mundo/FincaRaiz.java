@@ -18,6 +18,7 @@ import java.util.ArrayList;
 /**
  * Clase que representa un negocio de finca raíz que maneja la información de inmuebles para venta y arriendo <b>inv: </b> <br>
  * inmuebles != null <br>
+ * el identificador es único por inmueble <br>
  */
 public class FincaRaiz
 {
@@ -185,9 +186,9 @@ public class FincaRaiz
     {
         int N = inmuebles.size( );
         int i = 0;
-        int f = N - 1; 
+        int f = N - 1;
 
-        while( f >= i)
+        while( f >= i )
         {
             int m = ( f - i ) / 2 + i;
             Inmueble inmuebleM = ( Inmueble )inmuebles.get( m );
@@ -200,11 +201,11 @@ public class FincaRaiz
             }
             else if( X < 0 )
             {
-                i = m+1;
+                i = m + 1;
             }
             else
             {
-                f = m -1;
+                f = m - 1;
             }
         }
         return -1;
@@ -250,43 +251,27 @@ public class FincaRaiz
         int N = inmuebles.size( );
         int mayor = -1;
 
-        // verifica que existan inmuebles
-        if( inmuebles.isEmpty( ) == true )
+        for( int i = 0; i < N; i++ )
         {
-            return mayor;
-        }
-        else
-        {
-            for( int i = 0; i < N; i++ )
+            Inmueble inmuebleI = ( Inmueble )inmuebles.get( i );
+            String ofertaI = inmuebleI.darTipoOferta( );
+
+            if( ofertaI.equalsIgnoreCase( Inmueble.VENTA ) && mayor == -1 )
             {
-                Inmueble inmuebleX = ( Inmueble )inmuebles.get( i );
-                String ofertaX = inmuebleX.darTipoOferta( );
-
-                if( ofertaX.equalsIgnoreCase( "vender" ) == true )
-                {
-                    Inmueble inmuebleMayor = inmuebleX;
-                    mayor = i;
-
-                    for( int j = i; j < N; j++ )
-                    {
-                        Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
-                        String ofertaJ = inmuebleJ.darTipoOferta( );
-                        double precioJ = inmuebleJ.darPrecio( );
-                        double precioMayor = inmuebleMayor.darPrecio( );
-
-                        if( ofertaJ.equalsIgnoreCase( "vender" ) == true && precioMayor < precioJ )
-                        {
-                            inmuebleMayor = inmuebleJ;
-                            mayor = j;
-                        }
-                    }
-                }
-
+                mayor = i;
             }
-            return mayor;
-        }
-    }
+            else if( ofertaI.equalsIgnoreCase( Inmueble.VENTA ) && mayor != -1 )
+            {
+                Inmueble inmuebleM = ( Inmueble )inmuebles.get( mayor );
+                if( inmuebleI.darPrecio( ) > inmuebleM.darPrecio( ) )
+                {
+                    mayor = i;
+                }
+            }
 
+        }
+        return mayor;
+    }
     /**
      * Método que agregar un nuevo inmueble con los parámetros dados <b> pre: </b> La lista de inmuebles se encuentra inicializada. <br>
      * <b> post: </b> El inmueble creado con la información dada se agrego a la lista de inmuebles<br>
@@ -364,12 +349,40 @@ public class FincaRaiz
     // -----------------------------------------------------------------
 
     /**
+     * El identificador de un inmueble es válido si éste no se repite en ningún otro inmueble. <br>
+     * @return True si el tipo de inmueble es válido, false en caso contrario
+     */
+    private boolean identificadorEsValido( )
+    {
+        boolean respuesta = true;
+        int N = inmuebles.size( );
+        for( int i = 0; i < N; i++ )
+        {
+            Inmueble inmI = ( Inmueble )inmuebles.get( i );
+            String idenI = inmI.darIdentificador( );
+
+            for( int j = i + 1; j < N; j++ )
+            {
+                Inmueble inmJ = ( Inmueble )inmuebles.get( i );
+                String idenJ = inmJ.darIdentificador( );
+                if( i != j && idenI.compareToIgnoreCase( idenJ ) == 0 )
+                {
+                    respuesta = false;
+                }
+            }
+        }
+        return respuesta;
+    }
+
+    /**
      * Verifica que el invariante de la clase se cumpla. Si algo falla, lanza un AssertError.<br>
      * <b>inv: </b> <br>
      * inmuebles != null <br>
+     * el identificador es único por inmueble <br>
      */
     private void verificarInvariante( )
     {
+        assert identificadorEsValido( ) : "El identificador es inválido: Clase Finca Raiz";
         assert inmuebles != null : "El arreglo de Inmuebles está sin inicializar";
     }
 }
