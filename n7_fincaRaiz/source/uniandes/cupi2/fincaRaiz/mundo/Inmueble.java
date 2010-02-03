@@ -384,7 +384,8 @@ public class Inmueble
     private boolean identificadorEsValido( )
     {
         return identificador != null && !identificador.equals( "" );
-        // falta lo de que sea único
+        // en la clase finca raíz se verifica que sea único
+        // dado que en la clase inmueble no se puede hacer esta comparación
     }
 
     /**
@@ -459,7 +460,7 @@ public class Inmueble
 
     private void verificarInvariante( )
     {
-        assert identificadorEsValido( ) : "El identificador es inválido";
+        assert identificadorEsValido( ) : "El identificador es inválido: Clase Inmueble";
         assert TipoOfertaEsValida( ) : "El tipo de oferta es inválida";
         assert CiudadEsValida( ) : "La ciudad es inválida";
         assert BarrioEsValido( ) : "El barrio es inválido";
