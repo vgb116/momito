@@ -185,11 +185,11 @@ public class FincaRaiz
     {
         int N = inmuebles.size( );
         int i = 0;
-        int f = N - 1;
-        int m = ( f - i ) / 2;
+        int f = N - 1; 
 
-        while( true )
+        while( f >= i)
         {
+            int m = ( f - i ) / 2 + i;
             Inmueble inmuebleM = ( Inmueble )inmuebles.get( m );
             String identifiM = inmuebleM.darIdentificador( );
             int X = identifiM.compareToIgnoreCase( identificador );
@@ -200,17 +200,14 @@ public class FincaRaiz
             }
             else if( X < 0 )
             {
-                i = m + 1;
+                i = m+1;
             }
             else
             {
-                f = m - 1;
-            }
-            if(i>f)
-            {
-                return -1;
+                f = m -1;
             }
         }
+        return -1;
     }
     /**
      * Busca el inmueble que tenga la menor precio y sea para arrendar. <br>
@@ -222,41 +219,26 @@ public class FincaRaiz
         int N = inmuebles.size( );
         int menor = -1;
 
-        // verifica que existan inmuebles
-        if( inmuebles.isEmpty( ) == true )
+        for( int i = 0; i < N; i++ )
         {
-            return menor;
-        }
-        else
-        {
-            for( int i = 0; i < N; i++ )
+            Inmueble inmuebleI = ( Inmueble )inmuebles.get( i );
+            String ofertaI = inmuebleI.darTipoOferta( );
+
+            if( ofertaI.equalsIgnoreCase( Inmueble.ARRENDAR ) && menor == -1 )
             {
-                Inmueble inmuebleX = ( Inmueble )inmuebles.get( i );
-                String ofertaX = inmuebleX.darTipoOferta( );
-
-                if( ofertaX.equalsIgnoreCase( "arrendar" ) == true )
-                {
-                    Inmueble inmuebleMenor = inmuebleX;
-                    menor = i;
-
-                    for( int j = i; j < N; j++ )
-                    {
-                        Inmueble inmuebleJ = ( Inmueble )inmuebles.get( j );
-                        String ofertaJ = inmuebleJ.darTipoOferta( );
-                        double precioJ = inmuebleJ.darPrecio( );
-                        double precioMenor = inmuebleMenor.darPrecio( );
-
-                        if( ofertaJ.equalsIgnoreCase( "Arrendar" ) == true && precioMenor > precioJ )
-                        {
-                            inmuebleMenor = inmuebleJ;
-                            menor = j;
-                        }
-                    }
-                }
-
+                menor = i;
             }
-            return menor;
+            else if( ofertaI.equalsIgnoreCase( Inmueble.ARRENDAR ) && menor != -1 )
+            {
+                Inmueble inmuebleM = ( Inmueble )inmuebles.get( menor );
+                if( inmuebleI.darPrecio( ) < inmuebleM.darPrecio( ) )
+                {
+                    menor = i;
+                }
+            }
+
         }
+        return menor;
     }
     /**
      * Busca el inmueble que tenga el costo más alto y sea para vender. <br>

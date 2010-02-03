@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -36,8 +37,7 @@ public class PanelInmuebles extends JPanel implements ListSelectionListener
     /**
      * La lista de los inmuebles registrados
      */
-	//  TODO Declarar atributo que modela la lista de inmuebles
-    // nombre: lstInmuebles;
+    private JList lstInmuebles;
 
     /**
      * Scroll para la lista de inmuebles
@@ -68,14 +68,14 @@ public class PanelInmuebles extends JPanel implements ListSelectionListener
     	setBorder( BorderFactory.createTitledBorder( "Inmuebles Registrados" ) );
         setLayout( new GridLayout( 1, 1 ) );
         
-        // TODO
-        // (1) Crear la lista y (2) agregar al panel como listener de la lista
+        lstInmuebles = new JList();
+        lstInmuebles.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
+        lstInmuebles.addListSelectionListener( this );
 
 
-        // TODO
-        // (1) Crear y configurar un scroll pane para que contenga la lista
-        // (2) Agregar el scroll al panel
-        
+        scrListaInmuebles = new JScrollPane( );
+        scrListaInmuebles.setViewportView( lstInmuebles );
+        add( scrListaInmuebles );
     }
 
     // -----------------------------------------------------------------
@@ -88,7 +88,7 @@ public class PanelInmuebles extends JPanel implements ListSelectionListener
      */
     public void actualizarSeleccionado( int i )
     {
-    	 // TODO Completar según enunciado
+    	 lstInmuebles.setSelectedIndex( i );
         
     }
 
@@ -107,10 +107,7 @@ public class PanelInmuebles extends JPanel implements ListSelectionListener
      */
     public void valueChanged( ListSelectionEvent e )
     {
-    	// TODO Completar según enunciado
-        // Apóyese en el método actualizar(Inmueble nInmueble ) de la InterfazFincaRaiz
-    	// Ayuda: Verifique el inmueble seleccionado sea distinto de null antes de hacer cualquier cosa
-    	
+    	principal.actualizar( ( Inmueble )lstInmuebles.getSelectedValue( ) );
     }
 
 }

@@ -197,7 +197,7 @@ public class InterfazFincaRaiz extends JFrame
      * Método para ordenar por ciudad la lista de inmuebles
      */
     public void ordenarPorCiudad( )
-    {
+    {       
         fincaRaiz.ordenarPorCiudad( );
         actualizar( );
     }

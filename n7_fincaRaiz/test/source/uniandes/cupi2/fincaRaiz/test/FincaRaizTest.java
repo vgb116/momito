@@ -194,6 +194,7 @@ public class FincaRaizTest extends TestCase
     public void testBuscarBinarioPorIdentificador( )
     {
         setupEscenario1( );
+        fincaRaiz.ordenarPorIdentificador( );
         int x = fincaRaiz.buscarBinarioPorIdentificador( "1-C-S" );
         assertFalse( "No re realizo bien la busqueda de indentificador", x == -1 );
 
