@@ -1,0 +1,7 @@
+2
+Lapiceros
+1
+Compro;Lapicero Lamy;Compro lapicero Lamy nuevo tinta azul;3112458;kra 23# 122-10;Bucaramanga
+Libros
+1
+Vendo;Cuentos de Rafael Pombo;Vendo cuentos a buen precio;6678943;kra 54#19-2;Cartagena
