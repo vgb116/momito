@@ -49,6 +49,7 @@ public class Categoria implements Serializable
     /**
      * Crea una nueva categoría con un nombre <b> post: </b> Se inicializó la lista de posts. <br>
      * Se inicializó idPosts en 0.
+     * 
      * @param elNombre El nombre de la nueva categoría. elNombre!=null
      */
     public Categoria( String elNombre )
@@ -65,6 +66,7 @@ public class Categoria implements Serializable
 
     /**
      * Agrega el nuevo post a la lista de posts
+     * 
      * @param nuevoPost El nuevo post que se va a agregar
      */
     public void agregarPost( Post nuevoPost )
@@ -76,6 +78,7 @@ public class Categoria implements Serializable
     /**
      * Genera un id para un nuevo post. <br>
      * <b> post: </b> iPost se incremento en 1.
+     * 
      * @return idPost El id del nuevo post
      */
     public int darIdPost( )
@@ -87,6 +90,7 @@ public class Categoria implements Serializable
     /**
      * Busca el post que se desea eliminar y lo elimina de la lista de posts de la categoría. <br>
      * <b> post: </b> la lista de posts se encuentra inicializada
+     * 
      * @param idPost El identificador del post que se desea eliminar
      */
     public void eliminarPost( int idPost )
@@ -106,6 +110,7 @@ public class Categoria implements Serializable
 
     /**
      * Informa el nombre de la categoría
+     * 
      * @return El nombre de la categoría
      */
     public String darNombre( )
@@ -116,6 +121,7 @@ public class Categoria implements Serializable
     /**
      * 
      * Retorna la representación String de la categoría
+     * 
      * @return Retorna una cadena con el nombre de la categoría
      */
     public String toString( )
@@ -125,6 +131,7 @@ public class Categoria implements Serializable
 
     /**
      * Retorna los posts de la categoría
+     * 
      * @return posts los posts de la categoría
      */
     public ArrayList darPosts( )
@@ -140,6 +147,7 @@ public class Categoria implements Serializable
      * El nombre es válido si: <br>
      * no es null <br>
      * es diferente de la cadena vacía <br>
+     * 
      * @return True si el nombre es válido, false en caso contrario
      */
     private boolean nombreEsValido( )
@@ -149,6 +157,7 @@ public class Categoria implements Serializable
 
     /**
      * Verifica que no hayan post con id repetido
+     * 
      * @return True si el id es unico por post, false en caso contrario
      */
     private boolean idPostEsUnico( )

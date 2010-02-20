@@ -1,13 +1,10 @@
 package uniandes.cupi2.cupiPosts.mundo;
 
 /**
- * Esta excepción se lanza cuando se presenta un error al leer o escribir el archivo con la información del estado del modelo del mundo. <br>
- * El mensaje asociado con la excepción debe describir el problema que se presentó.
+ * Esta excepción se lanza en caso que en el archivo del que se están imporando los posts tenga errores de formato
  */
-
-public class PersistenciaException extends Exception
+public class FormatoArchivoException extends Exception
 {
-
     // ------------------------------------------------------------------
     // Constantes
     // -----------------------------------------------------------------
@@ -23,10 +20,10 @@ public class PersistenciaException extends Exception
 
     /**
      * Construye la excepción con el mensaje que se pasa como parámetro y que describe la causa del problema
-     * @param causa el mensaje que describe el problema
+     * @param mensaje el mensaje que describe el problema
      */
-    public PersistenciaException( String causa ) 
+    public FormatoArchivoException( String mensaje )
     {
-        super( causa );
+        super( mensaje );
     }
 }

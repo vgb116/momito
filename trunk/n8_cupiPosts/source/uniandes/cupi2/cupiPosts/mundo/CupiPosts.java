@@ -25,6 +25,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+
 /**
  * Clase principal de la aplicación.<br>
  * <b>inv: </b> <br>
@@ -50,14 +51,27 @@ public class CupiPosts
 
     /**
      * Construye un nuevo manejador de posts a partir de un archivo de configuración <br>
-     * @param archivoConfiguracion El archivo de configuración con los datos de las categorías de posts. - archivoConfiguracion!=null <br>
+     * @param archivoConfiguracion El archivo de configuración con los datos de las categorías de posts <br>
      * @throws PersistenciaException Error al cargar los datos del archivo de configuración
      */
     public CupiPosts( String archivoConfiguracion ) throws PersistenciaException
     {
-        //
-        // TODO: Completar según el enunciado y la documentación
+        File archivo = new File( archivoConfiguracion );
+        // el archivo de configuración que llega por parámetro está serializado
+        // por lo que no se verifica que exista
 
+        try
+        {
+            ObjectInputStream ois = new ObjectInputStream( new FileInputStream( archivo ) );
+            categorias = ( ArrayList )ois.readObject( );
+            ois.close( );
+        }
+        catch( Exception e )
+        {
+            // Se atrapan los tipos de excepción
+            throw new PersistenciaException( "Error fatal: No es posible restaurar el estado del programa (" + e.getMessage( ) + ")" );
+        }
+        verificarInvariante( );
     }
 
     /**
@@ -178,10 +192,16 @@ public class CupiPosts
      */
     public void guardarDatos( String ruta ) throws PersistenciaException
     {
-
-        //
-        // TODO: Completar según enunciado
-
+        try
+        {
+            ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream( ruta ) );
+            oos.writeObject( categorias );
+            oos.close( );
+        }
+        catch( IOException e )
+        {
+            throw new PersistenciaException( "Error al guardar: " + e.getMessage( ) );
+        }
     }
 
     /**
