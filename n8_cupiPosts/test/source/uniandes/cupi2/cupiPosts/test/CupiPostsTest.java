@@ -38,7 +38,7 @@ public class CupiPostsTest extends TestCase
      * Ruta para cargar el archivo de prueba
      */
     private final static String RUTA_PRUEBA = "./test/data/cupiPosts.data";
-    
+
     /**
      * Ruta para la prueba de escritura
      */
@@ -146,8 +146,23 @@ public class CupiPostsTest extends TestCase
      */
     public void testCrearCategoria( )
     {
-        //
-        // TODO: Completar según el enunciado y la documentación  
+        setupEscenario1( );
+        try
+        {
+            // Se agrega la categoría
+            cupiPosts.crearCategoria( "categoriaN" );
+            assertEquals( "La cateogía no fue agregada correctamente", 3, cupiPosts.darCategorias( ).size( ) );
+
+            // Se prueba que se haya agregado de forma correcta
+            Categoria cat = ( Categoria )cupiPosts.darCategoria( "categoriaN" );
+            assertNotNull( "No se agregó la categoria de forma Correcta, no fue encontrada", cat );
+            assertEquals( "No se agregó la categoria de forma Correcta, no se encontro el nombre", "categoriaN", cat.darNombre( ) );
+
+        }
+        catch( CategoriaExistenteException e )
+        {
+            fail( "No debería ocurrir ningún error. Se generó excepción: " + e.getMessage( ) );
+        }
 
     }
 
@@ -156,17 +171,49 @@ public class CupiPostsTest extends TestCase
      */
     public void testCrearCategoria2( )
     {
-        //
-        // TODO: Completar según el enunciado y la documentación  
+        setupEscenario1( );
+        int tamanio = cupiPosts.darCategorias( ).size( );
+        // Se agrega una categoria ya existente
+        Categoria cat = ( Categoria )cupiPosts.darCategorias( ).get( 0 );
+        String nCat = cat.darNombre( );
+        try
+        {
+            cupiPosts.crearCategoria( nCat );
+            fail( "No debería crearse la categoria, pues ya existe una con el mismo nombre" );
+        }
+        catch( CategoriaExistenteException e )
+        {
+            int nTamanio = cupiPosts.darCategorias( ).size( );
+            assertEquals( "Ha cambiado el tamaño de las categorias", tamanio, nTamanio );
+        }
     }
 
     /**
-     * Verifica que se agregue un nuevo post a la lista de posts de una categoría son que ocurran errores
+     * Verifica que se agregue un nuevo post a la lista de posts de una categoría sin que ocurran errores
      */
     public void testCrearPost( )
     {
-        //
-        // TODO: Completar según el enunciado y la documentación  
+        setupEscenario1( );
+        try
+        {
+            cupiPosts.crearPost( "categoria1", "ubicacionX", "servicioX", "tituloX", "descripcionX", 123456, "direccionx" );
+            Categoria ca = ( Categoria )cupiPosts.darCategorias( ).get( 0 );
+            int N = ca.darPosts( ).size( );
+            assertEquals( "El post no fue agregado correctamente", 2, N );
+
+            Post po = ( Post )ca.darPosts( ).get( 1 );
+            assertNotNull( "El post no fue encontrado", po );
+            assertEquals( "Los atributos del post no fueron agregados correctamente", 123456, po.darTelefono( ) );
+
+        }
+        catch( PostIncompletoException e )
+        {
+            fail( "No se agrego correctamente el post " + e.getMessage( ) );
+        }
+        catch( DescripcionException er )
+        {
+            fail( "No se creo correctamente el post " + er.getMessage( ) );
+        }
     }
 
     /**
@@ -174,8 +221,24 @@ public class CupiPostsTest extends TestCase
      */
     public void testCrearPost2( )
     {
-        //
-        // TODO: Completar según el enunciado y la documentación  
+        setupEscenario1( );
+        Categoria cat = ( Categoria )cupiPosts.darCategorias( ).get( 0 );
+        int N = cat.darPosts( ).size( );
+
+        try
+        {
+            cupiPosts.crearPost( "categoria1", "", "", "titulo2", "descripcion2", 987, "direccion2" );
+            fail( "No se debió haber creado el post" );
+        }
+        catch( PostIncompletoException e )
+        {
+            int nN = cat.darPosts( ).size( );
+            assertEquals( "Cambio el tamaño de los post", 1, nN );
+        }
+        catch( DescripcionException e )
+        {
+            fail( "Se intentó crear un post defectuoso" );
+        }
     }
 
     /**
@@ -183,8 +246,24 @@ public class CupiPostsTest extends TestCase
      */
     public void testCrearPost3( )
     {
-        //
-        // TODO: Completar según el enunciado y la documentación  
+        setupEscenario1( );
+        Categoria cat = ( Categoria )cupiPosts.darCategorias( ).get( 0 );
+        int N = cat.darPosts( ).size( );
+        String desc = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901122";
+        try
+        {
+            cupiPosts.crearPost( "categoria1", "ubicacionX", "servicioX", "tituloX", desc, 123456, "direccionx" );
+            fail("Se agrego un post con una descripción de longitud mayor a 300");
+        }
+        catch( PostIncompletoException e )
+        {
+            fail("Se intentó crear un post defectuoso");
+        }
+        catch( DescripcionException e )
+        {
+            int nN = cat.darPosts( ).size( );
+            assertEquals( "Cambio el tamaño de los post", 1, nN );
+        }
     }
 
     /**

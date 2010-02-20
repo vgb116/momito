@@ -186,8 +186,13 @@ public class CupiPosts
      */
     public void generarReportePostsSeleccionados( String pathArchivo, String nombreArchivo ) throws PersistenciaException
     {
-        //
-        // TODO: Completar según enunciado
+        File archivo = new File( "pathArchivo" + File.separator + "nombreArchivo" );
+        PrintWriter escritor = new PrintWriter( archivo );
+        escritor.println( "REPORTE GENERADO POR CUPI-POST" );
+        escritor.println( "A continuación se presentan los post marcados" );
+        escritor.println( "" );
+        escritor.println( "--------------------------------------------------------------" );
+        escritor.println( "Titulo: " +  );
 
     }
 
