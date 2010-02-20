@@ -223,14 +223,20 @@ public class InterfazCupiPosts extends JFrame
      */
     public void dispose( )
     {
-        //
-        // TODO: Este método es llamado al cerrar la aplicación
-        // Debe :
-        // Debe pedirle a cupiPosts que se serialice en el archivo cuya dirección se encuentra en la constante RUTA_ARCHIVO_CONFIGURACION
-        // Al finalizar el método, asegúrese de llamar el método dispose de la clase JFrame
-        
-        // Maneje los mensajes de error debidos a todas las excepciones que se puedan generar
-        //  - Debe preguntar al usuario si desea cerrar la aplicación sin salvar la información dado que ocurrió un error
+        try
+        {
+            cupiPosts.guardarDatos( RUTA_ARCHIVO_CONFIGURACION );
+            super.dispose( );
+        }
+        catch( Exception e )
+        {
+            setVisible( true );
+            int resp = JOptionPane.showConfirmDialog( this, "Problemas guardando la información de CupiPost:\n" + e.getMessage( ) + "\n¿Quiere cerrar el programa sin salvar?", "Error", JOptionPane.YES_NO_OPTION );
+            if( resp == JOptionPane.YES_OPTION )
+            {
+                super.dispose( );
+            }
+        }
     }
 
     /**
