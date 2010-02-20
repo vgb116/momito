@@ -25,7 +25,6 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-
 /**
  * Clase principal de la aplicación.<br>
  * <b>inv: </b> <br>
@@ -104,8 +103,8 @@ public class CupiPosts
      */
     public void crearPost( String categoria, String ubicacion, String servicio, String titulo, String descripcion, int tel, String direccion ) throws PostIncompletoException, DescripcionException
     {
-        //
-        // TODO: Completar según el enunciado y la documentación
+        Categoria cate = darCategoria( categoria );
+        cate.agregarPost( new Post( cate.darIdPost( ), servicio, titulo, descripcion, tel, direccion, ubicacion ) );
     }
 
     /**
@@ -117,7 +116,7 @@ public class CupiPosts
     public void crearCategoria( String nombreCategoria ) throws CategoriaExistenteException
     {
         // Si existe una categoria con nombre: nombreCategoria:
-        if ( darCategoria( nombreCategoria ) != null )
+        if( darCategoria( nombreCategoria ) != null )
         {
             throw new CategoriaExistenteException( "La categoria " + nombreCategoria + " ya existe en CupiPost", nombreCategoria );
         }
@@ -126,7 +125,6 @@ public class CupiPosts
             categorias.add( new Categoria( nombreCategoria ) );
         }
         verificarInvariante( );
-
     }
 
     /**
