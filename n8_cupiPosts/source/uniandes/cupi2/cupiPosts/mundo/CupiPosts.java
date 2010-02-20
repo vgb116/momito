@@ -116,8 +116,16 @@ public class CupiPosts
      */
     public void crearCategoria( String nombreCategoria ) throws CategoriaExistenteException
     {
-        //
-        // TODO: Completar según el enunciado y la documentación
+        // Si existe una categoria con nombre: nombreCategoria:
+        if ( darCategoria( nombreCategoria ) != null )
+        {
+            throw new CategoriaExistenteException( "La categoria " + nombreCategoria + " ya existe en CupiPost", nombreCategoria );
+        }
+        else
+        {
+            categorias.add( new Categoria( nombreCategoria ) );
+        }
+        verificarInvariante( );
 
     }
 
