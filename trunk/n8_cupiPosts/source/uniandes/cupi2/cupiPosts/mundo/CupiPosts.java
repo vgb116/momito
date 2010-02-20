@@ -25,6 +25,9 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import uniandes.cupi2.cupiPosts.interfaz.InterfazCupiPosts;
+import uniandes.cupi2.cupiPosts.interfaz.PanelPost;
+
 /**
  * Clase principal de la aplicación.<br>
  * <b>inv: </b> <br>
@@ -186,16 +189,41 @@ public class CupiPosts
      */
     public void generarReportePostsSeleccionados( String pathArchivo, String nombreArchivo ) throws PersistenciaException
     {
-        File archivo = new File( "pathArchivo" + File.separator + "nombreArchivo" );
-        PrintWriter escritor = new PrintWriter( archivo );
-        escritor.println( "REPORTE GENERADO POR CUPI-POST" );
-        escritor.println( "A continuación se presentan los post marcados" );
-        escritor.println( "" );
-        escritor.println( "--------------------------------------------------------------" );
-        escritor.println( "Titulo: " +  );
-
+        try
+        {
+            File archivo = new File( "pathArchivo" + File.separator + "nombreArchivo" );
+            PrintWriter escritor = new PrintWriter( archivo );
+            escritor.println( "REPORTE GENERADO POR CUPI-POST" );
+            escritor.println( "A continuación se presentan los post marcados" );
+            escritor.println( "" );
+    
+            int N = categorias.size( );
+            for( int i = 0; i < N; i++ )
+            {
+                Categoria cat = ( Categoria )categorias.get( i );
+                int nN = cat.darPosts( ).size( );
+                for( int j = 0; j < nN; j++ )
+                {
+                    Post p = ( Post )cat.darPosts( ).get( j );
+                    if( p.darSeleccionado( ) )
+                    {
+                        escritor.println( "--------------------------------------------------------------" );
+                        escritor.println( "El título : " + p.darTitulo( ) );
+                        escritor.println( "Servicio : " + p.darServicio( ) );
+                        escritor.println( "Ubicación : " + p.darUbicacion( ) );
+                        escritor.println( "Teléfono : " + p.darTelefono( ) );
+                        escritor.println( "Dirección : " + p.darDireccion( ) );
+                        escritor.println( "Descripción : " + p.darDescripcion( ) );
+                        escritor.println( "--------------------------------------------------------------" );
+                    }
+                }
+            }
+        }
+        catch( IOException e )
+        {
+            throw new PersistenciaException( "Error al salvar: " + e.getMessage( ) );
+        }
     }
-
     /**
      * Se encarga de guardar las categorías y posts de cupiPosts de forma serializada
      * @param ruta La ruta del archivo donde se guardan los datos
