@@ -285,6 +285,7 @@ public class PanelMenu extends JPanel implements ActionListener
         //
         // TODO Completar según las instrucciones en el enunciado
         
+        
     }
 
 }

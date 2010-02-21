@@ -268,14 +268,118 @@ public class CupiPosts
         {
             File archivo = new File( rutaArchivo );
             FileReader reader = new FileReader( archivo );
-            BufferedReader lector = new BufferedReader( reader ); 
+            BufferedReader lector = new BufferedReader( reader );
+
+            // Lee la primera línea
+            String numeroCat = lector.readLine( );
+            while( numeroCat != null && numeroCat != "" )
+            {
+                // lee el número de categorías
+                try
+                {
+                    int numCat = Integer.parseInt( numeroCat );
+                    for( int i = 0; i < numCat; i++ )
+                    {
+                        // Nombre de la categoria i
+                        String cat = lector.readLine( );
+                        try
+                        {
+                            // Crea la categoria i, si esta no existe
+                            crearCategoria( cat );
+                            String numeroPost = lector.readLine( );
+                            try
+                            {
+                                int numPost = Integer.parseInt( numeroPost );
+                                for( int j = 0; j < numPost; j++ )
+                                {
+                                    String postt = lector.readLine( );
+                                    String[] datos = postt.split( ";" );
+                                    if( datos.length == 6 )
+                                    {
+                                        String ServicioJ = datos[ 0 ];
+                                        String TituloJ = datos[ 1 ];
+                                        String DescripcionJ = datos[ 2 ];
+                                        int TelefonoJ = Integer.parseInt( datos[ 3 ] );
+                                        String DireccionJ = datos[ 4 ];
+                                        String UbicacionJ = datos[ 5 ];
+                                        try
+                                        {
+                                            crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
+                                        }
+                                        catch( PostIncompletoException e )
+                                        {
+                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" + e.getMessage( ) );
+                                        }
+                                        catch( DescripcionException e )
+                                        {
+                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" + e.getMessage( ) );
+                                        }
+                                    }
+                                }
+                            }
+                            catch( NumberFormatException ei )
+                            {
+                                throw new FormatoArchivoException( "No se encontro el número de post de la categoria " + cat + " " + ei.getMessage( ) );
+                            }
+
+                        }
+                        catch( CategoriaExistenteException e )
+                        {
+                            // Si la categoria leida ya existe, agrega los post
+                            String numeroPost = lector.readLine( );
+                            try
+                            {
+                                int numPost = Integer.parseInt( numeroPost );
+                                for( int j = 0; j < numPost; j++ )
+                                {
+                                    String postt = lector.readLine( );
+                                    String[] datos = postt.split( ";" );
+                                    if( datos.length == 6 )
+                                    {
+                                        String ServicioJ = datos[ 0 ];
+                                        String TituloJ = datos[ 1 ];
+                                        String DescripcionJ = datos[ 2 ];
+                                        int TelefonoJ = Integer.parseInt( datos[ 3 ] );
+                                        String DireccionJ = datos[ 4 ];
+                                        String UbicacionJ = datos[ 5 ];
+                                        try
+                                        {
+                                            crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
+                                        }
+                                        catch( PostIncompletoException ee )
+                                        {
+                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" + e.getMessage( ) );
+                                        }
+                                        catch( DescripcionException ee )
+                                        {
+                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" + e.getMessage( ) );
+                                        }
+                                    }
+                                }
+                            }
+                            catch( NumberFormatException ei )
+                            {
+                                throw new FormatoArchivoException( "No se encontro el número de post de la categoria " + cat + " " + ei.getMessage( ) );
+                            }
+                        }
+                    }
+                }
+                catch( NumberFormatException ea )
+                {
+                    throw new FormatoArchivoException( "En la primera linea no se encontro un número" + ea.getMessage( ) );
+                }
+            }
+        }
+        catch( FileNotFoundException e )
+        {
+            throw new FormatoArchivoException( "No se encontró el archivo: " + e.getMessage( ) );
         }
         catch( IOException e )
         {
             throw new FormatoArchivoException( "Error al importar los Datos" + e.getMessage( ) );
         }
-    }
 
+    }
     // -----------------------------------------------------------------
     // Puntos de Extensión
     // -----------------------------------------------------------------
