@@ -191,12 +191,12 @@ public class CupiPosts
     {
         try
         {
-            File archivo = new File( "pathArchivo" + File.separator + "nombreArchivo" );
+            File archivo = new File( pathArchivo + File.separator + nombreArchivo );
             PrintWriter escritor = new PrintWriter( archivo );
             escritor.println( "REPORTE GENERADO POR CUPI-POST" );
             escritor.println( "A continuación se presentan los post marcados" );
             escritor.println( "" );
-    
+
             int N = categorias.size( );
             for( int i = 0; i < N; i++ )
             {
@@ -218,6 +218,7 @@ public class CupiPosts
                     }
                 }
             }
+            escritor.close( );
         }
         catch( IOException e )
         {
@@ -263,9 +264,16 @@ public class CupiPosts
      */
     public void importarDatos( String rutaArchivo ) throws FormatoArchivoException
     {
-        //
-        // TODO: Completar según enunciado
-
+        try
+        {
+            File archivo = new File( rutaArchivo );
+            FileReader reader = new FileReader( archivo );
+            BufferedReader lector = new BufferedReader( reader ); 
+        }
+        catch( IOException e )
+        {
+            throw new FormatoArchivoException( "Error al importar los Datos" + e.getMessage( ) );
+        }
     }
 
     // -----------------------------------------------------------------

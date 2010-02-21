@@ -18,6 +18,7 @@ import javax.swing.border.TitledBorder;
 
 import uniandes.cupi2.cupiPosts.mundo.Categoria;
 import uniandes.cupi2.cupiPosts.mundo.CategoriaExistenteException;
+import uniandes.cupi2.cupiPosts.mundo.CupiPosts;
 
 /**
  * Panel que contiene el menu de la aplicación
@@ -102,7 +103,7 @@ public class PanelMenu extends JPanel implements ActionListener
     /**
      * Combo box con las categorías de posts
      */
-    // TODO: Declare el combo box llamado comboCategorias para las categorías
+    private JComboBox comboCategorias;
 
     // ------------------------------------------------------------------
     // Atributos de la interfaz
@@ -134,7 +135,13 @@ public class PanelMenu extends JPanel implements ActionListener
         panelCategorias.setBorder( new TitledBorder( "Categorías" ) );
 
         // TODO inicialice el combo box y asocie su listener usando el método addItemListener
-        
+        comboCategorias = new JComboBox( );
+        comboCategorias.addActionListener( this );
+        comboCategorias.setActionCommand( SELECCIONAR_CATEGORIA );
+        // falta lo de la constante
+
+        labelSeleccionarCategoria = new JLabel( "Seleccionar Categoria : " );
+
         panelCategorias.add( labelSeleccionarCategoria );
         panelCategorias.add( comboCategorias );
 
@@ -277,6 +284,7 @@ public class PanelMenu extends JPanel implements ActionListener
     {
         //
         // TODO Completar según las instrucciones en el enunciado
+        
     }
 
 }
