@@ -284,8 +284,8 @@ public class PanelMenu extends JPanel implements ActionListener
     {
         //
         // TODO Completar según las instrucciones en el enunciado
-        
-        
+        Categoria cat = ( Categoria )comboCategorias.getSelectedItem( );
+        return cat;
     }
 
 }
