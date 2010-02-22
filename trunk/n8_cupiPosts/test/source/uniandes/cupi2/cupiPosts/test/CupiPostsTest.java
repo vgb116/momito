@@ -13,6 +13,8 @@
 
 package uniandes.cupi2.cupiPosts.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
@@ -67,18 +69,19 @@ public class CupiPostsTest extends TestCase
      */
     private void setupEscenario1( )
     {
+
         try
         {
-            cupiPosts = new CupiPosts( "" );
+            cupiPosts = new CupiPosts( );
             cupiPosts.crearCategoria( "categoria1" );
             cupiPosts.crearCategoria( "categoria2" );
             cupiPosts.crearPost( "categoria1", "ubicacion1", "servicio1", "titulo1", "descripcion1", 1, "direccion1" );
             cupiPosts.crearPost( "categoria2", "ubicacion2", "servicio2", "titulo2", "descripcion2", 2, "direccion2" );
         }
-        catch( PersistenciaException e )
-        {
-            fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
-        }
+        // catch( PersistenciaException e )
+        // {
+        // fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
+        // }
         catch( CategoriaExistenteException e )
         {
             fail( "No se están creando bien las categorías" );
@@ -113,14 +116,15 @@ public class CupiPostsTest extends TestCase
      */
     public void setupEscenario3( )
     {
-        try
-        {
+//        cupiPosts = new CupiPosts( );
+         try
+         {
             cupiPosts = new CupiPosts( "" );
-        }
-        catch( PersistenciaException e )
-        {
-            fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
-        }
+         }
+         catch( PersistenciaException e )
+         {
+         fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
+         }
     }
 
     /**
@@ -227,13 +231,13 @@ public class CupiPostsTest extends TestCase
 
         try
         {
-            cupiPosts.crearPost( "categoria1", "", "", "titulo2", "descripcion2", 987, "direccion2" );
+            cupiPosts.crearPost( "categoria1", "", "", "titulo2", "descripcion2", 89, "direccion2" );
             fail( "No se debió haber creado el post" );
         }
         catch( PostIncompletoException e )
         {
             int nN = cat.darPosts( ).size( );
-            assertEquals( "Cambio el tamaño de los post", 1, nN );
+            assertEquals( "Cambio el tamaño de los post", N, nN );
         }
         catch( DescripcionException e )
         {
@@ -249,20 +253,20 @@ public class CupiPostsTest extends TestCase
         setupEscenario1( );
         Categoria cat = ( Categoria )cupiPosts.darCategorias( ).get( 0 );
         int N = cat.darPosts( ).size( );
-        String desc = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901122";
+        String desc = "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
         try
         {
             cupiPosts.crearPost( "categoria1", "ubicacionX", "servicioX", "tituloX", desc, 123456, "direccionx" );
-            fail("Se agrego un post con una descripción de longitud mayor a 300");
+            fail( "Se agrego un post con una descripción de longitud mayor a 300" );
         }
         catch( PostIncompletoException e )
         {
-            fail("Se intentó crear un post defectuoso");
+            fail( "Se intentó crear un post defectuoso" );
         }
         catch( DescripcionException e )
         {
             int nN = cat.darPosts( ).size( );
-            assertEquals( "Cambio el tamaño de los post", 1, nN );
+            assertEquals( "Cambio el tamaño de los post", N, nN );
         }
     }
 

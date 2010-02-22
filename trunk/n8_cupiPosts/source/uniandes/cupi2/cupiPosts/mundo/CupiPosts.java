@@ -308,75 +308,41 @@ public class CupiPosts
                                         }
                                         catch( PostIncompletoException e )
                                         {
-                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" + e.getMessage( ) );
+                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" );
                                         }
                                         catch( DescripcionException e )
                                         {
-                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" + e.getMessage( ) );
+                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" );
                                         }
                                     }
                                 }
                             }
-                            catch( NumberFormatException ei )
+                            catch( NumberFormatException e )
                             {
-                                throw new FormatoArchivoException( "No se encontro el número de post de la categoria " + cat + " " + ei.getMessage( ) );
+                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat  );
                             }
 
                         }
                         catch( CategoriaExistenteException e )
                         {
                             // Si la categoria leida ya existe, agrega los post
-                            String numeroPost = lector.readLine( );
-                            try
-                            {
-                                int numPost = Integer.parseInt( numeroPost );
-                                for( int j = 0; j < numPost; j++ )
-                                {
-                                    String postt = lector.readLine( );
-                                    String[] datos = postt.split( ";" );
-                                    if( datos.length == 6 )
-                                    {
-                                        String ServicioJ = datos[ 0 ];
-                                        String TituloJ = datos[ 1 ];
-                                        String DescripcionJ = datos[ 2 ];
-                                        int TelefonoJ = Integer.parseInt( datos[ 3 ] );
-                                        String DireccionJ = datos[ 4 ];
-                                        String UbicacionJ = datos[ 5 ];
-                                        try
-                                        {
-                                            crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
-                                        }
-                                        catch( PostIncompletoException ee )
-                                        {
-                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" + e.getMessage( ) );
-                                        }
-                                        catch( DescripcionException ee )
-                                        {
-                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" + e.getMessage( ) );
-                                        }
-                                    }
-                                }
-                            }
-                            catch( NumberFormatException ei )
-                            {
-                                throw new FormatoArchivoException( "No se encontro el número de post de la categoria " + cat + " " + ei.getMessage( ) );
-                            }
+                            throw new FormatoArchivoException( "La categoria " + cat + " ya existe" );
                         }
                     }
                 }
-                catch( NumberFormatException ea )
+                catch( NumberFormatException e )
                 {
-                    throw new FormatoArchivoException( "En la primera linea no se encontro un número" + ea.getMessage( ) );
+                    throw new FormatoArchivoException( "En la primera linea no se encontro un número" );
                 }
             }
         }
         catch( FileNotFoundException e )
         {
-            throw new FormatoArchivoException( "No se encontró el archivo: " + e.getMessage( ) );
+            throw new FormatoArchivoException( "No se encontró el archivo " );
         }
         catch( IOException e )
         {
-            throw new FormatoArchivoException( "Error al importar los Datos" + e.getMessage( ) );
+            throw new FormatoArchivoException( "Error al importar los Datos" );
         }
 
     }
