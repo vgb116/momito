@@ -110,31 +110,31 @@ public class CupiPosts
         String cau = "";
         if( categoria == null || categoria.equals( "" ) )
         {
-            cau = cau + categoria;
+            cau = cau + "Categoria";
         }
         if( ubicacion == null || ubicacion.equals( "" ) )
         {
-            cau = cau + ubicacion;
+            cau = cau + "Ubicacion";
         }
         if( servicio == null || servicio.equals( "" ) )
         {
-            cau = cau + servicio;
+            cau = cau + "Servicio";
         }
         if( titulo == null || titulo.equals( "" ) )
         {
-            cau = cau + titulo;
+            cau = cau + "Titulo";
         }
         if( descripcion == null || descripcion.equals( "" ) )
         {
-            cau = cau + descripcion;
+            cau = cau + "Descripcion";
         }
         if( tel <= 0 )
         {
-            cau = cau + tel;
+            cau = cau + "Telefono";
         }
         if( direccion == null || direccion.equals( "" ) )
         {
-            cau = cau + direccion;
+            cau = cau + "Direccion";
         }
         if( !cau.equals( "" ) )
         {

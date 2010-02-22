@@ -231,7 +231,7 @@ public class CupiPostsTest extends TestCase
 
         try
         {
-            cupiPosts.crearPost( "categoria1", "", "", "titulo2", "descripcion2", 89, "direccion2" );
+            cupiPosts.crearPost( "categoria1", "", "", "", "", 89, "" );
             fail( "No se debió haber creado el post" );
         }
         catch( PostIncompletoException e )
