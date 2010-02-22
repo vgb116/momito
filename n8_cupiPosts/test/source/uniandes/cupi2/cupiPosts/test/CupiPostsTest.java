@@ -48,7 +48,7 @@ public class CupiPostsTest extends TestCase
     /**
      * Ruta para importar datos de un archivo de texto plano
      */
-    private final static String RUTA_PRUEBA_3 = "./test/data/cargaTest.txt";
+    private final static String RUTA_PRUEBA_3 = "." + File.separator + "test" + File.separator + "data" + File.separator + "cargaTest.txt";
 
     // -----------------------------------------------------------------
     // Atributos
@@ -78,10 +78,10 @@ public class CupiPostsTest extends TestCase
             cupiPosts.crearPost( "categoria1", "ubicacion1", "servicio1", "titulo1", "descripcion1", 1, "direccion1" );
             cupiPosts.crearPost( "categoria2", "ubicacion2", "servicio2", "titulo2", "descripcion2", 2, "direccion2" );
         }
-//        catch( PersistenciaException e )
-//        {
-//            fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
-//        }
+        // catch( PersistenciaException e )
+        // {
+        // fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
+        // }
         catch( CategoriaExistenteException e )
         {
             fail( "No se están creando bien las categorías" );
@@ -116,15 +116,15 @@ public class CupiPostsTest extends TestCase
      */
     public void setupEscenario3( )
     {
-        // cupiPosts = new CupiPosts( );
-        try
-        {
-            cupiPosts = new CupiPosts( "" );
-        }
-        catch( PersistenciaException e )
-        {
-            fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
-        }
+        cupiPosts = new CupiPosts( );
+//        try
+//        {
+//            cupiPosts = new CupiPosts( "" );
+//        }
+//        catch( PersistenciaException e )
+//        {
+//            fail( "No debería haber problemas de persistencia al dar una ruta de un archivo que no existe" );
+//        }
     }
 
     /**
