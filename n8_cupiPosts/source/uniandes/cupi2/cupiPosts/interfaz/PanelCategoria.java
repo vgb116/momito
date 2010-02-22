@@ -113,5 +113,4 @@ public class PanelCategoria extends JPanel
         scroll.validate( );
         scroll.repaint( );
     }
-
 }

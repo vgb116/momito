@@ -134,11 +134,11 @@ public class PanelMenu extends JPanel implements ActionListener
         panelCategorias.setLayout( new FlowLayout( FlowLayout.LEFT, 5, 0 ) );
         panelCategorias.setBorder( new TitledBorder( "Categorías" ) );
 
-        // TODO inicialice el combo box y asocie su listener usando el método addItemListener
+        
         comboCategorias = new JComboBox( );
         comboCategorias.addActionListener( this );
-        comboCategorias.setActionCommand( SELECCIONAR_CATEGORIA );
-        // falta lo de la constante
+        comboCategorias.setActionCommand( COMBO_BOX );
+        
 
         labelSeleccionarCategoria = new JLabel( "Seleccionar Categoria : " );
 
@@ -282,8 +282,7 @@ public class PanelMenu extends JPanel implements ActionListener
      */
     public Categoria darCategoriaSeleccionada( )
     {
-        //
-        // TODO Completar según las instrucciones en el enunciado
+        
         Categoria cat = ( Categoria )comboCategorias.getSelectedItem( );
         return cat;
     }
