@@ -326,7 +326,41 @@ public class CupiPosts
                         catch( CategoriaExistenteException e )
                         {
                             // Si la categoria leida ya existe, agrega los post
-                            throw new FormatoArchivoException( "La categoria " + cat + " ya existe" );
+                            String numeroPost = lector.readLine( );
+                            try
+                            {
+                                int numPost = Integer.parseInt( numeroPost );
+                                for( int j = 0; j < numPost; j++ )
+                                {
+                                    String postt = lector.readLine( );
+                                    String[] datos = postt.split( ";" );
+                                    if( datos.length == 6 )
+                                    {
+                                        String ServicioJ = datos[ 0 ];
+                                        String TituloJ = datos[ 1 ];
+                                        String DescripcionJ = datos[ 2 ];
+                                        int TelefonoJ = Integer.parseInt( datos[ 3 ] );
+                                        String DireccionJ = datos[ 4 ];
+                                        String UbicacionJ = datos[ 5 ];
+                                        try
+                                        {
+                                            crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
+                                        }
+                                        catch( PostIncompletoException ea )
+                                        {
+                                            throw new FormatoArchivoException( "La informacion del post esta incompleta" );
+                                        }
+                                        catch( DescripcionException ea )
+                                        {
+                                            throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" );
+                                        }
+                                    }
+                                }
+                            }
+                            catch( NumberFormatException ea )
+                            {
+                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat  );
+                            }
                         }
                     }
                 }
