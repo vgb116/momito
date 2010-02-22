@@ -322,63 +322,53 @@ public class CupiPosts
                     {
                         // Nombre de la categoria i
                         String cat = lector.readLine( );
-                        while( cat != null && cat != "" )
+                        // Crea la categoria i, si esta no existe
+                        if( darCategoria( cat ) == null )
                         {
-                            // Crea la categoria i, si esta no existe
-                            // crearCategoria( cat );
-                            if( darCategoria( cat ) == null )
+                            categorias.add( new Categoria( cat ) );
+                        }
+
+                        // Continua agregando el post, si no existia la categoria ya fue creada
+                        // y si existía, el post se agrega a la existente
+
+                        String numeroPost = lector.readLine( );
+                        int numPost = Integer.parseInt( numeroPost );
+                        for( int j = 0; j < numPost; j++ )
+                        {
+                            String postt = lector.readLine( );
+                            if( postt != null && postt != "" )
                             {
-                                categorias.add( new Categoria( cat ) );
-                            }
-                            String numeroPost = lector.readLine( );
-                            while( numeroPost != null && numeroPost != "" )
-                            {
-                                try
+                                String[] datos = postt.split( ";" );
+                                if( datos.length == 6 )
                                 {
-                                    int numPost = Integer.parseInt( numeroPost );
-                                    for( int j = 0; j < numPost; j++ )
+                                    String ServicioJ = datos[ 0 ];
+                                    String TituloJ = datos[ 1 ];
+                                    String DescripcionJ = datos[ 2 ];
+                                    int TelefonoJ = Integer.parseInt( datos[ 3 ] );
+                                    String DireccionJ = datos[ 4 ];
+                                    String UbicacionJ = datos[ 5 ];
+                                    try
                                     {
-                                        String postt = lector.readLine( );
-                                        while( postt != null && postt != "" )
-                                        {
-                                            String[] datos = postt.split( ";" );
-                                            if( datos.length == 6 )
-                                            {
-                                                String ServicioJ = datos[ 0 ];
-                                                String TituloJ = datos[ 1 ];
-                                                String DescripcionJ = datos[ 2 ];
-                                                int TelefonoJ = Integer.parseInt( datos[ 3 ] );
-                                                String DireccionJ = datos[ 4 ];
-                                                String UbicacionJ = datos[ 5 ];
-                                                try
-                                                {
-                                                    crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
-                                                }
-                                                catch( PostIncompletoException e )
-                                                {
-                                                    throw new FormatoArchivoException( "La informacion del post esta incompleta" );
-                                                }
-                                                catch( DescripcionException e )
-                                                {
-                                                    throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" );
-                                                }
-                                            }
-                                        }
+                                        crearPost( cat, UbicacionJ, ServicioJ, TituloJ, DescripcionJ, TelefonoJ, DireccionJ );
+                                    }
+                                    catch( PostIncompletoException e )
+                                    {
+                                        throw new FormatoArchivoException( "La informacion del post esta incompleta" );
+                                    }
+                                    catch( DescripcionException e )
+                                    {
+                                        throw new FormatoArchivoException( "La descripción del post excede la longitud permitida" );
                                     }
                                 }
-                                catch( NumberFormatException e )
-                                {
-                                    throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat );
-                                }
                             }
-
                         }
+
                     }
                 }
 
                 catch( NumberFormatException e )
                 {
-                    throw new FormatoArchivoException( "En la primera linea no se encontro un número" );
+                    throw new FormatoArchivoException( "El documento no es consistente con el formato que debe tener" );
                 }
             }
         }
