@@ -107,9 +107,49 @@ public class CupiPosts
     public void crearPost( String categoria, String ubicacion, String servicio, String titulo, String descripcion, int tel, String direccion ) throws PostIncompletoException, DescripcionException
     {
         Categoria cate = darCategoria( categoria );
+        String cau = "";
+        if (categoria == null && categoria.equals( "" ))
+        {
+         cau= cau + categoria;   
+        }
+        if (ubicacion == null && ubicacion.equals( "" ) )
+        {
+            cau = cau +ubicacion;
+        }
+        if (servicio != null && servicio.equals( "" ) )
+        {
+            cau = cau + servicio;
+        }
+        if (titulo != null && titulo.equals( "" ) )
+        {
+            cau = cau + titulo;
+        }
+        if( descripcion != null && descripcion.equals( "" ) )
+        {
+            cau = cau + descripcion;
+        }
+        if (tel > 0)
+        {
+            cau = cau + tel;
+        }
+        if( direccion != null && direccion.equals( "" ) )
+        {
+            cau = cau + direccion;
+        }
+        if (!cau.equals( "" ))
+        {
+            throw new PostIncompletoException( "No se llenaron todos los campos", cau );
+        }
+        if ( descripcion.length( )>300 )
+        {
+            throw new DescripcionException( "El tamaño de la descripción supera los límites", descripcion.length( ) );
+        }
+        else
+        {
         cate.agregarPost( new Post( cate.darIdPost( ), servicio, titulo, descripcion, tel, direccion, ubicacion ) );
+        }
+        
     }
-
     /**
      * Crea una nueva categoría si no existe una con el mismo nombre. <br>
      * <b> post: </b> Se agrego una nueva categoría.
@@ -319,7 +359,7 @@ public class CupiPosts
                             }
                             catch( NumberFormatException e )
                             {
-                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat  );
+                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat );
                             }
 
                         }
@@ -359,7 +399,7 @@ public class CupiPosts
                             }
                             catch( NumberFormatException ea )
                             {
-                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat  );
+                                throw new FormatoArchivoException( "No se encontro el número de posts de la categoria " + cat );
                             }
                         }
                     }
