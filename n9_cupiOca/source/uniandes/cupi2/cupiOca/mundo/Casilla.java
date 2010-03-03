@@ -165,7 +165,24 @@ public class Casilla
     public Casilla buscarSiguienteTipoCasilla( String tipoBuscado )
     {
         // TODO Completar según la documentación
+        Casilla casSiguiente = casillaSiguiente;
+        Casilla respuesta = this;
+        Boolean encontrado = false;
 
+        while( casSiguiente != null && encontrado == false )
+        {
+            if( casSiguiente.darTipo( ).equals( tipoBuscado ) )
+            {
+                encontrado = true;
+                respuesta = casSiguiente;
+
+            }
+            else
+            {
+                casSiguiente = casSiguiente.darSiguiente( );
+            }
+        }
+        return respuesta;
     }
 
     /**
@@ -176,9 +193,24 @@ public class Casilla
      */
     public Casilla buscarAnteriorTipoCasilla( String tipoBuscado )
     {
-
         // TODO Completar según la documentación
+        Casilla casAnterior = casillaAnterior;
+        Casilla respuesta = this;
+        Boolean encontrado = false;
 
+        while( casAnterior != null && encontrado == false )
+        {
+            if( casAnterior.darTipo( ).equals( tipoBuscado ) )
+            {
+                encontrado = true;
+                respuesta = casAnterior;
+            }
+            else
+            {
+                casAnterior = casAnterior.darAnterior( );
+            }
+        }
+        return respuesta;
     }
 
     /**
@@ -191,7 +223,16 @@ public class Casilla
     {
 
         // TODO Completar según la documentación
+        Casilla actual = this;
+        int cont = 0;
 
+        while( actual != null && actual.darTipo( ).equals( tipoCasilla ) )
+        {
+            cont++;
+            actual = actual.darSiguiente( );
+        }
+
+        return cont;
     }
 
     // -----------------------------------------------------------------

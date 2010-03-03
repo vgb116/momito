@@ -265,13 +265,23 @@ public class Jugador
 
         // TODO Completar según la documentación
         int n = casillaActual.darPosicionCasilla( ) + numPosiciones;
-        if ( n > 49 )
+        Casilla actual = casillaActual;
+
+        if( n > 49 )
         {
-            // avanza hasta la última casilla 
+            while( actual.darSiguiente( ) != null )
+            {
+                actual = actual.darSiguiente( );
+            }
+            cambiarCasillaActual( actual );
         }
         else
         {
-            // avanza a la casilla siguiente
+            while( ( actual != null ) && ( actual.darPosicionCasilla( ) != n ) )
+            {
+                actual = actual.darSiguiente( );
+            }
+            cambiarCasillaActual( actual );
         }
     }
 
@@ -282,6 +292,8 @@ public class Jugador
     public Jugador darCopia( )
     {
         // TODO Completar según la documentación
+        Jugador jug = new Jugador( nick, casillaActual, imagen );
+        return jug;
     }
 
     // -----------------------------------------------------------------

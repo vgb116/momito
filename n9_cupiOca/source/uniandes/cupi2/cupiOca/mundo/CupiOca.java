@@ -19,6 +19,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.sound.midi.MidiDevice.Info;
+
 /**
  * Clase principal de la aplicación <br>
  * Invariante de la clase: <br>
@@ -37,13 +39,13 @@ public class CupiOca
     /**
      * La primera casilla del tablero de juego
      */
-	// TODO modele el atributo que representa la primera casilla del tablero
+    // TODO modele el atributo que representa la primera casilla del tablero
     private Casilla casillaInicio;
 
     /**
      * El jugador en turno
      */
-	// TODO modele el atributo que representa el jugador en turno
+    // TODO modele el atributo que representa el jugador en turno
     private Jugador jugadorEnTurno;
 
     /**
@@ -79,12 +81,12 @@ public class CupiOca
      */
     public Casilla darPrimeraCasilla( )
     {
-    	// TODO Completar según la documentación
+        // TODO Completar según la documentación
         return casillaInicio;
     }
 
     /**
-     * Carga un tablero de juego desde un archivo de configuración con el formato descrito en el archivo de descripción del ejercicio.<br> 
+     * Carga un tablero de juego desde un archivo de configuración con el formato descrito en el archivo de descripción del ejercicio.<br>
      * <b> pre: </b> Existe un archivo de configuración en la ruta. <br>
      * <b> post: </b> Se inicializan las casillas del tablero de juego. <br>
      * @param ruta Ruta al archivo de configuración
@@ -93,8 +95,8 @@ public class CupiOca
      */
     public void cargarTableroDeJuego( String ruta ) throws CupiOcaException
     {
-    	
-    	// TODO Completar según la documentación
+
+        // TODO Completar según la documentación
 
     }
 
@@ -117,10 +119,20 @@ public class CupiOca
      */
     public InfoJugada jugar( )
     {
-    	// TODO Completar según la documentación
-    	// Ayuda: llame al método jugar del jugadorActual, el número de posiciones lo obtiene con el método simular dado
-        
-    	
+        // TODO Completar según la documentación
+        // Ayuda: llame al método jugar del jugadorActual, el número de posiciones lo obtiene con el método simular dado
+        int n = simularDado( );
+        Jugador actual = jugadorEnTurno;
+        Casilla casInicial = actual.darCasillaActual( );
+        actual.avanzarCasillas( n );
+        Casilla casFinal = actual.darCasillaActual( );
+        Boolean gano = false;
+        if( casFinal.darPosicionCasilla( ) == 49 )
+        {
+            gano = true;
+        }
+        InfoJugada jugada = new InfoJugada( casInicial, casFinal, gano, "elMensaje", n );
+        return jugada;
     }
 
     /**
@@ -130,7 +142,7 @@ public class CupiOca
      */
     public void cambiarJugadorEnTurno( )
     {
-    	// TODO Completar según la documentación
+        // TODO Completar según la documentación
         jugadorEnTurno = jugadorEnTurno.darSiguiente( );
     }
 
@@ -147,11 +159,9 @@ public class CupiOca
      */
     public void agregarJugador( String nickJugador, String rutaImagen )
     {
-
-    	// TODO Completar según la documentación
-        
+        // TODO Completar según la documentación
+        Jugador jug = new Jugador( nickJugador, casillaInicio, rutaImagen );
     }
-
     /**
      * Busca un jugador con el nick dado como parámetro. <br>
      * <b> pre: </b> jugadorEnTurno != null <br>
@@ -160,8 +170,23 @@ public class CupiOca
      */
     public Jugador darJugador( String nick )
     {
-    	// TODO Completar según la documentación
-    	//Ayuda: Tenga en cuenta que la lista de jugadores es una lista circular
+        // TODO Completar según la documentación
+        // Ayuda: Tenga en cuenta que la lista de jugadores es una lista circular
+        Jugador jug = jugadorEnTurno;
+        Jugador respuesta = null;
+
+        while( jug.darSiguiente( ) != null )
+        {
+            if (jug.darNick( ).equals( nick ))
+            {
+                respuesta = jug;
+            }
+            else
+            {
+                jug=jug.darSiguiente( );
+            }
+        }
+        return respuesta;
     }
 
     /**
@@ -171,9 +196,9 @@ public class CupiOca
      */
     public boolean existeJugador( String nick )
     {
-    	
-    	// TODO Completar según la documentación
-    	
+
+        // TODO Completar según la documentación
+
     }
 
     /**
@@ -202,8 +227,8 @@ public class CupiOca
      */
     public int darNumCasillas( String tipoCasilla )
     {
-    	
-    	// TODO Completar según la documentación
+
+        // TODO Completar según la documentación
 
     }
 
@@ -216,37 +241,36 @@ public class CupiOca
      */
     public void eliminarJugador( String nickAEliminar ) throws Exception
     {
-    	// TODO Completar según la documentación
-    	
+        // TODO Completar según la documentación
+
     }
 
     /**
      * Este método agrega en forma ordenada un jugador a una lista ordenada y sencillamente encadenada. <br>
-     * El orden esta dado por la posición de la casilla en la que se encuentra un jugador. Se encuentra ordenado de mayor a menor casilla.
-     * <b>post: </b>El jugador agregar es agregado manteniendo la lista ordenada
+     * El orden esta dado por la posición de la casilla en la que se encuentra un jugador. Se encuentra ordenado de mayor a menor casilla. <b>post: </b>El jugador agregar es
+     * agregado manteniendo la lista ordenada
      * @param primerRanking El primer jugador de la lista ordenada - primerRanking != null
      * @param agregar El jugador que se va a agregar a la lista - agregar != null
      * @return El primer jugador de la lista ordenada
      */
     public Jugador insertarOrdenado( Jugador primerRanking, Jugador agregar )
     {
-    	
-    	// TODO Completar según la documentación
-    	
+
+        // TODO Completar según la documentación
+
     }
 
     /**
      * Retorna una lista de jugadores sencillamente encadenada ordenada.<br>
-     * El orden esta dado por la posición de la casilla en la que se encuentra un jugador. Se encuentra ordenado de mayor a menor casilla.
-     * <b>pre: </b>jugadorEnTurno!=null
+     * El orden esta dado por la posición de la casilla en la que se encuentra un jugador. Se encuentra ordenado de mayor a menor casilla. <b>pre: </b>jugadorEnTurno!=null
      * @return El primer jugador de la lista ordenada por posición de casilla
      */
     public Jugador darListaRanking( )
     {
-    	
-    	// TODO Completar según la documentación
-    	//Ayuda: Utilice el método insertarOrdenado para construir la lista.
-    	//		 Utilice el método darCopia de la clase jugador, para construir una lista con copias de los jugadores
+
+        // TODO Completar según la documentación
+        // Ayuda: Utilice el método insertarOrdenado para construir la lista.
+        // Utilice el método darCopia de la clase jugador, para construir una lista con copias de los jugadores
 
     }
 
