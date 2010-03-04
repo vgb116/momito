@@ -123,15 +123,8 @@ public class CupiOca
         // Ayuda: llame al método jugar del jugadorActual, el número de posiciones lo obtiene con el método simular dado
         int n = simularDado( );
         Jugador actual = jugadorEnTurno;
-        Casilla casInicial = actual.darCasillaActual( );
-        actual.avanzarCasillas( n );
-        Casilla casFinal = actual.darCasillaActual( );
-        Boolean gano = false;
-        if( casFinal.darPosicionCasilla( ) == 49 )
-        {
-            gano = true;
-        }
-        InfoJugada jugada = new InfoJugada( casInicial, casFinal, gano, "elMensaje", n );
+        InfoJugada jugada = actual.jugar( n );
+        jugadorEnTurno = actual.darSiguiente( );
         return jugada;
     }
 
@@ -160,7 +153,7 @@ public class CupiOca
     public void agregarJugador( String nickJugador, String rutaImagen )
     {
         // TODO Completar según la documentación
-        Jugador jug = new Jugador( nickJugador, casillaInicio, rutaImagen );
+        
     }
     /**
      * Busca un jugador con el nick dado como parámetro. <br>
@@ -172,21 +165,21 @@ public class CupiOca
     {
         // TODO Completar según la documentación
         // Ayuda: Tenga en cuenta que la lista de jugadores es una lista circular
-        Jugador jug = jugadorEnTurno;
-        Jugador respuesta = null;
-
-        while( jug.darSiguiente( ) != null )
-        {
-            if (jug.darNick( ).equals( nick ))
-            {
-                respuesta = jug;
-            }
-            else
-            {
-                jug=jug.darSiguiente( );
-            }
-        }
-        return respuesta;
+//        Jugador jug = jugadorEnTurno;
+//        Jugador respuesta = null;
+//
+//        while( jug.darSiguiente( ) != null )
+//        {
+//            if( jug.darNick( ).equals( nick ) )
+//            {
+//                respuesta = jug;
+//            }
+//            else
+//            {
+//                jug = jug.darSiguiente( );
+//            }
+//        }
+//        return respuesta;
     }
 
     /**
@@ -196,9 +189,20 @@ public class CupiOca
      */
     public boolean existeJugador( String nick )
     {
-
         // TODO Completar según la documentación
-
+        Jugador jug = jugadorEnTurno;
+        while( jug != null )
+        {
+            if( jug.darNick( ).equals( nick ) )
+            {
+                return true;
+            }
+            else
+            {
+                jug = jug.darSiguiente( );
+            }
+        }
+        return false;
     }
 
     /**
