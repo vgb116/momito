@@ -153,7 +153,6 @@ public class CupiOca
     public void agregarJugador( String nickJugador, String rutaImagen )
     {
         // TODO Completar según la documentación
-
     }
     /**
      * Busca un jugador con el nick dado como parámetro. <br>
@@ -193,7 +192,8 @@ public class CupiOca
     {
         // TODO Completar según la documentación
         Jugador jug = jugadorEnTurno;
-        while( jug != null )
+        int cont = 0;
+        while( jug != null && cont <= cantidadJugadores )
         {
             if( jug.darNick( ).equals( nick ) )
             {
@@ -202,6 +202,7 @@ public class CupiOca
             else
             {
                 jug = jug.darSiguiente( );
+                cont++;
             }
         }
         return false;
@@ -233,9 +234,7 @@ public class CupiOca
      */
     public int darNumCasillas( String tipoCasilla )
     {
-
         // TODO Completar según la documentación
-
     }
 
     /**
