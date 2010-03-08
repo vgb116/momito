@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
-
 import javax.sound.midi.MidiDevice.Info;
 
 /**
@@ -85,7 +84,7 @@ public class CupiOca
         // TODO Completar según la documentación
         return casillaInicio;
     }
-    
+
     /**
      * Retorna la utlima casilla del tablero de juego
      * @return primeraCasilla La primera casilla
@@ -94,11 +93,11 @@ public class CupiOca
     {
         // TODO Completar según la documentación
         Casilla cas = casillaInicio;
-        while(cas!=null)
+        while( cas != null )
         {
-            if(cas.darSiguiente( )!=null)
+            if( cas.darSiguiente( ) != null )
             {
-                cas=cas.darSiguiente( );
+                cas = cas.darSiguiente( );
             }
             else
             {
@@ -179,7 +178,7 @@ public class CupiOca
                         }
                         else
                         {
-                            casillaInicio=cas;
+                            casillaInicio = cas;
                         }
                     }
 
@@ -459,9 +458,9 @@ public class CupiOca
     public Jugador insertarOrdenado( Jugador primerRanking, Jugador agregar )
     {
         // TODO Completar según la documentación
-        int posR = primerRanking.darCasillaActual( ).darPosicionCasilla( );
-        int posA = agregar.darCasillaActual( ).darPosicionCasilla( );
-        if( posA >= posR )
+        int posPrimero = primerRanking.darCasillaActual( ).darPosicionCasilla( );
+        int posAgregar = agregar.darCasillaActual( ).darPosicionCasilla( );
+        if( posAgregar >= posPrimero )
         {
             agregar.cambiarSiguiente( primerRanking );
             return agregar;
@@ -469,10 +468,10 @@ public class CupiOca
         else
         {
             Jugador jug = primerRanking;
-            while( ( jug != null ) && ! ( jug.darSiguiente( ).equals( primerRanking ) ) )
+            while( jug != null )
             {
                 int posJ = jug.darCasillaActual( ).darPosicionCasilla( );
-                if( posA > posJ )
+                if( posAgregar > posJ )
                 {
                     Jugador anterior = darAnteriorJugador( jug );
                     anterior.cambiarSiguiente( agregar );
@@ -493,11 +492,19 @@ public class CupiOca
      */
     public Jugador darListaRanking( )
     {
-
         // TODO Completar según la documentación
         // Ayuda: Utilice el método insertarOrdenado para construir la lista.
         // Utilice el método darCopia de la clase jugador, para construir una lista con copias de los jugadores
-
+        Jugador primero = jugadorEnTurno;
+        Jugador copia = primero.darCopia( );
+        primero = insertarOrdenado( jugadorEnTurno, copia );
+        Jugador actual = primero.darCopia( );
+        while( ( actual != null ) && ( !actual.darSiguiente( ).equals( jugadorEnTurno ) ) )
+        {
+            copia = actual.darCopia( );
+            primero = insertarOrdenado( primero, copia );
+        }
+        return primero;
     }
 
     /**
