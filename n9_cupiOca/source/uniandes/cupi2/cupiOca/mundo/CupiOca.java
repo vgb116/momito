@@ -14,6 +14,7 @@
 package uniandes.cupi2.cupiOca.mundo;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -66,8 +67,11 @@ public class CupiOca
      */
     public CupiOca( String rutaTableroDejuego ) throws CupiOcaException
     {
+        System.out.println( "intenta crear la cupioca" );
         cantidadJugadores = 0;
+        System.out.println( "cantidad jugadores" );
         cargarTableroDeJuego( rutaTableroDejuego );
+        System.out.println( "carga el tablero de juego" );
         verificarInvariante( );
 
     }
@@ -84,6 +88,28 @@ public class CupiOca
         // TODO Completar según la documentación
         return casillaInicio;
     }
+    
+    /**
+     * Retorna la utlima casilla del tablero de juego
+     * @return primeraCasilla La primera casilla
+     */
+    public Casilla darUltimaCasilla( )
+    {
+        // TODO Completar según la documentación
+        Casilla cas = casillaInicio;
+        while(cas!=null)
+        {
+            if(cas.darSiguiente( )!=null)
+            {
+                cas=cas.darSiguiente( );
+            }
+            else
+            {
+                return cas;
+            }
+        }
+        return null;
+    }
 
     /**
      * Carga un tablero de juego desde un archivo de configuración con el formato descrito en el archivo de descripción del ejercicio.<br>
@@ -97,7 +123,82 @@ public class CupiOca
     {
 
         // TODO Completar según la documentación
+        try
+        {
+            File archivo = new File( ruta );
+            FileReader reader = new FileReader( archivo );
+            BufferedReader lector = new BufferedReader( reader );
+            // Lee la primera línea
+            String primera = lector.readLine( );
+            String linea = lector.readLine( );
+            int cont = 0;
+            while( ( linea != null ) && ( !linea.equals( "" ) ) )
+            {
+                cont++;
+                String[] datosCasillas = linea.split( ";" );
+                if( datosCasillas.length == 7 )
+                {
+                    for( int i = 0; i < datosCasillas.length; i++ )
+                    {
+                        String elTipo = "";
+                        if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_CALAVERA ) )
+                        {
+                            elTipo = Casilla.TIPO_CALAVERA;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_CARCEL ) )
+                        {
+                            elTipo = Casilla.TIPO_CARCEL;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_INICIO ) )
+                        {
+                            elTipo = Casilla.TIPO_INICIO;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_OCA ) )
+                        {
+                            elTipo = Casilla.TIPO_OCA;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_POSADA ) )
+                        {
+                            elTipo = Casilla.TIPO_POSADA;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_PUENTE ) )
+                        {
+                            elTipo = Casilla.TIPO_PUENTE;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_RODADERO ) )
+                        {
+                            elTipo = Casilla.TIPO_RODADERO;
+                        }
+                        else if( datosCasillas[ i ].equalsIgnoreCase( Casilla.TIPO_VACIA ) )
+                        {
+                            elTipo = Casilla.TIPO_VACIA;
+                        }
+                        Casilla cas = new Casilla( elTipo, i );
+                        if( !cas.darTipo( ).equals( Casilla.TIPO_INICIO ) )
+                        {
+                            Casilla ultima = darUltimaCasilla( );
+                            ultima.cambiarSiguiente( cas );
+                            cas.cambiarAnterior( ultima );
+                        }
+                        else
+                        {
+                            casillaInicio=cas;
+                        }
+                    }
 
+                }
+                linea = lector.readLine( );
+            }
+
+        }
+        catch( FileNotFoundException e )
+        {
+            throw new CupiOcaException( "No se encontró el archivo " );
+        }
+        catch( IOException e )
+        {
+            throw new CupiOcaException( "Error al importar los Datos" );
+        }
     }
 
     /**

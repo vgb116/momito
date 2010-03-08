@@ -170,12 +170,17 @@ public class InterfazCupiOca extends JFrame implements WindowListener
     {
         try
         {
+            System.out.println("hace el try");
             cupiOca = new CupiOca( ruta );
+            System.out.println("crea la cupioca");
             Casilla primeraCasilla = cupiOca.darPrimeraCasilla( );
+            System.out.println("primera casilla");
             panelTablero.actualizarTablero( primeraCasilla );
+            System.out.println("actualiza tablero");
         }
         catch( CupiOcaException e )
         {
+            System.out.println("cae en la exception");
             JOptionPane.showMessageDialog( this, e.getMessage( ), "Error", JOptionPane.ERROR_MESSAGE );
         }
 

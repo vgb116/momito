@@ -58,7 +58,7 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
      * Botón usado para confirmar la selección un archivo de configuración
      */
     private JButton btnAceptar;
-    
+
     /**
      * RadioButtons para los archivos a seleccionar
      */
@@ -90,24 +90,34 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
         panelBotones.setSize( 300, 100 );
         setTitle( "Seleccione un archivo" );
         principal = interfaz;
-        
+
         grupoBotones = new ButtonGroup( );
-        
+
         inicializarRadioButtons( );
         panelBotones.setLayout( new GridLayout( radioButtonsArchivos.length, 1 ) );
+
+        // TODO agregar los radioButtons al grupo de botones y al panelBotones
+
+        radioButtonsArchivos[ 0 ] = new JRadioButton( "Mundo Intermedio.oca" );
+        radioButtonsArchivos[ 1 ] = new JRadioButton( "Mundo Principiantes.oca" );
+        radioButtonsArchivos[ 1 ].setSelected( true );
+
+        radioButtonsArchivos[ 0 ].setEnabled( true );
+        radioButtonsArchivos[ 1 ].setEnabled( true );
+
+        grupoBotones.add( radioButtonsArchivos[ 0 ] );
+        grupoBotones.add( radioButtonsArchivos[ 1 ] );
         
-        
-        //TODO agregar los radioButtons al grupo de botones y al panelBotones
-        
-        
+        panelBotones.add( radioButtonsArchivos[ 0 ] );
+        panelBotones.add( radioButtonsArchivos[ 1 ] );
+
         add( panelBotones, BorderLayout.CENTER );
+
         btnAceptar = new JButton( "Aceptar" );
         btnAceptar.setActionCommand( ACEPTAR );
         btnAceptar.addActionListener( this );
         add( btnAceptar, BorderLayout.SOUTH );
-        
-        
-        
+
         setDefaultCloseOperation( DISPOSE_ON_CLOSE );
         pack( );
         setLocationRelativeTo( null );
@@ -127,9 +137,9 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
         {
             String archivoSeleccionado = "";
             boolean encontroSeleccionado = false;
-            for(int i = 0; i < radioButtonsArchivos.length; i++)
+            for( int i = 0; i < radioButtonsArchivos.length; i++ )
             {
-                JRadioButton temp = radioButtonsArchivos[i];
+                JRadioButton temp = radioButtonsArchivos[ i ];
                 if( temp.isSelected( ) )
                 {
                     archivoSeleccionado = temp.getText( );
@@ -139,6 +149,7 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
             if( encontroSeleccionado )
             {
                 principal.cargarDatos( RUTA_CONFIGURACIONES + "\\" + archivoSeleccionado );
+                System.out.println("carga los datos");
                 super.dispose( );
             }
             else
@@ -148,11 +159,11 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
         }
 
     }
-    
+
     /**
      * Lista de archivos que se encuentran en la RUTA_CONFIGURACIONES con la extensión .oca
      */
-    private void inicializarRadioButtons()
+    private void inicializarRadioButtons( )
     {
         ArrayList resArchivos = new ArrayList( );
         File carpeta = new File( RUTA_CONFIGURACIONES );
@@ -162,15 +173,15 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
             for( int i = 0; i < archivos.length; i++ )
             {
                 File file = archivos[ i ];
-                if(file.getName( ).endsWith( "oca" ))
+                if( file.getName( ).endsWith( "oca" ) )
                     resArchivos.add( file );
             }
         }
         radioButtonsArchivos = new JRadioButton[resArchivos.size( )];
         for( int i = 0; i < radioButtonsArchivos.length; i++ )
         {
-            radioButtonsArchivos[ i ] = new JRadioButton(((File)resArchivos.get( i )).getName( ));
-            
+            radioButtonsArchivos[ i ] = new JRadioButton( ( ( File )resArchivos.get( i ) ).getName( ) );
+
         }
     }
 

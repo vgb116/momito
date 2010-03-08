@@ -42,6 +42,11 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
      */
     public final static String SELECCIONAR_IMAGEN = "SELECCIONAR IMAGEN";
 
+    /**
+     * Constante para cancelar
+     */
+    public final static String CALCELAR_INGRESO = "CANCELAR";
+
     // -----------------------------------------------------------------
     // Atributos de la interfaz
     // -----------------------------------------------------------------
@@ -80,6 +85,11 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
      * Botón aceptar
      */
     private JButton btnAceptar;
+
+    /**
+     * Botón cancelar
+     */
+    private JButton btnCancelar;
 
     // -----------------------------------------------------------------
     // Atributos
@@ -123,9 +133,55 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
      */
     private void crearPanelPrincipal( )
     {
-    	
-    	// TODO Complete el método según la documentación
-    	
+
+        // TODO Complete el método según la documentación
+        setLayout( new GridBagLayout( ) );
+
+        GridBagConstraints gbc;
+
+        // El nick
+        lblNick = new JLabel( "Ingrese el Nick" );
+        gbc = new GridBagConstraints( 0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( lblNick, gbc );
+
+        txtElNick = new JTextField( );
+        txtElNick.setEnabled( false );
+        gbc = new GridBagConstraints( 0, 1, 1, 2, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( txtElNick, gbc );
+
+        // La imagen
+        lblImagen = new JLabel( "Seleccione su imagen" );
+        gbc = new GridBagConstraints( 0, 1, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( lblImagen, gbc );
+
+        txtLaImagen = new JTextField( );
+        txtLaImagen.setEnabled( true );
+        gbc = new GridBagConstraints( 1, 1, 1, 2, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( txtElNick, gbc );
+
+        // Boton Seleccionar
+        btnSelImagen = new JButton( );
+        btnSelImagen.setEnabled( false );
+        btnSelImagen.setActionCommand( SELECCIONAR_IMAGEN );
+        btnSelImagen.addActionListener( this );
+        gbc = new GridBagConstraints( 0, 2, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( btnSelImagen, gbc );
+        
+        // Boton Agregar
+        btnAceptar = new JButton( );
+        btnAceptar.setEnabled( true );
+        btnAceptar.setActionCommand( AGREGAR_JUGADOR );
+        btnAceptar.addActionListener( this );
+        gbc = new GridBagConstraints( 0, 3 , 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( btnAceptar, gbc );
+        
+        // Boton Cancelar
+        btnCancelar = new JButton( );
+        btnCancelar.setEnabled( true );
+        btnCancelar.setActionCommand( CALCELAR_INGRESO );
+        btnCancelar.addActionListener( this );
+        gbc = new GridBagConstraints( 1, 3 , 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( btnCancelar, gbc );
     }
 
     /**
@@ -137,6 +193,7 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
 
         if( e.getActionCommand( ).equals( AGREGAR_JUGADOR ) )
         {
+            
             String nick = txtElNick.getText( );
             if( nick.equals( "" ) )
                 JOptionPane.showMessageDialog( this, "Debe ingresar un nick", "Info", JOptionPane.INFORMATION_MESSAGE );
