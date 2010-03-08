@@ -140,6 +140,20 @@ public class CupiOca
     }
 
     /**
+     * Retorna el último jugador <br>
+     */
+    public Jugador darUltimo( )
+    {
+        // TODO Completar según la documentación
+        Jugador jug = jugadorEnTurno;
+        while( jug != null && !jug.darSiguiente( ).equals( jugadorEnTurno ) )
+        {
+            jug = jug.darSiguiente( );
+        }
+        return jug;
+    }
+
+    /**
      * Crea un nuevo jugador con el nombre y la imagen dados como parámetros. <br>
      * Al jugador se le asigna el último turno y se ingresa en la última posición de la lista de jugadores,<br>
      * manteniendo la estructura de una lista circular, donde todos los jugadores tienen un siguiente jugador<br>
@@ -153,6 +167,19 @@ public class CupiOca
     public void agregarJugador( String nickJugador, String rutaImagen )
     {
         // TODO Completar según la documentación
+        Jugador nuevo = new Jugador( nickJugador, casillaInicio, rutaImagen );
+        if( jugadorEnTurno == null )
+        {
+            jugadorEnTurno = nuevo;
+            jugadorEnTurno.cambiarSiguiente( jugadorEnTurno );
+        }
+        else
+        {
+            Jugador ultimo = darUltimo( );
+            ultimo.cambiarSiguiente( nuevo );
+            nuevo.cambiarSiguiente( jugadorEnTurno );
+            cantidadJugadores++;
+        }
     }
     /**
      * Busca un jugador con el nick dado como parámetro. <br>
@@ -165,14 +192,13 @@ public class CupiOca
         // TODO Completar según la documentación
         // Ayuda: Tenga en cuenta que la lista de jugadores es una lista circular
         Jugador jug = jugadorEnTurno;
-        Jugador respuesta = null;
         int cont = 0;
 
-        while( jug.darSiguiente( ) != null && cont != cantidadJugadores )
+        while( jug != null && cont <= cantidadJugadores )
         {
             if( jug.darNick( ).equals( nick ) )
             {
-                respuesta = jug;
+                return jug;
             }
             else
             {
@@ -180,7 +206,7 @@ public class CupiOca
                 cont++;
             }
         }
-        return respuesta;
+        return null;
     }
 
     /**
@@ -235,8 +261,59 @@ public class CupiOca
     public int darNumCasillas( String tipoCasilla )
     {
         // TODO Completar según la documentación
-    }
+        Casilla casillaUno = casillaInicio;
+        Casilla casillaDos = casillaUno.buscarSiguienteTipoCasilla( tipoCasilla );
+        int cont = 0;
 
+        // Si el tipo de la casilla de incio es igual al tipo de casilla buscado, aumenta en uno el contador
+        if( casillaUno.darTipo( ).equals( tipoCasilla ) )
+        {
+            cont++;
+        }
+
+        while( !casillaDos.equals( casillaUno ) )
+        {
+            cont++;
+            casillaUno = casillaDos;
+            casillaDos = casillaDos.buscarSiguienteTipoCasilla( tipoCasilla );
+        }
+        return cont;
+    }
+    /**
+     * Este método retorna el jugador anterior al jugador dado como parametro <br>
+     * @return null en caso de que no haya menos de un jugador
+     * @return el ultimo, si jug es el jugador en turno
+     * @param jug El jugador al que se le quiere encontrar el anterior
+     */
+    public Jugador darAnteriorJugador( Jugador jug )
+    {
+        // TODO Completar según la documentación
+
+        // Si hay menos de un jugador
+        if( cantidadJugadores <= 1 )
+        {
+            return null;
+        }
+
+        Jugador jugador = jugadorEnTurno;
+        Jugador ultimo = darUltimo( );
+        Jugador anterior = ultimo;
+
+        while( ( jugador != null ) && ( !jugador.equals( jug ) ) && ( !jugador.darSiguiente( ).equals( ultimo ) ) )
+        {
+            anterior = jugador;
+            jugador = jugador.darSiguiente( );
+        }
+        // si es el utlimo
+        if( ( jugador != null ) && ( jugador.equals( jug ) ) )
+        {
+            return anterior;
+        }
+        else
+        {
+            return null;
+        }
+    }
     /**
      * Este método elimina un jugador dado su nick <br>
      * <b> pre: </b> Existe un jugador cuyo nick es nickAEliminar <br>
@@ -247,7 +324,30 @@ public class CupiOca
     public void eliminarJugador( String nickAEliminar ) throws Exception
     {
         // TODO Completar según la documentación
-
+        Jugador jug = jugadorEnTurno;
+        try
+        {
+            while( ( jug != null ) && ( !jug.darSiguiente( ).equals( jugadorEnTurno ) ) )
+            {
+                // Si encuentra
+                if( jug.darNick( ).equals( nickAEliminar ) )
+                {
+                    Jugador anterior = darAnteriorJugador( jug );
+                    if( anterior != null )
+                    {
+                        anterior.cambiarSiguiente( jug.darSiguiente( ) );
+                    }
+                }
+                else
+                {
+                    jug = jug.darSiguiente( );
+                }
+            }
+        }
+        catch( Exception e )
+        {
+            throw new Exception( "El jugador que está intentando eliminar es el jugador en turno" );
+        }
     }
 
     /**
@@ -260,11 +360,34 @@ public class CupiOca
      */
     public Jugador insertarOrdenado( Jugador primerRanking, Jugador agregar )
     {
-
         // TODO Completar según la documentación
-
+        int posR = primerRanking.darCasillaActual( ).darPosicionCasilla( );
+        int posA = agregar.darCasillaActual( ).darPosicionCasilla( );
+        if( posA >= posR )
+        {
+            agregar.cambiarSiguiente( primerRanking );
+            return agregar;
+        }
+        else
+        {
+            Jugador jug = primerRanking;
+            while( ( jug != null ) && ! ( jug.darSiguiente( ).equals( primerRanking ) ) )
+            {
+                int posJ = jug.darCasillaActual( ).darPosicionCasilla( );
+                if( posA > posJ )
+                {
+                    Jugador anterior = darAnteriorJugador( jug );
+                    anterior.cambiarSiguiente( agregar );
+                    agregar.cambiarSiguiente( jug );
+                }
+                else
+                {
+                    jug = jug.darSiguiente( );
+                }
+            }
+            return primerRanking;
+        }
     }
-
     /**
      * Retorna una lista de jugadores sencillamente encadenada ordenada.<br>
      * El orden esta dado por la posición de la casilla en la que se encuentra un jugador. Se encuentra ordenado de mayor a menor casilla. <b>pre: </b>jugadorEnTurno!=null
@@ -289,9 +412,9 @@ public class CupiOca
     public void verificarInvariante( )
     {
         assert cantidadJugadores >= 0 : "El número de jugadores debe ser igual a cero cuando inicia el juego y mayor a cero en el transcurso";
-        assert primeraCasilla != null : "No se cargó el tablero de juego";
+        assert casillaInicio != null : "No se cargó el tablero de juego";
 
-        Casilla casillaActual = primeraCasilla;
+        Casilla casillaActual = casillaInicio;
         Casilla casillaSiguiente = casillaActual.darSiguiente( );
         while( casillaSiguiente != null )
         {

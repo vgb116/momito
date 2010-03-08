@@ -59,6 +59,7 @@ public class Jugador
         nick = elNick;
         casillaActual = casilla;
         imagen = laImagen;
+        verificarInvariante( );
     }
 
     // -----------------------------------------------------------------
@@ -314,7 +315,5 @@ public class Jugador
         assert ( imagen != null && !imagen.equals( "" ) ) : "La imagen esta vacía o es null";
         assert ( casillaActual != null ) : "El jugador debe estar ubicado en alguna casilla";
         assert ( turnosPerdidos >= 0 ) : "El número de turnos perdidos debe ser mayor o igual a cero";
-
     }
-
 }

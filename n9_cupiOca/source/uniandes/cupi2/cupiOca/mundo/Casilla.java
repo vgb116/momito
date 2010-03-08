@@ -95,7 +95,6 @@ public class Casilla
         tipo = elTipo;
         numCasilla = numeroCasilla;
         verificarInvariante( );
-
     }
 
     /**
@@ -166,7 +165,7 @@ public class Casilla
     {
         // TODO Completar según la documentación
         Casilla casSiguiente = casillaSiguiente;
-        
+
         while( casSiguiente != null )
         {
             if( casSiguiente.darTipo( ).equals( tipoBuscado ) )
@@ -191,7 +190,7 @@ public class Casilla
     {
         // TODO Completar según la documentación
         Casilla casAnterior = casillaAnterior;
-        
+
         while( casAnterior != null )
         {
             if( casAnterior.darTipo( ).equals( tipoBuscado ) )
@@ -216,12 +215,20 @@ public class Casilla
     {
         // TODO Completar según la documentación
         Casilla actual = this;
+        Casilla anterior = casillaAnterior;
         int cont = 0;
 
+        // Busca en las siguientes
         while( actual != null && actual.darTipo( ).equals( tipoCasilla ) )
         {
             cont++;
             actual = actual.darSiguiente( );
+        }
+        // Busca en las anteriores
+        while( anterior != null && anterior.darTipo( ).equals( tipoCasilla ) )
+        {
+            cont++;
+            anterior = anterior.darAnterior( );
         }
         return cont;
     }

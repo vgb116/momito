@@ -172,7 +172,6 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
             radioButtonsArchivos[ i ] = new JRadioButton(((File)resArchivos.get( i )).getName( ));
             
         }
-        
     }
 
 }
