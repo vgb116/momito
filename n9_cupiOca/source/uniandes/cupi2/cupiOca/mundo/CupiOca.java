@@ -468,6 +468,7 @@ public class CupiOca
         else
         {
             Jugador jug = primerRanking;
+            Jugador ultimo = null;
             while( jug != null )
             {
                 int posJ = jug.darCasillaActual( ).darPosicionCasilla( );
@@ -479,8 +480,13 @@ public class CupiOca
                 }
                 else
                 {
+                    ultimo = jug;
                     jug = jug.darSiguiente( );
                 }
+            }
+            if( jug == null )
+            {
+                ultimo.cambiarSiguiente( agregar );
             }
             return primerRanking;
         }
