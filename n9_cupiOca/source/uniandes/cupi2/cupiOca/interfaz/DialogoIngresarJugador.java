@@ -246,6 +246,10 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
             }
 
         }
+        else if ( e.getActionCommand( ).equals( CALCELAR_INGRESO))
+        {
+            super.dispose( );
+        }
 
     }
 
