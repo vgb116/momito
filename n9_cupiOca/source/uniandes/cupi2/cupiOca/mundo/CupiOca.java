@@ -67,11 +67,8 @@ public class CupiOca
      */
     public CupiOca( String rutaTableroDejuego ) throws CupiOcaException
     {
-        System.out.println( "intenta crear la cupioca" );
         cantidadJugadores = 0;
-        System.out.println( "cantidad jugadores" );
         cargarTableroDeJuego( rutaTableroDejuego );
-        System.out.println( "carga el tablero de juego" );
         verificarInvariante( );
 
     }

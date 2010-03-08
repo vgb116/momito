@@ -145,42 +145,42 @@ public class DialogoIngresarJugador extends JDialog implements ActionListener
         add( lblNick, gbc );
 
         txtElNick = new JTextField( );
-        txtElNick.setEnabled( false );
-        gbc = new GridBagConstraints( 0, 1, 1, 2, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        txtElNick.setEnabled( true );
+        gbc = new GridBagConstraints( 1, 0, 1, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
         add( txtElNick, gbc );
 
         // La imagen
         lblImagen = new JLabel( "Seleccione su imagen" );
-        gbc = new GridBagConstraints( 0, 1, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        gbc = new GridBagConstraints( 0, 2, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
         add( lblImagen, gbc );
 
         txtLaImagen = new JTextField( );
-        txtLaImagen.setEnabled( true );
-        gbc = new GridBagConstraints( 1, 1, 1, 2, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
-        add( txtElNick, gbc );
+        txtLaImagen.setEnabled( false );
+        gbc = new GridBagConstraints( 1, 2, 1, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        add( txtLaImagen, gbc );
 
         // Boton Seleccionar
-        btnSelImagen = new JButton( );
-        btnSelImagen.setEnabled( false );
+        btnSelImagen = new JButton( "Seleccionar");
+        btnSelImagen.setEnabled( true );
         btnSelImagen.setActionCommand( SELECCIONAR_IMAGEN );
         btnSelImagen.addActionListener( this );
-        gbc = new GridBagConstraints( 0, 2, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        gbc = new GridBagConstraints( 0, 3, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
         add( btnSelImagen, gbc );
         
         // Boton Agregar
-        btnAceptar = new JButton( );
+        btnAceptar = new JButton( "Aceptar" );
         btnAceptar.setEnabled( true );
         btnAceptar.setActionCommand( AGREGAR_JUGADOR );
         btnAceptar.addActionListener( this );
-        gbc = new GridBagConstraints( 0, 3 , 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        gbc = new GridBagConstraints( 0, 4 , 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
         add( btnAceptar, gbc );
         
         // Boton Cancelar
-        btnCancelar = new JButton( );
+        btnCancelar = new JButton( "Cancelar" );
         btnCancelar.setEnabled( true );
         btnCancelar.setActionCommand( CALCELAR_INGRESO );
         btnCancelar.addActionListener( this );
-        gbc = new GridBagConstraints( 1, 3 , 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
+        gbc = new GridBagConstraints( 1, 4 , 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 5, 5, 5, 5 ), 0, 0 );
         add( btnCancelar, gbc );
     }
 
