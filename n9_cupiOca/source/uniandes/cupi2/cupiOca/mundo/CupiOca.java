@@ -87,7 +87,7 @@ public class CupiOca
 
     /**
      * Retorna la utlima casilla del tablero de juego
-     * @return primeraCasilla La primera casilla
+     * @return La ultima casilla
      */
     public Casilla darUltimaCasilla( )
     {
@@ -219,9 +219,8 @@ public class CupiOca
         // TODO Completar según la documentación
         // Ayuda: llame al método jugar del jugadorActual, el número de posiciones lo obtiene con el método simular dado
         int n = simularDado( );
-        Jugador actual = jugadorEnTurno;
-        InfoJugada jugada = actual.jugar( n );
-        jugadorEnTurno = actual.darSiguiente( );
+        InfoJugada jugada = jugadorEnTurno.jugar( n );
+        cambiarJugadorEnTurno( );
         return jugada;
     }
 
@@ -243,9 +242,11 @@ public class CupiOca
     {
         // TODO Completar según la documentación
         Jugador jug = jugadorEnTurno;
-        while( jug != null && !jug.darSiguiente( ).equals( jugadorEnTurno ) )
+        Jugador sig = jugadorEnTurno.darSiguiente( );
+        while( ( jug != null ) && ( sig != null ) && ( !sig.equals( jugadorEnTurno ) ) )
         {
             jug = jug.darSiguiente( );
+            sig = jug.darSiguiente( );
         }
         return jug;
     }

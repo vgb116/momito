@@ -268,6 +268,7 @@ public class Jugador
         int n = casillaActual.darPosicionCasilla( ) + numPosiciones;
         Casilla actual = casillaActual;
 
+
         if( n > 49 )
         {
             while( actual.darSiguiente( ) != null )

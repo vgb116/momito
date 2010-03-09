@@ -149,7 +149,6 @@ public class DialogoSeleccionarArchivo extends JDialog implements ActionListener
             if( encontroSeleccionado )
             {
                 principal.cargarDatos( RUTA_CONFIGURACIONES + "\\" + archivoSeleccionado );
-                System.out.println("carga los datos");
                 super.dispose( );
             }
             else

@@ -114,12 +114,12 @@ public class InterfazCupiOca extends JFrame implements WindowListener
         setTitle( "El juego de la CupiOca" );
         // Construye la forma
         setLayout( new BorderLayout( ) );
-        setSize( 800, 600 );
+        setSize( 800, 610 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
         // Creación del panel contenedor (GridBagLayout) que contiene a panelTablero, panelEstadoJuego y panelControl
         JPanel panelCentral = new JPanel( );
-        panelCentral.setPreferredSize( new Dimension( 800, 400 ) );
+        panelCentral.setPreferredSize( new Dimension( 800, 600 ) );
         panelCentral.setLayout( new GridBagLayout( ) );
 
         GridBagConstraints gridBagConstraintsPanelTablero = new GridBagConstraints( );
@@ -176,7 +176,6 @@ public class InterfazCupiOca extends JFrame implements WindowListener
         }
         catch( CupiOcaException e )
         {
-            System.out.println("cae en la exception");
             JOptionPane.showMessageDialog( this, e.getMessage( ), "Error", JOptionPane.ERROR_MESSAGE );
         }
 
@@ -234,7 +233,6 @@ public class InterfazCupiOca extends JFrame implements WindowListener
     {
         Jugador jugador = cupiOca.darJugadorEnTurno( );
         InfoJugada infoJugada = cupiOca.jugar( );
-
         panelControl.actualizarCasillas( "" + infoJugada.darPosicionesMovidas( ) );
         panelTablero.actualizarJugada( jugador, infoJugada.darCasillaInicial( ).darPosicionCasilla( ), infoJugada.darCasillaFinal( ).darPosicionCasilla( ) );
         String respuesta = infoJugada.darMensaje( );
