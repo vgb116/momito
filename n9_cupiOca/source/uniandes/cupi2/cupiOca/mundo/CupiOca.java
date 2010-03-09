@@ -290,18 +290,16 @@ public class CupiOca
         // TODO Completar según la documentación
         // Ayuda: Tenga en cuenta que la lista de jugadores es una lista circular
         Jugador jug = jugadorEnTurno;
-        int cont = 0;
 
-        while( jug != null && cont <= cantidadJugadores )
+        while( ( jug != null ) && ( !jug.darSiguiente( ).equals( jugadorEnTurno ) ) )
         {
-            if( jug.darNick( ).equals( nick ) )
+            if( jug.darNick( ).equalsIgnoreCase( nick ) )
             {
                 return jug;
             }
             else
             {
                 jug = jug.darSiguiente( );
-                cont++;
             }
         }
         return null;
@@ -315,19 +313,9 @@ public class CupiOca
     public boolean existeJugador( String nick )
     {
         // TODO Completar según la documentación
-        Jugador jug = jugadorEnTurno;
-        int cont = 0;
-        while( jug != null && cont <= cantidadJugadores )
+        if( darJugador( nick ) != null )
         {
-            if( jug.darNick( ).equals( nick ) )
-            {
-                return true;
-            }
-            else
-            {
-                jug = jug.darSiguiente( );
-                cont++;
-            }
+            return true;
         }
         return false;
     }
@@ -379,15 +367,15 @@ public class CupiOca
     }
     /**
      * Este método retorna el jugador anterior al jugador dado como parametro <br>
-     * @return null en caso de que no haya menos de un jugador
-     * @return el ultimo, si jug es el jugador en turno
+     * @return null en caso de que haya menos de un jugador
+     * @return el jugador anterior al jugador dado como parametro
      * @param jug El jugador al que se le quiere encontrar el anterior
      */
     public Jugador darAnteriorJugador( Jugador jug )
     {
         // TODO Completar según la documentación
-
-        // Si hay menos de un jugador
+        //revisarrevisarrevisarrevisarrevisarrevisarrevisarrevisarrevisar
+        // Si hay un jugador o menos
         if( cantidadJugadores <= 1 )
         {
             return null;
