@@ -1,0 +1,8 @@
+#configuración del tablero
+inicio;vacía;puente;vacía;vacía;puente;vacía
+cupiOca;vacía;rodadero;vacía;vacía;vacía;puente
+cupiOca;vacía;vacía;rodadero;vacía;puente;vacía
+vacía;vacía;posada;vacía;puente;vacía;rodadero
+vacía;cárcel;vacía;puente;vacía;vacía;rodadero
+vacía;vacía;rodadero;vacía;vacía;puente;vacía
+vacía;calavera;rodadero;vacía;vacía;rodadero;vacía
