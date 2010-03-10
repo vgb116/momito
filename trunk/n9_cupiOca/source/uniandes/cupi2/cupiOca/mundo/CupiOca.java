@@ -387,7 +387,33 @@ public class CupiOca
         return cont;
     }
     /**
-     * Este método retorna el jugador anterior al jugador dado como parametro <br>
+     * Este método retorna el jugador anterior al jugador dado como parametro, para los jugadores en lista circular <br>
+     * @return null en caso de que no lo encuentre
+     * @return el jugador anterior al dado como parametro
+     * @param jug El jugador al que se le quiere encontrar el anterior
+     */
+    public Jugador darAnteriorJugadorCircular( Jugador jug )
+    {
+        // TODO Completar según la documentación
+
+        Jugador jugador = jugadorEnTurno;
+        Jugador anterior = darUltimo( );
+
+        while( ( !jugador.equals( jug ) ) && ( !jugador.darSiguiente( ).equals( jugadorEnTurno ) ) )
+        {
+            anterior = jugador;
+            jugador = jugador.darSiguiente( );
+        }
+        // si es el utlimo
+        if( ( jugador != null ) && ( jugador.equals( jug ) ) )
+        {
+            return anterior;
+        }
+        return null;
+    }
+
+    /**
+     * Este método retorna el jugador anterior al jugador dado como parametro, para los jugadores en lista sencilla <br>
      * @return null en caso de que no lo encuentre
      * @return el jugador anterior al dado como parametro
      * @param jug El jugador al que se le quiere encontrar el anterior
@@ -397,15 +423,15 @@ public class CupiOca
         // TODO Completar según la documentación
 
         Jugador jugador = jugadorEnTurno;
-        Jugador anterior = darUltimo( );
+        Jugador anterior = null;
 
-        while(( !jugador.equals( jug ) ) && ( !jugador.darSiguiente( ).equals( jugadorEnTurno ) ) )
+        while( ( jugador != null ) && ( !jugador.equals( jug ) ) )
         {
             anterior = jugador;
             jugador = jugador.darSiguiente( );
         }
         // si es el utlimo
-        if( ( jugador != null ) && ( jugador.equals( jug ) ) )
+        if( jugador!=null )
         {
             return anterior;
         }
@@ -429,7 +455,7 @@ public class CupiOca
                 // Si encuentra
                 if( jug.darNick( ).equals( nickAEliminar ) )
                 {
-                    Jugador anterior = darAnteriorJugador( jug );
+                    Jugador anterior = darAnteriorJugadorCircular( jug );
                     if( anterior != null )
                     {
                         anterior.cambiarSiguiente( jug.darSiguiente( ) );
