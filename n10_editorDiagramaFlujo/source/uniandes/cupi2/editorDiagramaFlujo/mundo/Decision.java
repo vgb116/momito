@@ -7,35 +7,31 @@ import java.io.PrintWriter;
 import uniandes.cupi2.editorDiagramaFlujo.mundo.IForma;
 import uniandes.cupi2.editorDiagramaFlujo.mundo.Punto;
 
-public class Decision implements IForma
+public class Decision extends FormaBasica
 {
+    // -----------------------------------------------------------------
+    // Constantes
+    // -----------------------------------------------------------------
 
-    @Override
-    public void cambiarFuente( Font laFuente )
+    /**
+     * Constante para definir el tipo 
+     */
+    public final static String TIPO = "DECISION";
+    
+    /**
+     * Constante para definir el alto
+     */
+    public final static int ALTO = 95;
+    
+    /**
+     * Constante para definir el ancho
+     */
+    public final static int ANCHO = 95;
+
+    public Decision( Punto punto )
     {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void cambiarTexto( String txt )
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Font darFuente( )
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String darTexto( )
-    {
-        // TODO Auto-generated method stub
-        return null;
+       
+        super( punto, new Punto( punto.darX( ) + ANCHO, punto.darY( ) + ALTO ) );
     }
 
     @Override
@@ -46,38 +42,36 @@ public class Decision implements IForma
     }
 
     @Override
-    public boolean estaDentro( Punto punto )
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void guardar( PrintWriter out )
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void moverFigura( Punto punto )
     {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public void pintar( Graphics2D g )
     {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public void pintarSeleccionado( Graphics2D g )
     {
         // TODO Auto-generated method stub
-
+        
     }
+
+    @Override
+    protected void pintarTexto( Graphics2D g )
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    
+    
+    
+   
 
 }

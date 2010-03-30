@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -95,6 +96,13 @@ public class ProcesoDatos extends FormaBasica
     {
     	// TODO pintar la figura.
     	// Ayuda: No olvidar pintar el texto usando el método pintarTexto
+        g.setPaint( Color.WHITE );
+        Rectangle2D rectangle = new Rectangle2D.Float(puntoInicial.darX( ), puntoInicial.darY( ), ANCHO, ALTO);
+        g.fill( rectangle );
+        g.setColor( Color.BLACK);
+        g.draw(rectangle);   
+        pintarTexto( g );
+
         
     }
     
@@ -105,7 +113,19 @@ public class ProcesoDatos extends FormaBasica
     public void pintarSeleccionado( Graphics2D g )
     {
     	// TODO pintar la figura seleccionada
-    	
+        pintar( g );
+        g.setPaint( Color.RED );
+        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
+
+        r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
+
+        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
+
+        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
     }
 
     /**

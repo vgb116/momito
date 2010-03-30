@@ -147,8 +147,13 @@ public class DiagramaFlujo
      */
     public void dibujar( Graphics2D g )
     {
-    	// TODO complete el método según la documentación	 
-
+    	// TODO falta pintar seleccionada la seleccionada	 
+        Iterator<IForma> figuras = elementos.iterator( );
+        while (figuras.hasNext( ))
+        {
+            IForma f=figuras.next( );
+            f.pintar( g );
+        }
     }
 
     /**
