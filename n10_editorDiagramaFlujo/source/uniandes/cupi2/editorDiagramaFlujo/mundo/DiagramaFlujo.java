@@ -24,10 +24,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+
 /**
  * Clase que representa un diagrama de flujo <br>
  * <b>inv:</b><br>
- * TODO: Definir y documentar invariante de la clase
+ * formas != null<br>
+ * seleccionada = null o seleccionada pertenece a formas
  */
 public class DiagramaFlujo
 {
@@ -70,6 +72,7 @@ public class DiagramaFlujo
         elementos = new ArrayList<IForma>( );
         archivo = null;
         modificado = false;
+        verificarInvariante( );
     }
 
     // -----------------------------------------------------------------
@@ -85,7 +88,7 @@ public class DiagramaFlujo
         elementos.add( elemento );
         seleccionada = elemento;
         modificado = true;
-
+        verificarInvariante( );
     }
 
     /**
@@ -147,7 +150,6 @@ public class DiagramaFlujo
      */
     public void dibujar( Graphics2D g )
     {
-        // TODO falta pintar seleccionada la seleccionada
         Iterator<IForma> figuras = elementos.iterator( );
         while( figuras.hasNext( ) )
         {
@@ -173,7 +175,7 @@ public class DiagramaFlujo
             if( f.estaDentro( punto ) )
                 seleccionada = f;
         }
-
+        verificarInvariante( );
     }
 
     /**
@@ -193,7 +195,7 @@ public class DiagramaFlujo
         elementos.remove( seleccionada );
         seleccionada = null;
         modificado = true;
-
+        verificarInvariante( );
     }
 
     /**
@@ -214,8 +216,9 @@ public class DiagramaFlujo
         modificado = false;
         seleccionada = null;
         archivo = null;
-
+        verificarInvariante( );
     }
+    
     // ------------------------------------------------------
     // Persistencia
     // ------------------------------------------------------
@@ -263,6 +266,7 @@ public class DiagramaFlujo
 
         // Reemplazar el nombre de archivo viejo
         archivo = new File( absolutePath );
+        verificarInvariante( );
     }
 
     /**
@@ -387,9 +391,29 @@ public class DiagramaFlujo
     // ------------------------------------------------------
     // Invariante
     // ------------------------------------------------------
+    /**
+     * Verifica el invariante de la clase <br>
+     * elementos != null <br>
+     * seleccionada = null o seleccionada pertenece a elementos
+     */
+    private void verificarInvariante( )
+    {
+        assert ( elementos != null ) : "Lista nula";
 
-    //
-    // TODO: Documentar e implementar la invariante de la clase forma
+        if( seleccionada != null )
+        {
+            Iterator<IForma> it = elementos.iterator( );
+            while( it.hasNext( ) )
+            {
+                IForma f = it.next( );
+                if( seleccionada.equals( f ) )
+                {
+                    return;
+                }
+            }
+            assert ( true ) : "Selección inválida";
+        }
+    }
 
     // -----------------------------------------------------------------
     // Puntos de Extensión
