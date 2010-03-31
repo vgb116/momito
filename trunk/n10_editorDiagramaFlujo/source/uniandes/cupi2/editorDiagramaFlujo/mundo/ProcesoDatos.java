@@ -94,16 +94,12 @@ public class ProcesoDatos extends FormaBasica
      */
     public void pintar( Graphics2D g )
     {
-    	// TODO pintar la figura.
-    	// Ayuda: No olvidar pintar el texto usando el método pintarTexto
         g.setPaint( Color.WHITE );
         Rectangle2D rectangle = new Rectangle2D.Float(puntoInicial.darX( ), puntoInicial.darY( ), ANCHO, ALTO);
         g.fill( rectangle );
         g.setColor( Color.BLACK);
         g.draw(rectangle);   
-        pintarTexto( g );
-
-        
+        pintarTexto( g );        
     }
     
     /**
@@ -112,7 +108,6 @@ public class ProcesoDatos extends FormaBasica
      */
     public void pintarSeleccionado( Graphics2D g )
     {
-    	// TODO pintar la figura seleccionada
         pintar( g );
         g.setPaint( Color.RED );
         Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );

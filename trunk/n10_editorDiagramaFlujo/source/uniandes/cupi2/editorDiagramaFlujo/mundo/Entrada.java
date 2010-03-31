@@ -83,10 +83,9 @@ public class Entrada extends FormaBasica
      */
     public void moverFigura( Punto punto )
     {
-        // TODO Mover Figura
-        puntoInicial.modificarX( punto.darX( ) - ANCHO / 2 );
+        puntoInicial.modificarX( punto.darX( ) - ANCHO / 2 - ANCHO_BASE );
         puntoInicial.modificarY( punto.darY( ) - ALTO / 2 );
-        puntoFinal.modificarX( punto.darX( ) + ANCHO / 2 );
+        puntoFinal.modificarX( punto.darX( ) + ANCHO / 2 + ANCHO_BASE );
         puntoFinal.modificarY( punto.darY( ) + ALTO / 2 );
     }
 
@@ -96,7 +95,7 @@ public class Entrada extends FormaBasica
      */
     public void pintar( Graphics2D g )
     {
-        int puntosX[] = { puntoInicial.darX( )+ANCHO_BASE, puntoFinal.darX( ) , puntoFinal.darX( )- ANCHO_BASE, puntoInicial.darX( )};
+        int puntosX[] = { puntoInicial.darX( ) + ANCHO_BASE, puntoFinal.darX( ), puntoFinal.darX( ) - ANCHO_BASE, puntoInicial.darX( ) };
         int puntosY[] = { puntoInicial.darY( ), puntoInicial.darY( ), puntoFinal.darY( ), puntoFinal.darY( ) };
 
         Polygon poli = new Polygon( puntosX, puntosY, 4 );
@@ -117,7 +116,7 @@ public class Entrada extends FormaBasica
         pintar( g );
 
         g.setPaint( Color.RED );
-        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( )+ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) + ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
         r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );
@@ -126,7 +125,7 @@ public class Entrada extends FormaBasica
         r1 = new Rectangle2D.Double( puntoFinal.darX( ) - ANCHO_BASE - 3, puntoFinal.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
-        r1 = new Rectangle2D.Double( puntoInicial.darX()  - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
     }

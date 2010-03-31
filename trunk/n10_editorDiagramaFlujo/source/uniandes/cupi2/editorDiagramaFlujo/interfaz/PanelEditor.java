@@ -141,9 +141,7 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
             String opcion = principal.darOpcionSeleccionada( );
             Punto punto = new Punto( evento.getX( ), evento.getY( ) );
             if( opcion.equals( InterfazEditorDiagramaFlujo.SELECCIONAR ) )
-            {
-                
-            	// TODO invocar el método seleccionar de la ventana principal.	
+            {	
                 principal.seleccionar( punto );
                 
                 if( evento.getClickCount( ) > 1 )
@@ -153,7 +151,6 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
             }
             else if( opcion.equals( InterfazEditorDiagramaFlujo.INICIO ) || opcion.equals( InterfazEditorDiagramaFlujo.FIN ) || opcion.equals( InterfazEditorDiagramaFlujo.ENTRADA ) || opcion.equals( InterfazEditorDiagramaFlujo.PROCESO_DATOS ) || opcion.equals( InterfazEditorDiagramaFlujo.DECISION ) || opcion.equals( InterfazEditorDiagramaFlujo.SALIDA_DE_INFORMACION ) )
             {
-            	// TODO invocar el método agregarFigura de la ventana principal.	
                principal.agregarFigura( punto );
             }
             else if( opcion.equals( InterfazEditorDiagramaFlujo.CONEXION ))  {
@@ -172,7 +169,6 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
                     IFormaBasica elementoTemp = ( IFormaBasica )principal.buscarElemento( punto );
                     if( elementoTemp != null )
                     {
-                    	// TODO invocar el método agregarConector de la ventana principal.
                         IFormaBasica elementoDestino = (IFormaBasica)principal.buscarElemento( punto );
                         principal.agregarConector( elementoInicial, elementoDestino );
                         numeroClick = 0;
