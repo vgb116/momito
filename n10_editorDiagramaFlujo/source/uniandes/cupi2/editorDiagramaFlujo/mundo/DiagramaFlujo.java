@@ -10,7 +10,7 @@
  * Autor: Camilo Alvarez Duran - 06-oct-2009
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-   
+
 package uniandes.cupi2.editorDiagramaFlujo.mundo;
 
 import java.awt.Graphics2D;
@@ -147,15 +147,18 @@ public class DiagramaFlujo
      */
     public void dibujar( Graphics2D g )
     {
-    	// TODO falta pintar seleccionada la seleccionada	 
+        // TODO falta pintar seleccionada la seleccionada
         Iterator<IForma> figuras = elementos.iterator( );
-        while (figuras.hasNext( ))
+        while( figuras.hasNext( ) )
         {
-            IForma f=figuras.next( );
+            IForma f = figuras.next( );
+            if( f.equals( seleccionada ) )
+            {
+                f.pintarSeleccionado( g );
+            }
             f.pintar( g );
         }
     }
-
     /**
      * Selecciona la forma que se encuentre en el punto dado, si la hay. Si no hay una forma allí, no hace nada
      * @param punto Punto donde se desea seleccionar la forma
@@ -191,7 +194,6 @@ public class DiagramaFlujo
         seleccionada = null;
         modificado = true;
 
-     
     }
 
     /**
@@ -213,7 +215,6 @@ public class DiagramaFlujo
         seleccionada = null;
         archivo = null;
 
-  
     }
     // ------------------------------------------------------
     // Persistencia
@@ -305,7 +306,7 @@ public class DiagramaFlujo
                 String lineaPuntosInicio = br.readLine( );
                 String lineaPuntosFin = br.readLine( );
                 String texto = br.readLine( );
-                
+
                 Punto pInicio = cargarPunto( lineaPuntosInicio );
                 Punto pFin = cargarPunto( lineaPuntosFin );
                 nuevo = new Conexion( ( IFormaBasica )buscarFormaBasica( pInicio ), ( IFormaBasica )buscarFormaBasica( pFin ) );
@@ -369,7 +370,7 @@ public class DiagramaFlujo
      */
     public void salvar( ) throws IOException
     {
-        // TODO complete el método según la documentación	    
+        // TODO complete el método según la documentación
     }
 
     /**

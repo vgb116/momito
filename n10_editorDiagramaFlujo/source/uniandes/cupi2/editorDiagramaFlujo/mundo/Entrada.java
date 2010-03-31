@@ -84,6 +84,10 @@ public class Entrada extends FormaBasica
     public void moverFigura( Punto punto )
     {
         // TODO Mover Figura
+        puntoInicial.modificarX( punto.darX( ) - ANCHO / 2 );
+        puntoInicial.modificarY( punto.darY( ) - ALTO / 2 );
+        puntoFinal.modificarX( punto.darX( ) + ANCHO / 2 );
+        puntoFinal.modificarY( punto.darY( ) + ALTO / 2 );
     }
 
     /**
@@ -92,65 +96,55 @@ public class Entrada extends FormaBasica
      */
     public void pintar( Graphics2D g )
     {
+        int puntosX[] = { puntoInicial.darX( ) + ANCHO_BASE, puntoFinal.darX( ) + ANCHO_BASE, puntoFinal.darX( ), puntoInicial.darX( ) };
+        int puntosY[] = { puntoInicial.darY( ), puntoInicial.darY( ), puntoFinal.darY( ), puntoFinal.darY( ) };
+
+        Polygon poli = new Polygon( puntosX, puntosY, 4 );
+        
         g.setPaint( Color.WHITE );
-        
-        ArrayList<Integer> xPoints = new ArrayList<Integer>( );
-        ArrayList<Integer> yPoints = new ArrayList<Integer>( );
-
-        // Esquina superior izquierda
-        xPoints.add( puntoInicial.darX( ) + ANCHO_BASE );
-        yPoints.add( puntoInicial.darY( ) );
-
-        // Esquina superior derecha
-        xPoints.add( puntoFinal.darX( ) + ANCHO_BASE );
-        yPoints.add( puntoInicial.darY( ) );
-
-        // Esquina inferior derecha
-        xPoints.add( puntoFinal.darX( ));
-        yPoints.add( puntoFinal.darY( ) );
-        
-        // Esquina inferior izquierda
-        xPoints.add( puntoInicial.darX( ) );
-        yPoints.add( puntoFinal.darY( ) ); 
-        
-        int npoints = xPoints.size( );
-
-        
-        
-        
-        RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float( puntoInicial.darX( ), puntoInicial.darY( ), ANCHO, ALTO, 30, 30 );
-        g.fill( roundedRectangle );
+        g.fill( poli );
         g.setColor( Color.BLACK );
-        g.draw( roundedRectangle );
+        g.drawPolygon( poli );
         pintarTexto( g );
     }
 
-     @Override
+    /**
+     * Pinta la forma cuando esta se encuentra seleccionada. Para ello, pinta cuatro rectángulos, uno en cada esquina de la forma
+     * @param g La superficie donde se debe pintar.
+     */
     public void pintarSeleccionado( Graphics2D g )
     {
-        // TODO Auto-generated method stub
-         pintar( g );
-         
-         g.setPaint( Color.RED );
-         Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) + ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
-         g.fill( r1 );
+        pintar( g );
 
-         r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
-         g.fill( r1 );
+        g.setPaint( Color.RED );
+        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) + ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
 
-         r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
-         g.fill( r1 );
+        r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
 
-         r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );
-         g.fill( r1 );
+        r1 = new Rectangle2D.Double( puntoFinal.darX( )+ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
+
+        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        g.fill( r1 );
 
     }
 
-    @Override
+    /**
+     * Sirve para pintar el texto (en color negro) del elemento. <br>
+     * Para pintar el texto, se debe utilizar la fuente asociada al elemento y se debe pintar en el abajo del elemento
+     * @param g La superficie donde se debe pintar.
+     */
     protected void pintarTexto( Graphics2D g )
     {
-        // TODO Auto-generated method stub
-
+        int centroX = ( puntoInicial.darX( ) + puntoFinal.darX( ) ) / 2;
+        int centroY = puntoInicial.darY( ) + ALTO / 2 ;
+        g.setFont( fuente );
+        g.setColor( Color.BLACK );
+        FontMetrics metrics = g.getFontMetrics( );
+        int ancho = metrics.stringWidth( texto );
+        g.drawString( texto, centroX - ancho / 2, centroY );
     }
 
 }
