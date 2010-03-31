@@ -50,7 +50,7 @@ public class Entrada extends FormaBasica
     public Entrada( Punto punto )
     {
 
-        super( punto, new Punto( punto.darX( ) + ANCHO, punto.darY( ) + ALTO ) );
+        super( punto, new Punto( punto.darX( ) + ANCHO + 2 * ANCHO_BASE, punto.darY( ) + ALTO ) );
     }
 
     /**
@@ -96,11 +96,11 @@ public class Entrada extends FormaBasica
      */
     public void pintar( Graphics2D g )
     {
-        int puntosX[] = { puntoInicial.darX( ) + ANCHO_BASE, puntoFinal.darX( ) + ANCHO_BASE, puntoFinal.darX( ), puntoInicial.darX( ) };
+        int puntosX[] = { puntoInicial.darX( )+ANCHO_BASE, puntoFinal.darX( ) , puntoFinal.darX( )- ANCHO_BASE, puntoInicial.darX( )};
         int puntosY[] = { puntoInicial.darY( ), puntoInicial.darY( ), puntoFinal.darY( ), puntoFinal.darY( ) };
 
         Polygon poli = new Polygon( puntosX, puntosY, 4 );
-        
+
         g.setPaint( Color.WHITE );
         g.fill( poli );
         g.setColor( Color.BLACK );
@@ -117,16 +117,16 @@ public class Entrada extends FormaBasica
         pintar( g );
 
         g.setPaint( Color.RED );
-        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( ) + ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        Rectangle2D r1 = new Rectangle2D.Double( puntoInicial.darX( )+ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
-        r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoInicial.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
-        r1 = new Rectangle2D.Double( puntoFinal.darX( )+ANCHO_BASE - 3, puntoInicial.darY( ) - 3, 6, 6 );
+        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - ANCHO_BASE - 3, puntoFinal.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
-        r1 = new Rectangle2D.Double( puntoFinal.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
+        r1 = new Rectangle2D.Double( puntoInicial.darX()  - 3, puntoFinal.darY( ) - 3, 6, 6 );
         g.fill( r1 );
 
     }
@@ -139,7 +139,7 @@ public class Entrada extends FormaBasica
     protected void pintarTexto( Graphics2D g )
     {
         int centroX = ( puntoInicial.darX( ) + puntoFinal.darX( ) ) / 2;
-        int centroY = puntoInicial.darY( ) + ALTO / 2 ;
+        int centroY = puntoInicial.darY( ) + ALTO / 2;
         g.setFont( fuente );
         g.setColor( Color.BLACK );
         FontMetrics metrics = g.getFontMetrics( );
