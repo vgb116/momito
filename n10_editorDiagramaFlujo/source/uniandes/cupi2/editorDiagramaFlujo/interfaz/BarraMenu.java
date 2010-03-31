@@ -41,10 +41,7 @@ public class BarraMenu extends JMenuBar implements ActionListener
     /**
      * constante Abrir
      */
-    private static final String ABRIR = "Abrir";
-    
-    //
-    // TODO: Completar opciones faltantes
+    private static final String ABRIR = "Abrir"; 
     
     /**
      * constante Guardar
@@ -89,9 +86,6 @@ public class BarraMenu extends JMenuBar implements ActionListener
      */
     private JMenuItem itemAbrir;
 
-    //
-    // TODO: Completar opciones faltantes
-
     /**
      * La opción Guardar del menú Archivo
      */
@@ -133,9 +127,6 @@ public class BarraMenu extends JMenuBar implements ActionListener
         itemAbrir.setActionCommand( ABRIR );
         itemAbrir.addActionListener( this );
         menuArchivo.add( itemAbrir );
-
-        //
-        // TODO: Completar opciones faltantes
         
         itemGuardar = new JMenuItem( "Guardar" );
         itemGuardar.setActionCommand( GUARDAR );
@@ -173,8 +164,6 @@ public class BarraMenu extends JMenuBar implements ActionListener
         {
             principal.abrir( );
         }
-        //
-        // TODO: Completar opciones faltantes
         else if(GUARDAR.equals( comando ))
         {
             principal.salvar( );

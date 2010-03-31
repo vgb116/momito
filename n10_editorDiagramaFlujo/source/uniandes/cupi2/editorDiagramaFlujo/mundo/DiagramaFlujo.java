@@ -18,12 +18,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 
 /**
  * Clase que representa un diagrama de flujo <br>
@@ -218,7 +218,7 @@ public class DiagramaFlujo
         archivo = null;
         verificarInvariante( );
     }
-    
+
     // ------------------------------------------------------
     // Persistencia
     // ------------------------------------------------------
@@ -374,7 +374,23 @@ public class DiagramaFlujo
      */
     public void salvar( ) throws IOException
     {
-        // TODO complete el método según la documentación
+        try
+        {
+            // TODO complete el método según la documentación
+            PrintWriter escritor = new PrintWriter( archivo );
+            escritor.println( elementos.size( ) );
+            Iterator<IForma> it = elementos.iterator( );
+            while( it.hasNext( ) )
+            {
+                IForma i = it.next( );
+                i.guardar( escritor );
+            }
+            escritor.close( );
+        }
+        catch( IOException e )
+        {
+            throw new IOException( );
+        }
     }
 
     /**

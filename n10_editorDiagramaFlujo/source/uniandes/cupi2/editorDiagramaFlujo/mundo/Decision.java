@@ -79,7 +79,6 @@ public class Decision extends FormaBasica
      */
     public void moverFigura( Punto punto )
     {
-        // TODO Auto-generated method stub
         puntoInicial.modificarX( punto.darX( ) - ANCHO / 2 );
         puntoInicial.modificarY( punto.darY( ) - ALTO / 2 );
         puntoFinal.modificarX( punto.darX( ) + ANCHO / 2 );
@@ -92,7 +91,6 @@ public class Decision extends FormaBasica
      */
     public void pintar( Graphics2D g )
     {
-        // TODO Auto-generated method stub
         int puntosX[] = { puntoInicial.darX( ) + ANCHO / 2, puntoFinal.darX( ), puntoInicial.darX( ) + ANCHO / 2, puntoInicial.darX( ) };
         int puntosY[] = { puntoInicial.darY( ), puntoInicial.darY( ) + ALTO / 2, puntoFinal.darY( ), puntoInicial.darY( ) + ALTO / 2 };
 
