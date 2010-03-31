@@ -31,12 +31,12 @@ import uniandes.cupi2.editorDiagramaFlujo.mundo.Punto;
  */
 public class PanelEditor extends JPanel implements MouseListener, MouseMotionListener
 {
-    
+
     /**
      * Constante para la serialización
      */
     private static final long serialVersionUID = 1L;
-    
+
     // -----------------------------------------------------------------
     // Atributos
     // -----------------------------------------------------------------
@@ -120,14 +120,16 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
     {
         // No se requiere
     }
-    
+
     /**
      * Este método se llama cuando se hace click sobre la superficie del editor. <br>
      * Debe tener en cuenta las siguientes opciones al presionar un botón del mouse: <br>
      * <b>1. </b>Si la opción seleccionada en el panel de botones es SELECCIONAR: <br>
      * <b> a. </b>Al hacer un click en el botón izquierdo sobre el editor, se debe seleccionar la figura que se encuentra en la posición.<br>
-     * <b> b. </b>Al hacer dos clicks en el botón izquierdo sobre el editor, se debe mostrar la ventana para editar el texto de la figura.<br><br>
-     * <b>2. </b>Si la opción seleccionada en el panel de botones es una de las figuras (inicio, fin, entrada de datos, proceso de datos, decisión, salida información), debe pintarlo.<br>
+     * <b> b. </b>Al hacer dos clicks en el botón izquierdo sobre el editor, se debe mostrar la ventana para editar el texto de la figura.<br>
+     * <br>
+     * <b>2. </b>Si la opción seleccionada en el panel de botones es una de las figuras (inicio, fin, entrada de datos, proceso de datos, decisión, salida información), debe
+     * pintarlo.<br>
      * <b>3. </b>Si la opción seleccionada en el panel de botones es una conexión debe:.<br>
      * <b> a. </b>Si es el primer click, debe seleccionar la figura que se encuentre en la posición del click.<br>
      * <b> b. </b>Si es el segundo click, debe pintar un conector entre la figura que estaba seleccionada y la que está en la posición del click.<br>
@@ -141,19 +143,21 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
             String opcion = principal.darOpcionSeleccionada( );
             Punto punto = new Punto( evento.getX( ), evento.getY( ) );
             if( opcion.equals( InterfazEditorDiagramaFlujo.SELECCIONAR ) )
-            {	
+            {
                 principal.seleccionar( punto );
-                
+
                 if( evento.getClickCount( ) > 1 )
                 {
                     principal.mostrarVentanaTexto( );
                 }
             }
-            else if( opcion.equals( InterfazEditorDiagramaFlujo.INICIO ) || opcion.equals( InterfazEditorDiagramaFlujo.FIN ) || opcion.equals( InterfazEditorDiagramaFlujo.ENTRADA ) || opcion.equals( InterfazEditorDiagramaFlujo.PROCESO_DATOS ) || opcion.equals( InterfazEditorDiagramaFlujo.DECISION ) || opcion.equals( InterfazEditorDiagramaFlujo.SALIDA_DE_INFORMACION ) )
+            else if( opcion.equals( InterfazEditorDiagramaFlujo.INICIO ) || opcion.equals( InterfazEditorDiagramaFlujo.FIN ) || opcion.equals( InterfazEditorDiagramaFlujo.ENTRADA ) || opcion.equals( InterfazEditorDiagramaFlujo.PROCESO_DATOS )
+                    || opcion.equals( InterfazEditorDiagramaFlujo.DECISION ) || opcion.equals( InterfazEditorDiagramaFlujo.SALIDA_DE_INFORMACION ) )
             {
-               principal.agregarFigura( punto );
+                principal.agregarFigura( punto );
             }
-            else if( opcion.equals( InterfazEditorDiagramaFlujo.CONEXION ))  {
+            else if( opcion.equals( InterfazEditorDiagramaFlujo.CONEXION ) )
+            {
                 if( numeroClick == 0 )
                 {
                     IFormaBasica elementoTemp = ( IFormaBasica )principal.buscarElemento( punto );
@@ -169,7 +173,7 @@ public class PanelEditor extends JPanel implements MouseListener, MouseMotionLis
                     IFormaBasica elementoTemp = ( IFormaBasica )principal.buscarElemento( punto );
                     if( elementoTemp != null )
                     {
-                        IFormaBasica elementoDestino = (IFormaBasica)principal.buscarElemento( punto );
+                        IFormaBasica elementoDestino = ( IFormaBasica )principal.buscarElemento( punto );
                         principal.agregarConector( elementoInicial, elementoDestino );
                         numeroClick = 0;
                     }
