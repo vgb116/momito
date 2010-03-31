@@ -2,12 +2,10 @@ package uniandes.cupi2.editorDiagramaFlujo.mundo;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
 import sun.java2d.loops.DrawParallelogram;
 import sun.java2d.loops.DrawPolygons;
 import uniandes.cupi2.editorDiagramaFlujo.mundo.IForma;
@@ -127,7 +125,6 @@ public class Entrada extends FormaBasica
 
         r1 = new Rectangle2D.Double( puntoInicial.darX( ) - 3, puntoFinal.darY( ) - 3, 6, 6 );
         g.fill( r1 );
-
     }
 
     /**

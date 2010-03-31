@@ -133,7 +133,7 @@ public class Decision extends FormaBasica
     protected void pintarTexto( Graphics2D g )
     {
         int centroX = ( puntoInicial.darX( ) + puntoFinal.darX( ) ) / 2;
-        int centroY = puntoInicial.darY( ) + ALTO / 2 ;
+        int centroY = puntoInicial.darY( ) + ALTO / 2;
         g.setFont( fuente );
         g.setColor( Color.BLACK );
         FontMetrics metrics = g.getFontMetrics( );
