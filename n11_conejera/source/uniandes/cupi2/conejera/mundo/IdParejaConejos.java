@@ -40,5 +40,4 @@ public class IdParejaConejos
         consecutivo++;
         return consecutivo - 1;
     }
-
 }
