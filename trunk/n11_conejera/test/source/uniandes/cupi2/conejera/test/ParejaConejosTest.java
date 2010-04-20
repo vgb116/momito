@@ -203,7 +203,7 @@ public class ParejaConejosTest extends TestCase
     {
         setupEscenario2( );
         pareja.simularMes( idParejaConejos, 5 );
-        System.out.println("pareja conejos mes 5 agregada");
+        //System.out.println("pareja conejos mes 5 agregada");
         assertEquals( "El número de parejas aumento correctamente", pareja.darNumeroParejasEnMes( 5 ), 8 );
         ParejaConejos temp1 = pareja.buscarPareja( 5 );
         assertNotNull( "No se crearon correctamente las nuevas parejas", temp1 );
