@@ -162,7 +162,9 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         int i = idConsecutivoConejos.darConsecutivo( );
-        ParejaConejos hijo = new ParejaConejos( i, mesActual );
+        ParejaConejos hijo = new ParejaConejos( i , mesActual );
+        hijo.valManetinimientoAdultos = valManetinimientoAdultos;
+        hijo.valManetinimientoBebes = valManetinimientoBebes;
         hijos.add( hijo );
     }
 
@@ -225,11 +227,11 @@ public class ParejaConejos
         int respuesta = 0;
         if( mesNacimiento == mes )
         {
-            respuesta++;
+            respuesta ++ ;
         }
         else
         {
-            for( int i = 0; i < hijos.size( ); i++ )
+            for( int i = 0; i < hijos.size( ); i ++ )
             {
                 ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
                 respuesta += hijo.darNumeroParejasEnMes( mes );
