@@ -49,13 +49,13 @@ public class ParejaConejosTest extends TestCase
     {
         setupEscenario1( );
         pareja.simularMes( idParejaConejos, 1 );
-        //System.out.println("p1");
+        System.out.println("p1");
         pareja.simularMes( idParejaConejos, 2 );
-        //System.out.println("p2");
+        System.out.println("p2");
         pareja.simularMes( idParejaConejos, 3 );
-        //System.out.println("p3");
+        System.out.println("p3");
         pareja.simularMes( idParejaConejos, 4 );
-        //System.out.println("p4");
+        System.out.println("p4");
     }
 
     /**
@@ -184,10 +184,11 @@ public class ParejaConejosTest extends TestCase
     public void testReproducirse( )
     {
         setupEscenario2( );
-        System.out.println("escenario cargado");
+        //System.out.println("escenario cargado");
         ParejaConejos temp = pareja.buscarPareja( 2 );
-        System.out.println("el id de temp " + temp.darId( ));
+        //System.out.println("el id de temp " );
         temp.reproducirse( idParejaConejos, 5 );
+        //System.out.println("temp ok");
         ArrayList hijos = temp.darHijos( );
         assertEquals( "El número de hijos es incorrecto", 1, hijos.size( ) );
         ParejaConejos hijo = ( ParejaConejos )hijos.get( 0 );
@@ -202,6 +203,7 @@ public class ParejaConejosTest extends TestCase
     {
         setupEscenario2( );
         pareja.simularMes( idParejaConejos, 5 );
+        System.out.println("pareja conejos mes 5 agregada");
         assertEquals( "El número de parejas aumento correctamente", pareja.darNumeroParejasEnMes( 5 ), 8 );
         ParejaConejos temp1 = pareja.buscarPareja( 5 );
         assertNotNull( "No se crearon correctamente las nuevas parejas", temp1 );
