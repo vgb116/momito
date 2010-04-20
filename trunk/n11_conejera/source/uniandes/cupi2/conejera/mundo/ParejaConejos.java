@@ -143,7 +143,7 @@ public class ParejaConejos
     public void crecer( )
     {
         // TODO completar según documentación
-        edad++;
+        edad ++;
         if( edad == 1 )
         {
             estado = ESTADO_ADULTOS;
@@ -162,10 +162,16 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         int i = idConsecutivoConejos.darConsecutivo( );
+        
+        //System.out.println("el consecutivo " + i);
+        
         ParejaConejos hijo = new ParejaConejos( i , mesActual );
         hijo.valManetinimientoAdultos = valManetinimientoAdultos;
-        hijo.valManetinimientoBebes = valManetinimientoBebes;
+        hijo.valManetinimientoBebes = valManetinimientoBebes;     
         hijos.add( hijo );
+        
+        //System.out.println("el tamanio " + hijos.size( ));
+
     }
 
     /**
@@ -179,11 +185,14 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         edad++;
-        if( edad >= 1 )
+        
+        //System.out.println("la edad del id " +id + "es: " + edad);
+        
+        if( edad > 1 )
         {
-            reproducirse( idConsecutivoConejos, mesActual );
+            reproducirse( idConsecutivoConejos , mesActual );
         }
-        for( int i = 0; i < hijos.size( ); i++ )
+        for( int i = 0; i < hijos.size( ) - 1; i++ )
         {
             ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
             hijo.simularMes( idConsecutivoConejos, mesActual );
@@ -252,6 +261,7 @@ public class ParejaConejos
         ParejaConejos buscada = null;
         if( id == idPareja )
         {
+            System.out.println("el id encontrado es "+id);
             return this;
         }
         else
@@ -260,6 +270,7 @@ public class ParejaConejos
             {
                 ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
                 hijo.buscarPareja( idPareja );
+                System.out.println("buscando en " + i);
             }
         }
         return buscada;

@@ -49,9 +49,13 @@ public class ParejaConejosTest extends TestCase
     {
         setupEscenario1( );
         pareja.simularMes( idParejaConejos, 1 );
+        //System.out.println("p1");
         pareja.simularMes( idParejaConejos, 2 );
+        //System.out.println("p2");
         pareja.simularMes( idParejaConejos, 3 );
+        //System.out.println("p3");
         pareja.simularMes( idParejaConejos, 4 );
+        //System.out.println("p4");
     }
 
     /**
@@ -180,7 +184,9 @@ public class ParejaConejosTest extends TestCase
     public void testReproducirse( )
     {
         setupEscenario2( );
+        System.out.println("escenario cargado");
         ParejaConejos temp = pareja.buscarPareja( 2 );
+        System.out.println("el id de temp " + temp.darId( ));
         temp.reproducirse( idParejaConejos, 5 );
         ArrayList hijos = temp.darHijos( );
         assertEquals( "El número de hijos es incorrecto", 1, hijos.size( ) );
