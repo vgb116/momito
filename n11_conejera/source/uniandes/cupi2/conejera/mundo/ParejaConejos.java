@@ -142,7 +142,6 @@ public class ParejaConejos
      */
     public void crecer( )
     {
-        // TODO completar según documentación
         edad++;
         if( edad == 1 )
         {
@@ -161,7 +160,6 @@ public class ParejaConejos
      */
     public void reproducirse( IdParejaConejos idConsecutivoConejos, int mesActual )
     {
-        // TODO completar según documentación
         int i = idConsecutivoConejos.darConsecutivo( );
         ParejaConejos hijo = new ParejaConejos( i, mesActual );
         hijo.valManetinimientoAdultos = valManetinimientoAdultos;
@@ -179,7 +177,6 @@ public class ParejaConejos
      */
     public void simularMes( IdParejaConejos idConsecutivoConejos, int mesActual )
     {
-        // TODO completar según documentación
         edad++;
         if( edad > 1 )
         {
@@ -207,7 +204,6 @@ public class ParejaConejos
      */
     public double valorInvertidoMes( int mes )
     {
-        // TODO completar según documentación
         double respuesta = 0;
         if( mes == mesNacimiento )
         {
@@ -231,7 +227,6 @@ public class ParejaConejos
      */
     public int darNumeroParejasEnMes( int mes )
     {
-        // TODO completar según documentación
         int respuesta = 0;
         if( mesNacimiento <= mes )
         {
@@ -254,7 +249,6 @@ public class ParejaConejos
      */
     public ParejaConejos buscarPareja( int idPareja )
     {
-        // TODO completar según documentación
         if( id == idPareja )
         {
             return this;
@@ -281,7 +275,6 @@ public class ParejaConejos
      */
     public void descendientesBebes( Collection respuesta )
     {
-        // TODO completar según documentación
         if( estado.equals( ESTADO_BEBES ) )
         {
             respuesta.add( this );
@@ -299,7 +292,6 @@ public class ParejaConejos
      */
     public void darListaIds( Collection lista )
     {
-        // TODO completar según documentación
         lista.add( id );
         for( int i = 0; i < hijos.size( ); i++ )
         {
@@ -482,7 +474,6 @@ public class ParejaConejos
 
     public void verificarInvariante( )
     {
-        // TODO completar según documentación
         assert EstadoEsValido( ) : "El estado es inválido";
         assert ListaHijosInicializada( ) : "La lista de bebés está sin inicializar";
         assert BebeSinHijos( ) : "Un bebé tiene hijos";
@@ -491,5 +482,4 @@ public class ParejaConejos
         assert id > 0 : "El id es menor que cero";
         assert MesNacimiento( ) : "Un adulto tiene cero meses";
     }
-
 }
