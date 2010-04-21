@@ -84,7 +84,6 @@ public class Conejera
      */
     public double darValorInvertidoPorMes( int mes )
     {
-        // TODO completar según documentación
         if( parejaInicial == null )
         {
             return 0;
@@ -116,7 +115,6 @@ public class Conejera
      */
     public int darNumeroParejasEnMes( int mes )
     {
-        // TODO completar según documentación
         if( parejaInicial == null )
         {
             return 0;
@@ -131,7 +129,6 @@ public class Conejera
      */
     public void simularPasoMes( )
     {
-        // TODO completar según documentación
         mesActual++;
         dineroInvertidoEnManutencion += darValorInvertidoPorMes( mesActual );
         parejaInicial.simularMes( idConsecutivoConejos, mesActual );
@@ -165,7 +162,6 @@ public class Conejera
      */
     public int descendientesBebes( int id ) throws Exception
     {
-        // TODO completar según documentación
         try
         {
             ParejaConejos pareja = parejaInicial.buscarPareja( id );
@@ -198,8 +194,6 @@ public class Conejera
      */
     public void establecerCostosMantenimiento( double valParejaAdulta, double valParejaBebe )
     {
-
-        // TODO completar según documentación
         parejaInicial.cambiarValMantenimientoAdultos( valParejaAdulta );
         parejaInicial.cambiarValMantenimientoBebes( valParejaBebe );
         verificarInvariante( );
@@ -220,8 +214,6 @@ public class Conejera
      */
     public void verificarInvariante( )
     {
-
-        // TODO completar según documentación
         assert dineroInvertidoEnManutencion >= 0 : "El dienero de manutencion es negativo";
         assert parejaInicial != null : "La pareja inicial es nula";
         assert mesActual >= 0 : "El mes actual es negativo";
@@ -234,8 +226,6 @@ public class Conejera
      */
     private boolean hayParejasMismoIdentificador( )
     {
-
-        // TODO completar según documentación
         ArrayList<Integer> lista = new ArrayList<Integer>( );
         parejaInicial.darListaIds( lista );
         for( int i = 0; i < lista.size( ); i++ )
