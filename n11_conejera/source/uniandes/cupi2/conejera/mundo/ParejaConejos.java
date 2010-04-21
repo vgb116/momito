@@ -148,6 +148,7 @@ public class ParejaConejos
         {
             estado = ESTADO_ADULTOS;
         }
+        verificarInvariante( );
     }
 
     /**
@@ -162,16 +163,11 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         int i = idConsecutivoConejos.darConsecutivo( );
-
-        System.out.println("el consecutivo " + i);
-
         ParejaConejos hijo = new ParejaConejos( i, mesActual );
         hijo.valManetinimientoAdultos = valManetinimientoAdultos;
         hijo.valManetinimientoBebes = valManetinimientoBebes;
         hijos.add( hijo );
-
-        System.out.println("el tamanio " + hijos.size( ));
-
+        verificarInvariante( );
     }
 
     /**
@@ -185,22 +181,21 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         edad++;
+        if( edad > 1 )
+        {
+            for( int i = 0; i < hijos.size( ); i++ )
+            {
+                ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
+                hijo.simularMes( idConsecutivoConejos, mesActual );
+            }
+            reproducirse( idConsecutivoConejos, mesActual );
 
-        System.out.println("la edad del id " +id + "es: " + edad);
-
-        if(edad>0)
+        }
+        else if( edad > 0 )
         {
             estado = ESTADO_ADULTOS;
         }
-        if( edad > 1 )
-        {
-            reproducirse( idConsecutivoConejos, mesActual );
-        }
-        for( int i = 0; i < hijos.size( ) - 1; i++ )
-        {
-            ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
-            hijo.simularMes( idConsecutivoConejos, mesActual );
-        }
+        verificarInvariante( );
     }
 
     /**
@@ -214,26 +209,21 @@ public class ParejaConejos
     {
         // TODO completar según documentación
         double respuesta = 0;
-        if( estado.equals( ESTADO_ADULTOS ) )
-        {
-            respuesta += ( edad - 1 ) * valManetinimientoAdultos + valManetinimientoBebes;
-            System.out.println("adulto con id: "+id +" $"+valManetinimientoAdultos);
-            System.out.println("el valor actual: "+respuesta);
-        }
-        else
+        if( mes == mesNacimiento )
         {
             respuesta += valManetinimientoBebes;
-            System.out.println("bebe con id: "+id +" $"+valManetinimientoBebes);
-            System.out.println("el valor actual: "+respuesta);
         }
-        for( int i = 0; i < hijos.size( ); i++ )
+        else if( mes > mesNacimiento )
         {
-            ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
-            respuesta += hijo.valorInvertidoMes( mes );
+            respuesta += valManetinimientoAdultos;
+            for( int i = 0; i < hijos.size( ); i++ )
+            {
+                ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
+                respuesta += hijo.valorInvertidoMes( mes );
+            }
         }
         return respuesta;
     }
-
     /**
      * Calcula el total de parejas de conejos en un mes dado como parámetro <br>
      * @param mes El mes para calcular el total de parejas - mes >= 0
@@ -249,10 +239,10 @@ public class ParejaConejos
         }
         for( int i = 0; i < hijos.size( ); i++ )
         {
-                ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
-                respuesta += hijo.darNumeroParejasEnMes( mes );
+            ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
+            respuesta += hijo.darNumeroParejasEnMes( mes );
         }
-        
+
         return respuesta;
     }
 
@@ -265,15 +255,8 @@ public class ParejaConejos
     public ParejaConejos buscarPareja( int idPareja )
     {
         // TODO completar según documentación
-        ParejaConejos buscada = null;
         if( id == idPareja )
         {
-            System.out.println( "el id encontrado es " + id );
-            // ParejaConejos pareja = new ParejaConejos( id , mesNacimiento );
-            // pareja.valManetinimientoAdultos = valManetinimientoAdultos;
-            // pareja.valManetinimientoBebes = valManetinimientoBebes;
-            // pareja.hijos = hijos;
-            // return pareja;
             return this;
         }
         else
@@ -281,10 +264,14 @@ public class ParejaConejos
             for( int i = 0; i < hijos.size( ); i++ )
             {
                 ParejaConejos hijo = ( ParejaConejos )hijos.get( i );
-                hijo.buscarPareja( idPareja );
+                ParejaConejos buscada = hijo.buscarPareja( idPareja );
+                if( buscada != null )
+                {
+                    return buscada;
+                }
             }
         }
-        return buscada;
+        return null;
     }
 
     /**
@@ -338,6 +325,7 @@ public class ParejaConejos
     public void cambiarValMantenimientoAdultos( double nuevoValor )
     {
         valManetinimientoAdultos = nuevoValor;
+        verificarInvariante( );
     }
 
     /**
@@ -347,6 +335,7 @@ public class ParejaConejos
     public void cambiarValMantenimientoBebes( double nuevoValor )
     {
         valManetinimientoBebes = nuevoValor;
+        verificarInvariante( );
     }
 
     /**
