@@ -99,8 +99,12 @@ public class Conejera
      */
     public double darValorInvertidoTotal( )
     {
-
-        return dineroInvertidoEnManutencion;
+        double respuesta = 0;
+        for( int i = 0; i <= mesActual; i++ )
+        {
+            respuesta += darValorInvertidoPorMes( i );
+        }
+        return respuesta;
     }
 
     /**
@@ -130,8 +134,8 @@ public class Conejera
         // TODO completar según documentación
         mesActual++;
         dineroInvertidoEnManutencion += darValorInvertidoPorMes( mesActual );
-        
         parejaInicial.simularMes( idConsecutivoConejos, mesActual );
+        verificarInvariante( );
     }
 
     /**
@@ -198,7 +202,7 @@ public class Conejera
         // TODO completar según documentación
         parejaInicial.cambiarValMantenimientoAdultos( valParejaAdulta );
         parejaInicial.cambiarValMantenimientoBebes( valParejaBebe );
-
+        verificarInvariante( );
     }
 
     // -------------------------------------------------------
@@ -232,16 +236,21 @@ public class Conejera
     {
 
         // TODO completar según documentación
-        boolean respuesta = true;
-        Collection<Integer> lista = new ArrayList<Integer>( );
+        ArrayList<Integer> lista = new ArrayList<Integer>( );
         parejaInicial.darListaIds( lista );
-        Iterator<Integer> it = lista.iterator( );
-        while(it.hasNext( ))
+        for( int i = 0; i < lista.size( ); i++ )
         {
-            int x = it.next( );
-            
+            int x = lista.get( i ).intValue( );
+            for( int j = i + 1; j < lista.size( ); j++ )
+            {
+                int y = lista.get( j ).intValue( );
+                if( x == y )
+                {
+                    return false;
+                }
+            }
         }
-        return respuesta;
+        return true;
     }
 
     // -----------------------------------------------------------------
