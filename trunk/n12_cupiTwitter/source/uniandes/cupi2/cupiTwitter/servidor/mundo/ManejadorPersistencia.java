@@ -305,7 +305,7 @@ public class ManejadorPersistencia
         // TODO elimina un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
         Statement st = conexion.createStatement( );
         String del = "DELETE FROM usuarios_seguidores WHERE usuario = '" + usuarioSeguido + "' AND usuario_seguidor = '" + usuarioSeguidor;
-        st.execute( del );
+        st.executeUpdate( del );
         st.close( );
         verificarInvariante( );
     }
