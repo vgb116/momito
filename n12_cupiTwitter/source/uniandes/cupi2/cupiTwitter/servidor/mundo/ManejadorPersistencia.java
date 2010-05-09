@@ -23,6 +23,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.sun.corba.se.spi.orbutil.fsm.State;
+
 /**
  * Clase que se encarga del manejo de la persistencia
  */
@@ -154,9 +156,12 @@ public class ManejadorPersistencia
      */
     public void registrarMicroBlog( String usuario, String microblog, String fecha ) throws SQLException
     {
-        
         // TODO Ingresar un microblog en la tabla de microblogs
-        
+        Statement st = conexion.createStatement( );
+        String insert = "INSERT INTO microblogs (usuario,microblog,fecha_publicacion)" + "VALUES (' " + usuario + " ',' " + microblog + "','" + fecha + "')";
+        st.execute( insert );
+        st.close( );
+        verificarInvariante( );
     }
 
     /**
@@ -170,9 +175,12 @@ public class ManejadorPersistencia
      */
     public void registrarUsuario( String usuario, String nombre, String apellidos, String pwd ) throws SQLException
     {
-        
         // TODO Registrar un usuario en la tabla de usuarios
-        
+        Statement st = conexion.createStatement( );
+        String insert = "INSERT INTO usuarios (usuario, nombre, apellidos, pwd,total_mensajes,total_seguidores,conectado) " + "VALUES ('" + usuario + "','" + nombre + "','" + apellidos + "','" + pwd + "', 0 , 0 , '" + "N" + "')";
+        st.execute( insert );
+        st.close( );
+        verificarInvariante( );
     }
 
     /**
@@ -184,9 +192,20 @@ public class ManejadorPersistencia
      */
     public Usuario buscarUsuario( String nUsuario, String nPwd ) throws SQLException
     {
-        
+
         // TODO Buscar un usuario con el login y password dado en la tabla de usuario y construir un objeto de tipo usuario con la información obtenida
-        
+        Usuario usuario = null;
+        String sql = "SELECT usuario, nombre, apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario ='" + nUsuario + "' AND pwd = '" + nPwd + "')";
+        Statement st = conexion.createStatement( );
+        ResultSet resultado = st.executeQuery( sql );
+
+        if( resultado.next( ) ) // Se encontró el jugador
+        {
+            usuario = construirUsuario( resultado );
+
+            resultado.close( );
+        }
+        return usuario;
     }
 
     /**
@@ -197,9 +216,19 @@ public class ManejadorPersistencia
      */
     public Usuario buscarUsuario( String nUsuario ) throws SQLException
     {
-        
+
         // TODO Buscar un usuario con el login dado en la tabla de usuario y construir un objeto de tipo usuario con la información obtenida
-        
+        Usuario usuario = null;
+        String sql = "SELECT usuario,nombre,apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario = '" + nUsuario + "')";
+        Statement st = conexion.createStatement( );
+        ResultSet resultado = st.executeQuery( sql );
+
+        if( resultado.next( ) )
+        {
+            usuario = construirUsuario( resultado );
+            resultado.close( );
+        }
+        return usuario;
     }
 
     /**
@@ -247,7 +276,20 @@ public class ManejadorPersistencia
         // TODO Agrega un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
         // AYUDA: si el usuarioSeguido no existe retorna false
         // Si se pudo registrar el usuario seguidor retorna true
-
+        Usuario u = buscarUsuario( usuarioSeguido );
+        if( u != null )
+        {
+            Statement st = conexion.createStatement( );
+            String insert = "INSERT INTO usuarios_seguidores (usuario,usuario_seguidor) " + "VALUES ('" + u + "','" + usuarioSeguidor + "')";
+            st.execute( insert );
+            st.close( );
+            verificarInvariante( );
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
@@ -259,9 +301,13 @@ public class ManejadorPersistencia
      */
     public void eliminarSeguidor( String usuarioSeguidor, String usuarioSeguido ) throws SQLException
     {
-        
+
         // TODO elimina un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
-        
+        Statement st = conexion.createStatement( );
+        String del = "DELETE FROM usuarios_seguidores WHERE usuario = '" + usuarioSeguido + "' AND usuario_seguidor = '" + usuarioSeguidor;
+        st.execute( del );
+        st.close( );
+        verificarInvariante( );
     }
 
     /**
@@ -308,7 +354,7 @@ public class ManejadorPersistencia
      * @throws SQLException En caso de encontrar un error
      */
     public ArrayList consultarBlogParaUsuario( String nUsuario ) throws SQLException
-    {   
+    {
         String sql = "select * from usuarios_seguidores where usuario_seguidor = ? ";
         String sqlBlogs = "select  * from microblogs where usuario = ?";
         String[] params = { nUsuario };
@@ -334,9 +380,18 @@ public class ManejadorPersistencia
      */
     public ArrayList consultarUsuariosRegistrados( ) throws SQLException
     {
-        
         // TODO Devuelve una lista con los usuarios registrados
-        
+        Statement st = conexion.createStatement( );
+        String consulta = "SELECT usuario, nombre, apellidos, pwd, total_mensajes, total_seguidores, conectado FROM usuarios";
+        ResultSet resultado = st.executeQuery( consulta );
+        st.close( );
+        ArrayList<Usuario> respuesta = new ArrayList<Usuario>( );
+        while( resultado.next( ) )
+        {
+            Usuario u = construirUsuario( resultado );
+            respuesta.add( u );
+        }
+        return respuesta;
     }
 
     /**
@@ -348,9 +403,19 @@ public class ManejadorPersistencia
      */
     public ArrayList consultarUsuariosSeguidores( String nUsuario ) throws SQLException
     {
-    
         // TODO Devuelve una lista con los usuarios que siguen al usuario dado por parámetro
-        
+        Statement st = conexion.createStatement( );
+        String consulta = "SELECT usuario_seguidor FROM usuarios_seguidores WHERE usuario = '" + nUsuario + "'";
+        ResultSet resultado = st.executeQuery( consulta );
+        st.close( );
+        ArrayList<Usuario> respuesta = new ArrayList<Usuario>( );
+        while(resultado.next( ))
+        {
+            String nombreSeguidor = resultado.getString( 1 );
+            Usuario u = buscarUsuario( nombreSeguidor );
+            respuesta.add( u );
+        }
+        return respuesta;
     }
 
     /**
@@ -362,8 +427,16 @@ public class ManejadorPersistencia
      */
     public void cambiarEstado( String nUsuario, boolean estado ) throws SQLException
     {
-        
         // TODO Cambia el estado del usuario con el login dado
+        Statement st = conexion.createStatement( );
+        String nuevoEstado = "N";
+        if(estado == true )
+        {
+            nuevoEstado = "S";
+        }
+        String cambio = "UPDATE usuarios SET conectado = '" + nuevoEstado +"' WHERE usuario = '" + nUsuario +"'";
+        st.executeUpdate( cambio );
+        st.close( );
         
     }
 
