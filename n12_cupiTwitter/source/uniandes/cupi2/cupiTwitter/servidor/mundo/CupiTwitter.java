@@ -86,17 +86,21 @@ public class CupiTwitter
         try
         {
             // TODO inicialice el ServerSocket receptor
+            socketServidor = new ServerSocket( puerto );
+            
             verificarInvariante( );
             while( true )
             {
                 // Esperar una nueva conexión
+                Socket socketNuevoCliente = socketServidor.accept( );
+                
                 
                 // TODO Acepte una conexión usando el receptor
                 
                 
                 // TODO Atender el nuevo cliente 
                 // Ayuda: Use el método registrarUsuario
-
+                registrarUsuario( socketNuevoCliente );
             }
         }
         catch( IOException e )
@@ -143,9 +147,15 @@ public class CupiTwitter
      */
     public Usuario darDetallesUsuario( String usuario ) throws CupiTwitterServidorException
     {
-        
         // TODO complete el método de acuerdo con su contrato
-    
+        try
+        {
+            return manejadorPersistencia.buscarUsuario( usuario );
+        }
+        catch( SQLException e )
+        {
+            throw new CupiTwitterServidorException( e.getMessage( ) );
+        }
     }
 
     /**
@@ -158,7 +168,14 @@ public class CupiTwitter
     {
         
         // TODO complete el método de acuerdo con su contrato
-        
+        try
+        {
+            return manejadorPersistencia.consultarUsuariosSeguidores( usuario );
+        }
+        catch( SQLException e )
+        {
+            throw new CupiTwitterServidorException( e.getMessage( ) );
+        }
     }
 
     /**
@@ -169,9 +186,15 @@ public class CupiTwitter
      */
     public ArrayList darUsuarios( ) throws CupiTwitterServidorException
     {
-        
         // TODO complete el método de acuerdo con su contrato
-        
+        try
+        {
+            return manejadorPersistencia.consultarUsuariosRegistrados( );
+        }
+        catch( SQLException e )
+        {
+            throw new CupiTwitterServidorException( e.getMessage( ) );
+        }
     }
 
     /**
