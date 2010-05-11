@@ -203,7 +203,8 @@ public class ClienteRemotoTwitter extends Thread
         }
 
         // TODO Envié el mensaje CREAR_CUENTA_OK usando el manejador de comuniaciones
-        
+        manejadorComunicaciones.enviarMensaje( new Mensaje(ProtocoloComunicacion.CREAR_CUENTA_OK) );
+
     }
 
     /**
@@ -242,11 +243,8 @@ public class ClienteRemotoTwitter extends Thread
             Usuario u = manejadorPersistencia.buscarUsuario( nUsuario, nPwd );
             if( u != null )
             {
-                // fALTAAAAAAAAA Enviar mensaje INICIAR_SESION_OK
-                manejadorPersistencia.cambiarEstado( nUsuario , conectado );
-                
-                
-                
+                manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.INICIAR_SESION_OK ) );
+                manejadorPersistencia.cambiarEstado( nUsuario, conectado );
             }
         }
         catch( SQLException e )
@@ -266,6 +264,15 @@ public class ClienteRemotoTwitter extends Thread
         // TODO Completar según la documentación
         // 1. registre el seguidor usando el manejador de persistencia
         // 2. Envié el mensaje SEGUIR_USUARIO_OK usando el manejador de comunicaciones si se registro el seguidor, de lo contrario lanza una CupiTwitterServidorException
+        try
+        {
+            manejadorPersistencia.registrarSeguidor( usuario.darUsuario( ), nUsuarioSeguir );
+            manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.SEGUIR_USUARIO_OK ) );
+        }
+        catch( SQLException e )
+        {
+            throw new CupiTwitterServidorException( e.getMessage( ) );
+        }
 
     }
 
@@ -282,7 +289,8 @@ public class ClienteRemotoTwitter extends Thread
             // TODO Completar según la documentación
             // 1. Elimine el seguidor usando el manejador de persistencia
             // 2. Envié el mensaje DEJAR_SEGUIR_USUARIO_OK usando el manejador de comunicaciones
-
+            manejadorPersistencia.eliminarSeguidor( usuario.darUsuario( ), nUsuarioDejarSeguir );
+            manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.DEJAR_SEGUIR_USUARIO_OK ) );
         }
         catch( Exception e )
         {
@@ -303,6 +311,7 @@ public class ClienteRemotoTwitter extends Thread
         {
 
             // TODO Registre el microblog usando el manejador de persistencia
+            manejadorPersistencia.registrarMicroBlog( usuario.darUsuario( ) , blog, fecha );
 
         }
         catch( SQLException e )
@@ -311,6 +320,7 @@ public class ClienteRemotoTwitter extends Thread
         }
 
         // TODO Envié el mensaje ESCRIBIR_MICROBLOG_OK usando el manejador de comunicaciones
+        manejadorComunicaciones.enviarMensaje( new Mensaje(ProtocoloComunicacion.ESCRIBIR_MICROBLOG_OK) );
     }
 
     /**
@@ -326,6 +336,10 @@ public class ClienteRemotoTwitter extends Thread
             // 2. Ordene los blogs usando el método ordenarMicroBlogs
             // 3. Cree un nuevo mensaje para ser enviado (Objeto de tipo Mensaje)
             // 4. Envié el mensaje usando el manejador de comunicaciones
+            ArrayList blogs = manejadorPersistencia.consultarBlogParaUsuario( usuario.darUsuario( ) );
+            ordenarMicroBlogs( blogs );
+            Mensaje men = new Mensaje(ProtocoloComunicacion.CONSULTAR_BLOGS_OK);
+            manejadorComunicaciones.enviarMensaje( men );
         }
         catch( Exception e )
         {
@@ -341,6 +355,7 @@ public class ClienteRemotoTwitter extends Thread
     public void ordenarMicroBlogs( ArrayList microblogs )
     {
         // TODO Completar según la documentación
+        
     }
 
     // -----------------------------------------------------------------
