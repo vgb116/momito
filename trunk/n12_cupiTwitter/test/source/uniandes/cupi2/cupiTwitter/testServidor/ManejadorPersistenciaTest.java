@@ -302,10 +302,11 @@ public class ManejadorPersistenciaTest extends TestCase
     public void testBuscarUsuario1( )
     {
         setupEscenario1( );
+        System.out.println("1");
         try
         {
             Usuario usuario = manejadorPersistencia.buscarUsuario( "us1", "1" );
-
+            System.out.println("2");
             assertEquals( "Error en la busqueda de usuarios, el nombre de usuario no corresponde", usuario.darUsuario( ), "us1" );
             assertEquals( "Error en la busqueda de usuarios, el nombre del usuario no corresponde", usuario.darNombre( ), "Juan1" );
             assertEquals( "Error en la busqueda de usuarios, los apellidos del usuario no corresponden", usuario.darApellidos( ), "Perez1" );
