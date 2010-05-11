@@ -111,6 +111,14 @@ public class ManejadorPersistencia
     }
 
     /**
+     * Retorna el Atributo Conexion
+     */
+    public Connection darConexion()
+    {
+        return conexion;
+    }
+    
+    /**
      * Conecta el administrador a la base de datos
      * 
      * @throws SQLException Se lanza esta excepción si hay problemas realizando la operación
@@ -195,7 +203,7 @@ public class ManejadorPersistencia
 
         // TODO Buscar un usuario con el login y password dado en la tabla de usuario y construir un objeto de tipo usuario con la información obtenida
         Usuario usuario = null;
-        String sql = "SELECT usuario, nombre, apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario ='" + nUsuario + "' AND pwd = '" + nPwd + "')";
+        String sql = "SELECT usuario, nombre, apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario ='" + nUsuario + "' AND pwd = '" + nPwd + "'";
         Statement st = conexion.createStatement( );
         ResultSet resultado = st.executeQuery( sql );
 
@@ -219,7 +227,7 @@ public class ManejadorPersistencia
 
         // TODO Buscar un usuario con el login dado en la tabla de usuario y construir un objeto de tipo usuario con la información obtenida
         Usuario usuario = null;
-        String sql = "SELECT usuario,nombre,apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario = '" + nUsuario + "')";
+        String sql = "SELECT usuario,nombre,apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario = '" + nUsuario + "'";
         Statement st = conexion.createStatement( );
         ResultSet resultado = st.executeQuery( sql );
 
@@ -304,7 +312,7 @@ public class ManejadorPersistencia
 
         // TODO elimina un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
         Statement st = conexion.createStatement( );
-        String del = "DELETE FROM usuarios_seguidores WHERE usuario = '" + usuarioSeguido + "' AND usuario_seguidor = '" + usuarioSeguidor;
+        String del = "DELETE FROM usuarios_seguidores WHERE usuario = '" + usuarioSeguido + "' AND usuario_seguidor = '" + usuarioSeguidor+"'";
         st.executeUpdate( del );
         st.close( );
         verificarInvariante( );
@@ -391,7 +399,7 @@ public class ManejadorPersistencia
             Usuario u = construirUsuario( resultado );
             respuesta.add( u );
         }
-        return respuesta;
+        return respuesta;       
     }
 
     /**
