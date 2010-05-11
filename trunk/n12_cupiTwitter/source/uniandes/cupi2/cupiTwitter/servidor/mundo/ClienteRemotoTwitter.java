@@ -242,7 +242,7 @@ public class ClienteRemotoTwitter extends Thread
             Usuario u = manejadorPersistencia.buscarUsuario( nUsuario, nPwd );
             if( u != null )
             {
-                // Enviar mensaje INICIAR_SESION_OK
+                // fALTAAAAAAAAA Enviar mensaje INICIAR_SESION_OK
                 manejadorPersistencia.cambiarEstado( nUsuario , conectado );
                 
                 

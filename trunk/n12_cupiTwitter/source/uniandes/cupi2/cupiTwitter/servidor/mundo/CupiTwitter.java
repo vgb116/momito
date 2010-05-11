@@ -87,16 +87,14 @@ public class CupiTwitter
         {
             // TODO inicialice el ServerSocket receptor
             socketServidor = new ServerSocket( puerto );
-            
             verificarInvariante( );
+            
             while( true )
             {
                 // Esperar una nueva conexión
-                Socket socketNuevoCliente = socketServidor.accept( );
-                
                 
                 // TODO Acepte una conexión usando el receptor
-                
+                Socket socketNuevoCliente = socketServidor.accept( );
                 
                 // TODO Atender el nuevo cliente 
                 // Ayuda: Use el método registrarUsuario
@@ -136,7 +134,10 @@ public class CupiTwitter
         // 2. Cree un nuevo ClienteRemotoTwitter
         // 3. Inicie el thread del cliente remoto
         // 4. Agregue el nuevo cliente a la lista de clientes conectados
-        
+        ManejadorComunicacionesServidor manejador = new ManejadorComunicacionesServidor( socketNuevoCliente );
+        ClienteRemotoTwitter nuevoCliente = new ClienteRemotoTwitter( manejador, manejadorPersistencia );
+        nuevoCliente.run( );
+        usuariosConectados.add( nuevoCliente );
     }
 
     /**
