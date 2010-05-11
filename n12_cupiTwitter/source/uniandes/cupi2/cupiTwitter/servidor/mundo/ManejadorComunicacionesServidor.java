@@ -63,9 +63,9 @@ public class ManejadorComunicacionesServidor
         try
         {
             // TODO inicialice el canal de salida
-            
+            out = new PrintWriter( canal.getOutputStream( ),true );
             // TODO inicialice el canal de entrada
-            
+            in = new BufferedReader( new InputStreamReader( canal.getInputStream( ) ) );
         }
         catch( Exception e )
         {
