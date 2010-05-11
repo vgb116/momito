@@ -37,11 +37,10 @@ public class ClienteRemotoTwitter extends Thread
      */
     private boolean conectado;
 
-    
     // -----------------------------------------------------------------
     // Cosntructores
     // -----------------------------------------------------------------
-    
+
     /**
      * Construye un nuevo cliente remoto <br>
      * <b> post: </b> Inicializa conectado en true <br>
@@ -192,17 +191,19 @@ public class ClienteRemotoTwitter extends Thread
         try
         {
             // TODO Cree el usuario usando el manejador de persistencia
-            
+            manejadorPersistencia.registrarUsuario( nUsuario, nombre, apellidos, pwd );
             // TODO inicialice el atributo usuario con la información recibida por parámetro
-            
+            usuario = manejadorPersistencia.buscarUsuario( nUsuario );
             // TODO cambie el estado del usuario usuando el manejador de persistencia
+            manejadorPersistencia.cambiarEstado( nUsuario, conectado );
         }
         catch( Exception e )
         {
             throw new CupiTwitterServidorException( "Error creando la cuenta" );
         }
-        
+
         // TODO Envié el mensaje CREAR_CUENTA_OK usando el manejador de comuniaciones
+        
     }
 
     /**
@@ -232,11 +233,26 @@ public class ClienteRemotoTwitter extends Thread
     private void login( String nUsuario, String nPwd ) throws CupiTwitterServidorException
     {
 
-        //TODO Completar según la documentación
-        //1. Busque el usuario usando el manejador de persistencia
-        //2. Si el usuario existe envié el mensaje INICIAR_SESION_OK usando el manejador de comunicaciones, cambie el estado del usuario e inicialice el atributo usuario
-        //   Si el usuario no existe lance una CupiTwitterServidorException
-
+        // TODO Completar según la documentación
+        // 1. Busque el usuario usando el manejador de persistencia
+        // 2. Si el usuario existe envié el mensaje INICIAR_SESION_OK usando el manejador de comunicaciones, cambie el estado del usuario e inicialice el atributo usuario
+        // Si el usuario no existe lance una CupiTwitterServidorException
+        try
+        {
+            Usuario u = manejadorPersistencia.buscarUsuario( nUsuario, nPwd );
+            if( u != null )
+            {
+                // Enviar mensaje INICIAR_SESION_OK
+                manejadorPersistencia.cambiarEstado( nUsuario , conectado );
+                
+                
+                
+            }
+        }
+        catch( SQLException e )
+        {
+            throw new CupiTwitterServidorException( e.getMessage( ) );
+        }
     }
 
     /**
@@ -246,11 +262,11 @@ public class ClienteRemotoTwitter extends Thread
      */
     private void seguirUsuario( String nUsuarioSeguir ) throws CupiTwitterServidorException
     {
-        
-        //TODO Completar según la documentación
-        //1. registre el seguidor usando el manejador de persistencia
-        //2. Envié el mensaje SEGUIR_USUARIO_OK usando el manejador de comunicaciones si se registro el seguidor, de lo contrario lanza una CupiTwitterServidorException
-       
+
+        // TODO Completar según la documentación
+        // 1. registre el seguidor usando el manejador de persistencia
+        // 2. Envié el mensaje SEGUIR_USUARIO_OK usando el manejador de comunicaciones si se registro el seguidor, de lo contrario lanza una CupiTwitterServidorException
+
     }
 
     /**
@@ -263,10 +279,10 @@ public class ClienteRemotoTwitter extends Thread
     {
         try
         {
-            //TODO Completar según la documentación
-            //1. Elimine el seguidor usando el manejador de persistencia
-            //2. Envié el mensaje DEJAR_SEGUIR_USUARIO_OK usando el manejador de comunicaciones
-            
+            // TODO Completar según la documentación
+            // 1. Elimine el seguidor usando el manejador de persistencia
+            // 2. Envié el mensaje DEJAR_SEGUIR_USUARIO_OK usando el manejador de comunicaciones
+
         }
         catch( Exception e )
         {
@@ -285,16 +301,16 @@ public class ClienteRemotoTwitter extends Thread
         String fecha = dateFormat.format( new Date( ) );
         try
         {
-            
-            //TODO Registre el microblog usando el manejador de persistencia
+
+            // TODO Registre el microblog usando el manejador de persistencia
 
         }
         catch( SQLException e )
         {
             throw new CupiTwitterServidorException( "El registrando el microblog." );
         }
-        
-        //TODO Envié el mensaje ESCRIBIR_MICROBLOG_OK usando el manejador de comunicaciones
+
+        // TODO Envié el mensaje ESCRIBIR_MICROBLOG_OK usando el manejador de comunicaciones
     }
 
     /**
@@ -305,11 +321,11 @@ public class ClienteRemotoTwitter extends Thread
     {
         try
         {
-            //TODO Completar según la documentación
-            //1. Consulte los blogs disponibles para el usuario usando el manejador de persistencia
-            //2. Ordene los blogs usando el método ordenarMicroBlogs
-            //3. Cree un nuevo mensaje para ser enviado (Objeto de tipo Mensaje)
-            //4. Envié el mensaje usando el manejador de comunicaciones
+            // TODO Completar según la documentación
+            // 1. Consulte los blogs disponibles para el usuario usando el manejador de persistencia
+            // 2. Ordene los blogs usando el método ordenarMicroBlogs
+            // 3. Cree un nuevo mensaje para ser enviado (Objeto de tipo Mensaje)
+            // 4. Envié el mensaje usando el manejador de comunicaciones
         }
         catch( Exception e )
         {
@@ -323,8 +339,8 @@ public class ClienteRemotoTwitter extends Thread
      * @param microblogs La lista de microblogs
      */
     public void ordenarMicroBlogs( ArrayList microblogs )
-    {   
-        //TODO Completar según la documentación
+    {
+        // TODO Completar según la documentación
     }
 
     // -----------------------------------------------------------------
