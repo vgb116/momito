@@ -203,7 +203,7 @@ public class ClienteRemotoTwitter extends Thread
         }
 
         // TODO Envié el mensaje CREAR_CUENTA_OK usando el manejador de comuniaciones
-        manejadorComunicaciones.enviarMensaje( new Mensaje(ProtocoloComunicacion.CREAR_CUENTA_OK) );
+        manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.CREAR_CUENTA_OK ) );
 
     }
 
@@ -311,7 +311,7 @@ public class ClienteRemotoTwitter extends Thread
         {
 
             // TODO Registre el microblog usando el manejador de persistencia
-            manejadorPersistencia.registrarMicroBlog( usuario.darUsuario( ) , blog, fecha );
+            manejadorPersistencia.registrarMicroBlog( usuario.darUsuario( ), blog, fecha );
 
         }
         catch( SQLException e )
@@ -320,7 +320,7 @@ public class ClienteRemotoTwitter extends Thread
         }
 
         // TODO Envié el mensaje ESCRIBIR_MICROBLOG_OK usando el manejador de comunicaciones
-        manejadorComunicaciones.enviarMensaje( new Mensaje(ProtocoloComunicacion.ESCRIBIR_MICROBLOG_OK) );
+        manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.ESCRIBIR_MICROBLOG_OK ) );
     }
 
     /**
@@ -338,7 +338,7 @@ public class ClienteRemotoTwitter extends Thread
             // 4. Envié el mensaje usando el manejador de comunicaciones
             ArrayList blogs = manejadorPersistencia.consultarBlogParaUsuario( usuario.darUsuario( ) );
             ordenarMicroBlogs( blogs );
-            Mensaje men = new Mensaje(ProtocoloComunicacion.CONSULTAR_BLOGS_OK);
+            Mensaje men = new Mensaje( ProtocoloComunicacion.CONSULTAR_BLOGS_OK );
             manejadorComunicaciones.enviarMensaje( men );
         }
         catch( Exception e )
@@ -355,7 +355,14 @@ public class ClienteRemotoTwitter extends Thread
     public void ordenarMicroBlogs( ArrayList microblogs )
     {
         // TODO Completar según la documentación
-        
+        for( int i = microblogs.size( ) - 1; i > 0; i-- )
+        {
+            for( int j = 0; j < i; j++ )
+            {
+                
+            }
+        }
+
     }
 
     // -----------------------------------------------------------------
