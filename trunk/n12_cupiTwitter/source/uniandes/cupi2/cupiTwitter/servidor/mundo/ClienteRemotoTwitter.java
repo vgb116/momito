@@ -359,7 +359,16 @@ public class ClienteRemotoTwitter extends Thread
         {
             for( int j = 0; j < i; j++ )
             {
-                
+                Microblog microJ = ( Microblog )microblogs.get( j );
+                Microblog microJJ = ( Microblog )microblogs.get( j + 1 );
+                String fechaJ = microJ.darFecha( );
+                String fechaJJ = microJJ.darFecha( );
+                int x = fechaJ.compareToIgnoreCase( fechaJJ );
+                if( x < 0 )
+                {
+                    microblogs.set( j , microJJ );
+                    microblogs.set( j + 1 , microJ );
+                }
             }
         }
 
