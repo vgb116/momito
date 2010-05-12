@@ -165,16 +165,24 @@ public class ManejadorPersistencia
     public void registrarMicroBlog( String usuario, String microblog, String fecha ) throws SQLException
     {
         // TODO Ingresar un microblog en la tabla de microblogs
+        
+        // Ingresa el microblog
         Statement st = conexion.createStatement( );
         String insert = "INSERT INTO microblogs (usuario,microblog,fecha_publicacion)" + "VALUES (' " + usuario + " ',' " + microblog + "','" + fecha + "')";
         st.execute( insert );
         st.close( );
+        
+        // Actualiza la tabla de usuarios aumentando el total de mensajes
+        Statement st1 = conexion.createStatement( );
+        String actualiza = "UPDATE usuarios SET total_mensajes = total_mensajes + 1 WHERE usuario = '" + usuario + "'";
+        st1.execute( actualiza );
+        st1.close( );
+        
         verificarInvariante( );
     }
 
     /**
      * Registra un usuario en la base de datos
-     * 
      * @param usuario El nombre de usuario
      * @param nombre El nombre del usuario
      * @param apellidos Los apellidos del usuario
@@ -203,7 +211,7 @@ public class ManejadorPersistencia
 
         // TODO Buscar un usuario con el login y password dado en la tabla de usuario y construir un objeto de tipo usuario con la información obtenida
         Usuario usuario = null;
-        String sql = "SELECT usuario, nombre, apellidos,pwd,total_mensajes,total_seguidores,conectado FROM usuarios WHERE usuario ='" + nUsuario + "' AND pwd = '" + nPwd + "'";
+        String sql = "SELECT * FROM usuarios WHERE usuario ='" + nUsuario + "' AND pwd = '" + nPwd + "'";
         Statement st = conexion.createStatement( );
         ResultSet resultado = st.executeQuery( sql );
 
@@ -284,13 +292,22 @@ public class ManejadorPersistencia
         // TODO Agrega un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
         // AYUDA: si el usuarioSeguido no existe retorna false
         // Si se pudo registrar el usuario seguidor retorna true
+        
         Usuario u = buscarUsuario( usuarioSeguido );
         if( u != null )
         {
+            // Inserta el seguidor en los usuarios_seguidores del usuarioSeguido
             Statement st = conexion.createStatement( );
             String insert = "INSERT INTO usuarios_seguidores (usuario,usuario_seguidor) " + "VALUES ('" + u + "','" + usuarioSeguidor + "')";
             st.execute( insert );
             st.close( );
+            
+            // Incrementa el número de seguidores del usuario seguido
+            Statement st1 = conexion.createStatement( );
+            String actualiza = "UPDATE usuarios SET total_seguidores = total_seguidores + 1 WHERE usuario = '" + u.darUsuario( ) + "'";
+            st1.execute( actualiza );
+            st1.close( );
+            
             verificarInvariante( );
             return true;
         }
@@ -311,10 +328,21 @@ public class ManejadorPersistencia
     {
 
         // TODO elimina un usuario seguidor a la tabla de usuario_seguidores, y actualiza el total de seguidores en la tabla de usuarios.
+        
+        // Elimina el usuarioSeguidor de la tabala de usuarios seguidores 
         Statement st = conexion.createStatement( );
         String del = "DELETE FROM usuarios_seguidores WHERE usuario = '" + usuarioSeguido + "' AND usuario_seguidor = '" + usuarioSeguidor+"'";
         st.executeUpdate( del );
         st.close( );
+        
+        Usuario u = buscarUsuario( usuarioSeguido );
+        
+        // Decrementa el número de seguidores del usuario seguido
+        Statement st1 = conexion.createStatement( );
+        String actualiza = "UPDATE usuarios SET total_seguidores = total_seguidores - 1 WHERE usuario = '" + u.darUsuario( ) + "'";
+        st1.execute( actualiza );
+        st1.close( );
+        
         verificarInvariante( );
     }
 
@@ -390,7 +418,7 @@ public class ManejadorPersistencia
     {
         // TODO Devuelve una lista con los usuarios registrados
         Statement st = conexion.createStatement( );
-        String consulta = "SELECT usuario, nombre, apellidos, pwd, total_mensajes, total_seguidores, conectado FROM usuarios";
+        String consulta = "SELECT * FROM usuarios";
         ResultSet resultado = st.executeQuery( consulta );
         
         ArrayList<Usuario> respuesta = new ArrayList<Usuario>( );
