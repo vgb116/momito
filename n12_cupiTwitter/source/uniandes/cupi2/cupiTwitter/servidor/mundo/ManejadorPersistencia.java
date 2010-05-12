@@ -392,13 +392,14 @@ public class ManejadorPersistencia
         Statement st = conexion.createStatement( );
         String consulta = "SELECT usuario, nombre, apellidos, pwd, total_mensajes, total_seguidores, conectado FROM usuarios";
         ResultSet resultado = st.executeQuery( consulta );
-        st.close( );
+        
         ArrayList<Usuario> respuesta = new ArrayList<Usuario>( );
         while( resultado.next( ) )
         {
             Usuario u = construirUsuario( resultado );
             respuesta.add( u );
         }
+        st.close( );
         return respuesta;       
     }
 
@@ -415,7 +416,6 @@ public class ManejadorPersistencia
         Statement st = conexion.createStatement( );
         String consulta = "SELECT usuario_seguidor FROM usuarios_seguidores WHERE usuario = '" + nUsuario + "'";
         ResultSet resultado = st.executeQuery( consulta );
-        st.close( );
         ArrayList<Usuario> respuesta = new ArrayList<Usuario>( );
         while(resultado.next( ))
         {
@@ -423,6 +423,7 @@ public class ManejadorPersistencia
             Usuario u = buscarUsuario( nombreSeguidor );
             respuesta.add( u );
         }
+        st.close( );
         return respuesta;
     }
 
