@@ -253,6 +253,7 @@ public class InterfazCliente extends JFrame implements IEscucharCambios
      */
     public void actualizarIniciarSesion( )
     {
+        ocultarMensajeEsperar( );
         dialogoIniciarSesion.setVisible( false );
         dialogoInicio.setVisible( false );
         panelInfoUsuario.actualizarUsuario( cliente.darNombreUsuario( ) );

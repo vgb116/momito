@@ -176,6 +176,7 @@ public class DialogoIniciarSesion extends JDialog implements ActionListener
                 JOptionPane.showMessageDialog( this, "Las contraseña no puede estar vacía", "Error Contraseña", JOptionPane.ERROR_MESSAGE );
                 return;
             }
+            System.out.println();
             principal.iniciarSesion( txtUsuario.getText( ), txtPwd.getText( ) );
         }
         else if( command.equals( CANCELAR ) )

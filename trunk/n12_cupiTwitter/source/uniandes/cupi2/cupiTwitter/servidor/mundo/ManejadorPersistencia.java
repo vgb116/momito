@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 import com.sun.corba.se.spi.orbutil.fsm.State;
@@ -168,7 +169,7 @@ public class ManejadorPersistencia
         
         // Ingresa el microblog
         Statement st = conexion.createStatement( );
-        String insert = "INSERT INTO microblogs (usuario,microblog,fecha_publicacion)" + "VALUES (' " + usuario + " ',' " + microblog + "','" + fecha + "')";
+        String insert = "INSERT INTO microblogs (usuario, microblog, fecha_publicacion)" + " VALUES ('" + usuario + "', '" + microblog + "', '" + fecha + "')";
         st.execute( insert );
         st.close( );
         
@@ -372,7 +373,8 @@ public class ManejadorPersistencia
      * @throws SQLException En caso de encontrar un error
      */
     private ResultSet ejecutarConsulta( String consulta, String[] params ) throws SQLException
-    {
+    { 
+    	System.out.println(consulta + Arrays.toString(params));
         PreparedStatement ps = conexion.prepareStatement( consulta );
         for( int i = 0; i < params.length; i++ )
         {
@@ -391,6 +393,7 @@ public class ManejadorPersistencia
      */
     public ArrayList consultarBlogParaUsuario( String nUsuario ) throws SQLException
     {
+        
         String sql = "select * from usuarios_seguidores where usuario_seguidor = ? ";
         String sqlBlogs = "select  * from microblogs where usuario = ?";
         String[] params = { nUsuario };
