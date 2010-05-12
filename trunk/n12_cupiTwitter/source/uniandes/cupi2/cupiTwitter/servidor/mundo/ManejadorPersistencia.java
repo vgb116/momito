@@ -374,7 +374,6 @@ public class ManejadorPersistencia
      */
     private ResultSet ejecutarConsulta( String consulta, String[] params ) throws SQLException
     { 
-    	System.out.println(consulta + Arrays.toString(params));
         PreparedStatement ps = conexion.prepareStatement( consulta );
         for( int i = 0; i < params.length; i++ )
         {
