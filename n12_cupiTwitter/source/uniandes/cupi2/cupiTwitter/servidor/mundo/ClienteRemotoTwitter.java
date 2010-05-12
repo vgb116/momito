@@ -240,8 +240,8 @@ public class ClienteRemotoTwitter extends Thread
         // Si el usuario no existe lance una CupiTwitterServidorException
         try
         {
-            Usuario u = manejadorPersistencia.buscarUsuario( nUsuario, nPwd );
-            if( u != null )
+            usuario = manejadorPersistencia.buscarUsuario( nUsuario, nPwd );
+            if( usuario != null )
             {
                 manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.INICIAR_SESION_OK ) );
                 manejadorPersistencia.cambiarEstado( nUsuario, conectado );
@@ -380,7 +380,6 @@ public class ClienteRemotoTwitter extends Thread
                 }
             }
         }
-
     }
 
     // -----------------------------------------------------------------

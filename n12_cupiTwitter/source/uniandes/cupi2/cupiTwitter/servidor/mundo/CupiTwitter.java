@@ -72,7 +72,6 @@ public class CupiTwitter
             throw new CupiTwitterServidorException( e.getMessage( ) );
         }
         usuariosConectados = new ArrayList( );
-
     }
 
     /**

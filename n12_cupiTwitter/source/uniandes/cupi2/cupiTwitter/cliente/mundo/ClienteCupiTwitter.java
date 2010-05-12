@@ -15,7 +15,6 @@ package uniandes.cupi2.cupiTwitter.cliente.mundo;
 
 import java.net.Socket;
 import java.util.ArrayList;
-
 import uniandes.cupi2.cupiTwitter.comun.mundo.ProtocoloComunicacion;
 
 /**
