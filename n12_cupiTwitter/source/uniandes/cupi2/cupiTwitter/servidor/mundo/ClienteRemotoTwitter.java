@@ -246,6 +246,10 @@ public class ClienteRemotoTwitter extends Thread
                 manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.INICIAR_SESION_OK ) );
                 manejadorPersistencia.cambiarEstado( nUsuario, conectado );
             }
+            else
+            {
+                manejadorComunicaciones.enviarMensaje( new Mensaje( ProtocoloComunicacion.ERROR + ProtocoloComunicacion.SEPARADOR_PARAMETROS + "El nombre de usuario o contraseña es invalido") );
+            }
         }
         catch( SQLException e )
         {
