@@ -338,7 +338,13 @@ public class ClienteRemotoTwitter extends Thread
             // 4. Envié el mensaje usando el manejador de comunicaciones
             ArrayList blogs = manejadorPersistencia.consultarBlogParaUsuario( usuario.darUsuario( ) );
             ordenarMicroBlogs( blogs );
-            Mensaje men = new Mensaje( ProtocoloComunicacion.CONSULTAR_BLOGS_OK );
+            ArrayList param = new ArrayList( );
+            for( int i = 0; i < blogs.size( ); i++ )
+            {
+                String blog = blogs.get( i ).toString( );
+                param.add( blog );
+            }
+            Mensaje men = new Mensaje( ProtocoloComunicacion.CONSULTAR_BLOGS_OK, param );
             manejadorComunicaciones.enviarMensaje( men );
         }
         catch( Exception e )
@@ -346,7 +352,6 @@ public class ClienteRemotoTwitter extends Thread
             throw new CupiTwitterServidorException( "Error consultando la lista de blogs disponibles." );
         }
     }
-
     /**
      * Método que ordena el listado de microblogs basado en la fecha (de mayor a menor)<br>
      * post: La lista de microblogs se encuentra ordenada de mayor a menor
@@ -366,8 +371,8 @@ public class ClienteRemotoTwitter extends Thread
                 int x = fechaJ.compareToIgnoreCase( fechaJJ );
                 if( x < 0 )
                 {
-                    microblogs.set( j , microJJ );
-                    microblogs.set( j + 1 , microJ );
+                    microblogs.set( j, microJJ );
+                    microblogs.set( j + 1, microJ );
                 }
             }
         }
