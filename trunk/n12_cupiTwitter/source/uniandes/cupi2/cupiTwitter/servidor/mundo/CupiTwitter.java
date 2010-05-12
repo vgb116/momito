@@ -136,7 +136,7 @@ public class CupiTwitter
         // 4. Agregue el nuevo cliente a la lista de clientes conectados
         ManejadorComunicacionesServidor manejador = new ManejadorComunicacionesServidor( socketNuevoCliente );
         ClienteRemotoTwitter nuevoCliente = new ClienteRemotoTwitter( manejador, manejadorPersistencia );
-        nuevoCliente.run( );
+        nuevoCliente.start( );
         usuariosConectados.add( nuevoCliente );
     }
 
