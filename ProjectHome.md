@@ -1,0 +1,1 @@
+para que momo aprenda apo1 y deje en 5 apo2
